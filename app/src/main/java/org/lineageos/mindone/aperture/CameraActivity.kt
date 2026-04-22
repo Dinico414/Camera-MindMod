@@ -34,6 +34,7 @@ import android.widget.Button
 import android.widget.HorizontalScrollView
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -172,6 +173,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
     private val previewBlurView by lazy { findViewById<PreviewBlurView>(R.id.previewBlurView) }
     private val proButton by lazy { findViewById<ImageButton>(R.id.proButton) }
     private val screenFlashView by lazy { findViewById<ScreenFlashView>(R.id.screenFlashView) }
+    private val secondaryBarLayout by lazy { findViewById<LinearLayout>(R.id.secondaryBarLayout) }
     private val secondaryBottomBarLayout by lazy { findViewById<ConstraintLayout>(R.id.secondaryBottomBarLayout) }
     private val secondaryTopBarLayout by lazy { findViewById<HorizontalScrollView>(R.id.secondaryTopBarLayout) }
     private val settingsButton by lazy { findViewById<Button>(R.id.settingsButton) }
@@ -294,9 +296,9 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
     private val forceTorchSnackbar by lazy {
         Snackbar.make(
-            secondaryBottomBarLayout, R.string.force_torch_help, Snackbar.LENGTH_INDEFINITE
+            secondaryBarLayout, R.string.force_torch_help, Snackbar.LENGTH_INDEFINITE
         )
-            .setAnchorView(secondaryBottomBarLayout)
+            .setAnchorView(secondaryBarLayout)
             .setAction(android.R.string.ok) {
                 viewModel.setForceModeHelpShown(true)
             }
@@ -426,7 +428,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         proButton.setOnClickListener {
             val willBeVisible = !secondaryTopBarLayout.isVisible
             secondaryTopBarLayout.slide()
-            animateSecondaryBottomBarBackground(willBeVisible)
+            animateSecondaryBarBackground(willBeVisible)
         }
         googleLensButton.setOnClickListener {
             dismissKeyguardAndRun {
@@ -452,8 +454,8 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             handler.sendMessageDelayed(handler.obtainMessage(MSG_HIDE_EXPOSURE_SLIDER), 2000)
 
             if (secondaryTopBarLayout.isVisible) {
-                secondaryTopBarLayout.slideDown()
-                animateSecondaryBottomBarBackground(false)
+                secondaryTopBarLayout.slide()
+                animateSecondaryBarBackground(false)
             }
         }
 
@@ -645,14 +647,14 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         }
     }
 
-    private fun animateSecondaryBottomBarBackground(visible: Boolean) {
-        val colorFrom = (secondaryBottomBarLayout.background as? ColorDrawable)?.color ?: Color.TRANSPARENT
+    private fun animateSecondaryBarBackground(visible: Boolean) {
+        val colorFrom = (secondaryBarLayout.background as? ColorDrawable)?.color ?: Color.TRANSPARENT
         val colorTo = if (visible) Color.parseColor("#99000000") else Color.TRANSPARENT
 
         ValueAnimator.ofObject(ArgbEvaluator(), colorFrom, colorTo).apply {
             duration = 250 // Match slideUp duration
             addUpdateListener { animator ->
-                secondaryBottomBarLayout.setBackgroundColor(animator.animatedValue as Int)
+                secondaryBarLayout.setBackgroundColor(animator.animatedValue as Int)
             }
             start()
         }
@@ -722,7 +724,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             viewModel.cameraMode.collectLatest { cameraMode ->
                 // Hide secondary top bar
                 secondaryTopBarLayout.isVisible = false
-                animateSecondaryBottomBarBackground(false)
+                animateSecondaryBarBackground(false)
 
                 // Update secondary top bar buttons
                 aspectRatioButton.isVisible = cameraMode != CameraMode.VIDEO
@@ -1055,11 +1057,11 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             viewModel.thermalStatus.collectLatest { thermalStatus ->
                 val showSnackBar = { stringId: Int ->
                     Snackbar.make(
-                        secondaryBottomBarLayout,
+                        secondaryBarLayout,
                         stringId,
                         Snackbar.LENGTH_INDEFINITE
                     )
-                        .setAnchorView(secondaryBottomBarLayout)
+                        .setAnchorView(secondaryBarLayout)
                         .setAction(android.R.string.ok) {
                             // Do nothing
                         }

@@ -26,21 +26,25 @@ internal fun View.slide() {
 }
 
 internal fun View.slideUp() {
-    if (isVisible) {
+    animate().cancel()
+    if (isVisible && translationY == 0f && alpha == 1f) {
         return
     }
 
-    isVisible = true
+    if (!isVisible) {
+        measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+        translationY = measuredHeight.toFloat()
+        alpha = 0f
+        isVisible = true
+    }
 
-    measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
-    startAnimation(AnimationSet(true).apply {
-        addAnimation(TranslateAnimation(0f, 0f, measuredHeight.toFloat(), 0f).apply {
-            duration = 250
-        })
-        addAnimation(AlphaAnimation(0.0f, 1.0f).apply {
-            duration = 250
-        })
-    })
+    animate()
+        .translationY(0f)
+        .alpha(1f)
+        .setDuration(250)
+        .setInterpolator(AccelerateDecelerateInterpolator())
+        .withEndAction(null)
+        .start()
 }
 
 internal fun View.slideDown() {
@@ -48,16 +52,17 @@ internal fun View.slideDown() {
         return
     }
 
-    isVisible = false
-
-    startAnimation(AnimationSet(true).apply {
-        addAnimation(TranslateAnimation(0f, 0f, 0f, height.toFloat()).apply {
-            duration = 200
-        })
-        addAnimation(AlphaAnimation(1.0f, 0.0f).apply {
-            duration = 200
-        })
-    })
+    animate()
+        .translationY(height.toFloat())
+        .alpha(0f)
+        .setDuration(200)
+        .setInterpolator(AccelerateDecelerateInterpolator())
+        .withEndAction {
+            isVisible = false
+            translationY = 0f
+            alpha = 1f
+        }
+        .start()
 }
 
 internal fun View.smoothRotate(rotation: Float) {
