@@ -23,12 +23,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
+import android.os.SystemClock
 import android.provider.MediaStore
 import android.util.Log
 import android.view.GestureDetector
+import android.view.InputDevice
 import android.view.KeyEvent
 import android.view.MotionEvent
-import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.HorizontalScrollView
@@ -59,7 +60,6 @@ import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.children
 import androidx.core.view.isInvisible
@@ -97,7 +97,6 @@ import org.lineageos.mindone.aperture.ext.setPadding
 import org.lineageos.mindone.aperture.ext.setShadingMode
 import org.lineageos.mindone.aperture.ext.setVideoStabilizationMode
 import org.lineageos.mindone.aperture.ext.slide
-import org.lineageos.mindone.aperture.ext.slideDown
 import org.lineageos.mindone.aperture.ext.smoothRotate
 import org.lineageos.mindone.aperture.ext.transform
 import org.lineageos.mindone.aperture.ext.updateBarsVisibility
@@ -144,6 +143,8 @@ import java.io.InputStream
 import kotlin.math.abs
 import kotlin.reflect.safeCast
 import androidx.camera.core.CameraState as CameraXCameraState
+import androidx.core.graphics.drawable.toDrawable
+import androidx.core.graphics.toColorInt
 
 @androidx.annotation.OptIn(ExperimentalCamera2Interop::class, ExperimentalZeroShutterLag::class)
 open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
@@ -174,7 +175,6 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
     private val proButton by lazy { findViewById<ImageButton>(R.id.proButton) }
     private val screenFlashView by lazy { findViewById<ScreenFlashView>(R.id.screenFlashView) }
     private val secondaryBarLayout by lazy { findViewById<LinearLayout>(R.id.secondaryBarLayout) }
-    private val secondaryBottomBarLayout by lazy { findViewById<ConstraintLayout>(R.id.secondaryBottomBarLayout) }
     private val secondaryTopBarLayout by lazy { findViewById<HorizontalScrollView>(R.id.secondaryTopBarLayout) }
     private val settingsButton by lazy { findViewById<Button>(R.id.settingsButton) }
     private val shutterButton by lazy { findViewById<ImageButton>(R.id.shutterButton) }
@@ -206,15 +206,18 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
     private val isGoogleLensAvailable by lazy { GoogleLensUtils.isGoogleLensAvailable(this) }
 
     private var viewFinderTouchEvent: MotionEvent? = null
+    private var isShutterKeyPressed = false
+    private var isFocusKeyPressed = false
+    private var focusPending = false
     private val gestureDetector by lazy {
         GestureDetector(this, object : GestureDetector.SimpleOnGestureListener() {
             override fun onSingleTapUp(e: MotionEvent): Boolean {
-                viewFinderTouchEvent = e
+                viewFinderTouchEvent = MotionEvent.obtain(e)
                 return false
             }
 
             override fun onFling(
-                e1: MotionEvent?, e2: MotionEvent, velocityX: Float, velocityY: Float
+                e1: MotionEvent?, e2: MotionEvent, velocityX: Float, velocityY: Float,
             ): Boolean {
                 return e1?.let {
                     if (!handler.hasMessages(MSG_ON_PINCH_TO_ZOOM) &&
@@ -269,6 +272,13 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
                 MSG_HIDE_EXPOSURE_SLIDER -> {
                     exposureLevel.isVisible = false
+                }
+
+                MSG_PERFORM_FOCUS -> {
+                    if (!isShutterKeyPressed) {
+                        performFocus()
+                    }
+                    focusPending = false
                 }
             }
         }
@@ -545,7 +555,8 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 }
 
                 is InputStream,
-                is Uri -> sendIntentResultAndExit(input)
+                is Uri,
+                    -> sendIntentResultAndExit(input)
 
                 else -> throw Exception("Invalid input")
             }
@@ -646,6 +657,28 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == 27) {
+            isShutterKeyPressed = true
+            handler.removeMessages(MSG_PERFORM_FOCUS)
+            focusPending = false
+        } else if (keyCode == 134) {
+            isFocusKeyPressed = true
+        } else if (keyCode == 133 && event?.repeatCount == 0 && !capturePreviewLayout.isVisible) {
+            viewModel.setCameraFacing(CameraFacing.FRONT)
+            return true
+        } else if (keyCode == 132 && event?.repeatCount == 0 && !capturePreviewLayout.isVisible) {
+            viewModel.setCameraFacing(CameraFacing.BACK)
+            return true
+        }
+
+        if (keyCode == 134 && event?.repeatCount == 0 && !capturePreviewLayout.isVisible &&
+            !isShutterKeyPressed && !focusPending
+        ) {
+            focusPending = true
+            handler.sendMessageDelayed(handler.obtainMessage(MSG_PERFORM_FOCUS), 75)
+            return true
+        }
+
         Log.d(LOG_TAG, "onKeyDown: $keyCode")
         return when (capturePreviewLayout.isVisible) {
             true -> super.onKeyDown(keyCode, event)
@@ -654,6 +687,14 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
     }
 
     override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == 27) {
+            isShutterKeyPressed = false
+        } else if (keyCode == 134) {
+            isFocusKeyPressed = false
+        } else if (keyCode == 133 || keyCode == 132) {
+            return true
+        }
+
         Log.d(LOG_TAG, "onKeyUp: $keyCode")
         return when (capturePreviewLayout.isVisible) {
             true -> super.onKeyUp(keyCode, event)
@@ -663,7 +704,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
     private fun animateSecondaryBarBackground(visible: Boolean) {
         val colorFrom = (secondaryBarLayout.background as? ColorDrawable)?.color ?: Color.TRANSPARENT
-        val colorTo = if (visible) Color.parseColor("#99000000") else Color.TRANSPARENT
+        val colorTo = if (visible) "#99000000".toColorInt() else Color.TRANSPARENT
 
         ValueAnimator.ofObject(ArgbEvaluator(), colorFrom, colorTo).apply {
             duration = 250 // Match slideUp duration
@@ -695,7 +736,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
                     is Event.PhotoCaptureStatus -> when (event) {
                         is Event.PhotoCaptureStatus.CaptureStarted -> {
-                            viewFinder.foreground = ColorDrawable(Color.BLACK)
+                            viewFinder.foreground = Color.BLACK.toDrawable()
                             ValueAnimator.ofInt(0, 255, 0).apply {
                                 addUpdateListener { anim ->
                                     viewFinder.foreground.alpha = anim.animatedValue as Int
@@ -868,9 +909,6 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                                     finish()
                                 }
 
-                                null -> {
-                                    // Do nothing
-                                }
                             }
                         }
                     }
@@ -933,7 +971,8 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                                     Rotation.ROTATION_0 -> 0.0f
                                     Rotation.ROTATION_180 -> 1.0f
                                     Rotation.ROTATION_90,
-                                    Rotation.ROTATION_270 -> 0.5f
+                                    Rotation.ROTATION_270,
+                                        -> 0.5f
                                 }
                             ).apply {
                                 addUpdateListener { anim ->
@@ -1084,7 +1123,8 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
                 when (thermalStatus) {
                     ThermalStatus.NONE,
-                    ThermalStatus.LIGHT -> Unit
+                    ThermalStatus.LIGHT,
+                        -> Unit
 
                     ThermalStatus.MODERATE -> {
                         showSnackBar(R.string.thermal_status_moderate)
@@ -1453,7 +1493,8 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         // Start or reset animation
         when (shutterAnimation) {
             ShutterAnimation.InitPhoto,
-            ShutterAnimation.InitVideo -> drawable.reset()
+            ShutterAnimation.InitVideo,
+                -> drawable.reset()
 
             else -> drawable.start()
         }
@@ -1622,7 +1663,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             cameraConfiguration.camera, cameraConfiguration.extensionMode
         )
 
-        // Workaround: We cannot set flash mode to screen with a non front facing camera.
+        // Workaround: We cannot set flash mode to screen with a non-front facing camera.
         // VM will set the correct value later on
         if (cameraConfiguration.camera.cameraFacing != CameraFacing.FRONT
             && viewModel.cameraController.flashMode == FlashMode.SCREEN
@@ -1785,7 +1826,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
 
             galleryButtonUri?.also { uri ->
-                // Try to open the Uri in the non secure gallery
+                // Try to open the Uri in the non-secure gallery
                 dismissKeyguardAndRun {
                     mutableListOf<String>().apply {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -1863,7 +1904,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 }
 
                 setResult(RESULT_OK)
-            } catch (exc: FileNotFoundException) {
+            } catch (_: FileNotFoundException) {
                 Log.e(LOG_TAG, "Failed to open URI")
                 setResult(RESULT_CANCELED)
             }
@@ -1964,7 +2005,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
     }
 
     private fun handleHardwareKeyDown(
-        keyCode: Int, event: KeyEvent?
+        keyCode: Int, event: KeyEvent?,
     ) = HardwareKey.match(keyCode)?.let { (hardwareKey, tempIncrease) ->
         val increase = when (viewModel.getHardwareKeyInvert(hardwareKey)) {
             true -> !tempIncrease
@@ -1986,6 +2027,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 if (viewModel.cameraMode.value == CameraMode.VIDEO
                     && viewModel.isShutterButtonEnabled.value
                     && event?.repeatCount == 0
+                    && !isFocusKeyPressed
                 ) {
                     shutterButton.performClick()
                 }
@@ -1994,8 +2036,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
             GestureAction.FOCUS -> {
                 if (event?.repeatCount == 0) {
-                    viewFinderTouchEvent = null
-                    viewFinder.performClick()
+                    performFocus()
                 }
                 true
             }
@@ -2036,8 +2077,53 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         }
     }
 
+    private fun performFocus() {
+        val x = viewFinder.width / 2f
+        val y = viewFinder.height / 2f
+
+        val downTime = SystemClock.uptimeMillis()
+        val properties = arrayOf(MotionEvent.PointerProperties().apply {
+            id = 0
+            toolType = MotionEvent.TOOL_TYPE_FINGER
+        })
+        val coords = arrayOf(MotionEvent.PointerCoords().apply {
+            this.x = x
+            this.y = y
+            pressure = 1f
+            size = 1f
+        })
+
+        val downEvent = MotionEvent.obtain(
+            downTime, downTime, MotionEvent.ACTION_DOWN,
+            1, properties, coords, 0, 0, 1f, 1f, 0, 0,
+            InputDevice.SOURCE_TOUCHSCREEN, 0
+        )
+        val upEvent = MotionEvent.obtain(
+            downTime, downTime + 100, MotionEvent.ACTION_UP,
+            1, properties, coords, 0, 0, 1f, 1f, 0, 0,
+            InputDevice.SOURCE_TOUCHSCREEN, 0
+        )
+
+        viewFinder.dispatchTouchEvent(downEvent)
+        viewFinder.dispatchTouchEvent(upEvent)
+        
+        viewModel.setExposureCompensationLevel(0.5f)
+        exposureLevel.isVisible = true
+        handler.removeMessages(MSG_HIDE_EXPOSURE_SLIDER)
+        handler.sendMessageDelayed(handler.obtainMessage(MSG_HIDE_EXPOSURE_SLIDER), 2000)
+
+        if (secondaryTopBarLayout.isVisible) {
+            secondaryTopBarLayout.slide()
+            animateSecondaryBarBackground(false)
+        }
+
+        downEvent.recycle()
+        upEvent.recycle()
+    }
+
     private fun handleHardwareKeyUp(
-        keyCode: Int, event: KeyEvent?
+
+        keyCode: Int, event: KeyEvent?,
     ) = HardwareKey.match(keyCode)?.let { (hardwareKey, _) ->
         val gestureAction = viewModel.getHardwareKeyAction(hardwareKey)
 
@@ -2096,6 +2182,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         private const val MSG_HIDE_ZOOM_SLIDER = 0
         private const val MSG_HIDE_FOCUS_RING = 1
         private const val MSG_HIDE_EXPOSURE_SLIDER = 2
+        private const val MSG_PERFORM_FOCUS = 3
         private const val MSG_ON_PINCH_TO_ZOOM = 3
 
         // We need to return something small enough so as not to overwhelm Binder. 1MB is the

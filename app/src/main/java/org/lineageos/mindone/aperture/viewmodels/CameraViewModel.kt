@@ -1241,6 +1241,30 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
         }
     }
 
+    fun setCameraFacing(cameraFacing: CameraFacing) = updateConfiguration<CameraConfiguration> { cameraConfiguration ->
+        if (cameraConfiguration.camera.cameraFacing == cameraFacing) {
+            return@updateConfiguration cameraConfiguration
+        }
+
+        val cameraForCycling = camerasForCycling.value
+
+        val camera = when (cameraFacing) {
+            CameraFacing.UNKNOWN -> null
+            CameraFacing.FRONT -> cameraRepository.mainFrontCamera
+            CameraFacing.BACK -> cameraRepository.mainBackCamera
+            CameraFacing.EXTERNAL -> null
+        } ?: cameraForCycling[cameraFacing]?.firstOrNull() ?: return@updateConfiguration cameraConfiguration
+
+        preferencesRepository.lastCameraFacing.value = camera.cameraFacing
+
+        emitEvent(Event.FlipCameraAnimation)
+
+        createInitialCameraConfiguration(
+            camera = camera,
+            cameraMode = cameraConfiguration.cameraMode,
+        )
+    }
+
     /**
      * Flip the camera.
      */
