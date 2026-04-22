@@ -371,17 +371,14 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         // Enable edge-to-edge
         enableEdgeToEdge()
 
-        // Hide the status bars
-        window.updateBarsVisibility(
-            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE,
-            systemBars = false,
-        )
+        // Setup window insets
+        ViewCompat.setOnApplyWindowInsetsListener(mainLayout) { _, windowInsets ->
+            windowInsets
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1
             && keyguardManager.isKeyguardLocked
         ) {
-            setShowWhenLocked(true)
-
             @Suppress("SourceLockedOrientationActivity")
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
@@ -408,10 +405,6 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
-        // Setup window insets
-        ViewCompat.setOnApplyWindowInsetsListener(mainLayout) { _, windowInsets ->
-            windowInsets
-        }
 
         // Set secondary top bar button callbacks
         aspectRatioButton.setOnClickListener { viewModel.cyclePhotoAspectRatio() }
@@ -619,6 +612,27 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         lifecycleScope.launch {
             queueSetupWithCameraPermissions()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        hideSystemBars()
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+
+        if (hasFocus) {
+            hideSystemBars()
+        }
+    }
+
+    private fun hideSystemBars() {
+        window.updateBarsVisibility(
+            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE,
+            systemBars = false,
+        )
     }
 
     override fun onDestroy() {
