@@ -4,8 +4,7 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="org.lineageos.aperture">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-feature android:name="android.hardware.camera.any" />
     <uses-feature
@@ -34,7 +33,7 @@
     </queries>
 
     <application
-        android:name=".ApertureApplication"
+        android:name="org.lineageos.mindone.aperture.ApertureApplication"
         android:enableOnBackInvokedCallback="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -47,7 +46,7 @@
             android:required="false" />
 
         <activity
-            android:name=".CameraActivity"
+            android:name="org.lineageos.mindone.aperture.CameraActivity"
             android:clearTaskOnLaunch="true"
             android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize|keyboardHidden"
             android:exported="true"
@@ -72,7 +71,7 @@
             android:name=".CameraLauncher"
             android:exported="true"
             android:label="@string/app_name"
-            android:targetActivity=".CameraActivity">
+            android:targetActivity="org.lineageos.mindone.aperture.CameraActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -82,7 +81,7 @@
         </activity-alias>
 
         <activity
-            android:name=".CaptureActivity"
+            android:name="org.lineageos.mindone.aperture.CaptureActivity"
             android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize|keyboardHidden"
             android:exported="true"
             android:screenOrientation="nosensor"
@@ -98,7 +97,7 @@
         </activity>
 
         <activity
-            android:name=".QrScannerActivity"
+            android:name="org.lineageos.mindone.aperture.QrScannerActivity"
             android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize|keyboardHidden"
             android:exported="true"
             android:screenOrientation="nosensor"
@@ -111,7 +110,7 @@
             android:name=".VideoCamera"
             android:exported="true"
             android:label="@string/video_camera_label"
-            android:targetActivity=".CaptureActivity">
+            android:targetActivity="org.lineageos.mindone.aperture.CaptureActivity">
             <intent-filter>
                 <action android:name="android.media.action.VIDEO_CAMERA" />
 
@@ -127,7 +126,7 @@
         </activity-alias>
 
         <activity
-            android:name=".SecureCameraActivity"
+            android:name="org.lineageos.mindone.aperture.SecureCameraActivity"
             android:clearTaskOnLaunch="true"
             android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize|keyboardHidden"
             android:excludeFromRecents="true"
@@ -149,7 +148,7 @@
         </activity>
 
         <activity
-            android:name=".SettingsActivity"
+            android:name="org.lineageos.mindone.aperture.SettingsActivity"
             android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize|keyboardHidden"
             android:exported="false"
             android:label="@string/title_activity_settings"

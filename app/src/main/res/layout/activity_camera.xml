@@ -18,13 +18,13 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:soundEffectsEnabled="false"
-        app:layout_constraintBottom_toTopOf="@+id/secondaryBottomBarLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:scaleType="fitCenter" />
 
-    <org.lineageos.aperture.ui.views.PreviewBlurView
+    <org.lineageos.mindone.aperture.ui.views.PreviewBlurView
         android:id="@+id/previewBlurView"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -47,7 +47,7 @@
         app:layout_constraintTop_toTopOf="@+id/viewFinder"
         tools:ignore="ContentDescription" />
 
-    <org.lineageos.aperture.ui.views.GridView
+    <org.lineageos.mindone.aperture.ui.views.GridView
         android:id="@+id/gridView"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -56,7 +56,7 @@
         app:layout_constraintStart_toStartOf="@+id/viewFinder"
         app:layout_constraintTop_toTopOf="@+id/viewFinder" />
 
-    <org.lineageos.aperture.ui.views.LevelerView
+    <org.lineageos.mindone.aperture.ui.views.LevelerView
         android:id="@+id/levelerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -65,7 +65,7 @@
         app:layout_constraintStart_toStartOf="@+id/viewFinder"
         app:layout_constraintTop_toTopOf="@+id/viewFinder" />
 
-    <org.lineageos.aperture.ui.views.IslandView
+    <org.lineageos.mindone.aperture.ui.views.IslandView
         android:id="@+id/islandView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
         app:layout_constraintStart_toStartOf="@+id/viewFinder"
         app:layout_constraintTop_toTopOf="@+id/viewFinder" />
 
-    <org.lineageos.aperture.ui.views.CountDownView
+    <org.lineageos.mindone.aperture.ui.views.CountDownView
         android:id="@+id/countDownView"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -87,12 +87,13 @@
         app:layout_constraintStart_toStartOf="@+id/viewFinder"
         app:layout_constraintTop_toTopOf="@+id/viewFinder" />
 
-    <org.lineageos.aperture.ui.views.HorizontalSlider
+    <org.lineageos.mindone.aperture.ui.views.HorizontalSlider
         android:id="@+id/zoomLevel"
         android:layout_width="250dp"
         android:layout_height="32dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/viewFinder"
+        android:layout_marginTop="24dp"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="@+id/viewFinder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:thumbColor="@android:color/white"
@@ -100,13 +101,13 @@
         app:thumbTextSize="10dp"
         app:trackColor="#7FCCCCCC" />
 
-    <org.lineageos.aperture.ui.views.VerticalSlider
+    <org.lineageos.mindone.aperture.ui.views.VerticalSlider
         android:id="@+id/exposureLevel"
         android:layout_width="32dp"
         android:layout_height="250dp"
         android:layout_marginEnd="8dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/viewFinder"
+        app:layout_constraintBottom_toBottomOf="@+id/secondaryBottomBarLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/viewFinder"
         app:thumbColor="@android:color/white"
@@ -245,7 +246,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@android:color/white" />
 
-        <org.lineageos.aperture.ui.views.LensSelectorLayout
+        <org.lineageos.mindone.aperture.ui.views.LensSelectorLayout
             android:id="@+id/lensSelectorLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -271,6 +272,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
+        android:background="#99000000"
         app:layout_constraintBottom_toTopOf="@+id/cameraModeSelectorLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -353,9 +355,10 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <org.lineageos.aperture.ui.views.CameraModeSelectorLayout
+    <org.lineageos.mindone.aperture.ui.views.CameraModeSelectorLayout
         android:id="@+id/cameraModeSelectorLayout"
         android:layout_width="0dp"
+        android:background="#99000000"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

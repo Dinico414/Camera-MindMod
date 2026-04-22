@@ -3,7 +3,7 @@
      SPDX-FileCopyrightText: 2022-2025 The LineageOS Project
      SPDX-License-Identifier: Apache-2.0
 -->
-<org.lineageos.aperture.ui.views.CapturePreviewLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<org.lineageos.mindone.aperture.ui.views.CapturePreviewLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -77,4 +77,4 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</org.lineageos.aperture.ui.views.CapturePreviewLayout>
+</org.lineageos.mindone.aperture.ui.views.CapturePreviewLayout>

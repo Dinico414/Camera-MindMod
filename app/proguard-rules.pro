@@ -24,7 +24,7 @@
 #-renamesourcefileattribute SourceFile
 
 # Any class extending SettingsFragment can be referenced in XML.
--keep class ** extends org.lineageos.aperture.SettingsActivity$SettingsFragment
+-keep class ** extends org.lineageos.mindone.aperture.SettingsActivity$SettingsFragment
 
 # Suppress warnings for the dynamically loaded camera extensions library
 -dontwarn androidx.camera.extensions.impl.advanced.**

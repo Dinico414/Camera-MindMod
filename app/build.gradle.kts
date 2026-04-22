@@ -14,11 +14,11 @@ plugins {
 }
 
 android {
-    namespace = "org.lineageos.aperture"
+    namespace = "org.lineageos.mindone.aperture"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "org.lineageos.aperture"
+        applicationId = "org.lineageos.mindone.aperture"
         minSdk = 26
         targetSdk = 36
         versionCode = 1
