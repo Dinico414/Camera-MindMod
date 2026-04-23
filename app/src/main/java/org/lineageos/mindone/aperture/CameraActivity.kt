@@ -276,7 +276,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
                 MSG_PERFORM_FOCUS -> {
                     if (!isShutterKeyPressed) {
-                        performFocus()
+                        handleHardwareKeyDown(134, msg.obj as? KeyEvent)
                     }
                     focusPending = false
                 }
@@ -697,7 +697,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             !isShutterKeyPressed && !focusPending
         ) {
             focusPending = true
-            handler.sendMessageDelayed(handler.obtainMessage(MSG_PERFORM_FOCUS), 75)
+            handler.sendMessageDelayed(handler.obtainMessage(MSG_PERFORM_FOCUS, event), 75)
             return true
         }
 
@@ -2205,7 +2205,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         private const val MSG_HIDE_FOCUS_RING = 1
         private const val MSG_HIDE_EXPOSURE_SLIDER = 2
         private const val MSG_PERFORM_FOCUS = 3
-        private const val MSG_ON_PINCH_TO_ZOOM = 3
+        private const val MSG_ON_PINCH_TO_ZOOM = 4
 
         // We need to return something small enough so as not to overwhelm Binder. 1MB is the
         // per-process limit across all transactions. Camera2 sets a max pixel count of 51200.

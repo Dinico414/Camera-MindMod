@@ -36,7 +36,7 @@ enum class HardwareKey(
         R.string.camera_button_action_title,
     ),
     FOCUS(
-        KeyEvent.KEYCODE_FOCUS,
+        134,
         null,
         false,
         GestureAction.FOCUS,
