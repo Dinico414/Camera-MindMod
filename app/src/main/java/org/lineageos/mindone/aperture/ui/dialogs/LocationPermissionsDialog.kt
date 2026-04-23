@@ -30,10 +30,8 @@ class LocationPermissionsDialog(activity: Activity) : Dialog(activity) {
 
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.location_permissions_dialog)
-        window?.let {
-            it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            WindowCompat.setDecorFitsSystemWindows(it, false)
-        }
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
 
         setOnCancelListener {
             onResultCallback(false)

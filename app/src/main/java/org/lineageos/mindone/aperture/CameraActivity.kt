@@ -30,6 +30,8 @@ import android.view.GestureDetector
 import android.view.InputDevice
 import android.view.KeyEvent
 import android.view.MotionEvent
+import android.view.ViewGroup
+import android.view.WindowInsets.Type.statusBars
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.HorizontalScrollView
@@ -145,6 +147,7 @@ import kotlin.reflect.safeCast
 import androidx.camera.core.CameraState as CameraXCameraState
 import androidx.core.graphics.drawable.toDrawable
 import androidx.core.graphics.toColorInt
+import androidx.core.view.WindowInsetsCompat
 
 @androidx.annotation.OptIn(ExperimentalCamera2Interop::class, ExperimentalZeroShutterLag::class)
 open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
@@ -381,14 +384,17 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         // Enable edge-to-edge
         enableEdgeToEdge()
 
-        // Setup window insets
-        ViewCompat.setOnApplyWindowInsetsListener(mainLayout) { _, windowInsets ->
-            windowInsets
-        }
+        // Hide the status bars
+        window.updateBarsVisibility(
+            WindowInsetsControllerCompat.BEHAVIOR_DEFAULT,
+            statusBars = false,
+        )
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1
             && keyguardManager.isKeyguardLocked
         ) {
+            setShowWhenLocked(true)
+
             @Suppress("SourceLockedOrientationActivity")
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
@@ -404,6 +410,24 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         // Handle intent
         intent.action?.let {
             intentActions[it]?.invoke()
+        }
+
+        ViewCompat.setOnApplyWindowInsetsListener(mainLayout) { _, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            cameraModeSelectorLayout.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = insets.bottom
+                leftMargin = insets.left
+                rightMargin = insets.right
+            }
+
+            capturePreviewLayout.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = insets.bottom
+                leftMargin = insets.left
+                rightMargin = insets.right
+            }
+
+            windowInsets
         }
 
         // Handle assistant intent

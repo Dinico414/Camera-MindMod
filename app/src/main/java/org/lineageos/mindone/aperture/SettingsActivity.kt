@@ -139,6 +139,14 @@ class SettingsActivity : AppCompatActivity(R.layout.activity_settings) {
             isVerticalScrollBarEnabled = false
 
             ViewCompat.setOnApplyWindowInsetsListener(this) { _, windowInsets ->
+                val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+                updatePadding(
+                    bottom = insets.bottom,
+                    left = insets.left,
+                    right = insets.right,
+                )
+
                 windowInsets
             }
         }

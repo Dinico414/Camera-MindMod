@@ -107,9 +107,6 @@ class QrBottomSheetDialog(context: Context) : BottomSheetDialog(context) {
 
     init {
         setContentView(R.layout.qr_bottom_sheet_dialog)
-        window?.let {
-            WindowCompat.setDecorFitsSystemWindows(it, false)
-        }
 
         cardView.setOnClickListener {
             qrResult?.actions?.firstOrNull()?.let { action ->
