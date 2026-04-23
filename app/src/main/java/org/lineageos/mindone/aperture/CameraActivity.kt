@@ -1245,6 +1245,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                     when (photoAspectRatio) {
                         AspectRatio.RATIO_4_3 -> R.string.aspect_ratio_4_3
                         AspectRatio.RATIO_16_9 -> R.string.aspect_ratio_16_9
+                        2 -> R.string.aspect_ratio_11_10
                         else -> throw Exception("Unknown aspect ratio $photoAspectRatio")
                     }
                 )
@@ -1577,6 +1578,14 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         // Initialize the use case we want and set its properties
         val cameraUseCases = when (cameraConfiguration) {
             is CameraConfiguration.Photo -> {
+                viewFinder.updateLayoutParams<ConstraintLayout.LayoutParams> {
+                    dimensionRatio = when (cameraConfiguration.photoAspectRatio) {
+                        AspectRatio.RATIO_4_3 -> "3:4"
+                        AspectRatio.RATIO_16_9 -> "9:16"
+                        2 -> "10:11"
+                        else -> null
+                    }
+                }
                 require(
                     cameraConfiguration.photoCaptureMode != ImageCapture.CAPTURE_MODE_ZERO_SHUTTER_LAG
                             || cameraConfiguration.camera.supportsZsl
@@ -1605,11 +1614,16 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                     PhotoOutputFormat.RAW_JPEG -> ImageCapture.OUTPUT_FORMAT_RAW_JPEG
                 }
 
-                viewModel.cameraController.imageCaptureResolutionSelector =
-                    ResolutionSelector.Builder()
+                val internalAspectRatio = if (cameraConfiguration.photoAspectRatio == 2) {
+                    AspectRatio.RATIO_4_3
+                } else {
+                    cameraConfiguration.photoAspectRatio
+                }
+
+                val resolutionSelector = ResolutionSelector.Builder()
                         .setAspectRatioStrategy(
                             AspectRatioStrategy(
-                                cameraConfiguration.photoAspectRatio,
+                                internalAspectRatio,
                                 AspectRatioStrategy.FALLBACK_RULE_AUTO,
                             )
                         )
@@ -1621,11 +1635,17 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                             }
                         )
                         .build()
+                viewModel.cameraController.imageCaptureResolutionSelector = resolutionSelector
+                viewModel.cameraController.previewResolutionSelector = resolutionSelector
 
                 CameraController.IMAGE_CAPTURE
             }
 
             is CameraConfiguration.Video -> {
+                viewFinder.updateLayoutParams<ConstraintLayout.LayoutParams> {
+                    dimensionRatio = "9:16"
+                }
+
                 // Check whether or not the video quality is supported
                 val videoQualityInfo = cameraConfiguration.camera.supportedVideoQualities[
                     cameraConfiguration.videoQuality
@@ -1672,6 +1692,10 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
 
             is CameraConfiguration.Qr -> {
+                viewFinder.updateLayoutParams<ConstraintLayout.LayoutParams> {
+                    dimensionRatio = null
+                }
+
                 viewModel.cameraController.setImageAnalysisAnalyzer(
                     viewModel.cameraExecutor, viewModel.qrImageAnalyzer
                 )

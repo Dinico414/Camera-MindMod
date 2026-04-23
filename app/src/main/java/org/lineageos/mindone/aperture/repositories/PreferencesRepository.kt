@@ -262,6 +262,7 @@ class PreferencesRepository(
         enumToPreferenceValue = mapOf(
             AspectRatio.RATIO_4_3 to "4_3",
             AspectRatio.RATIO_16_9 to "16_9",
+            2 to "11_10",
         ),
     ).asPreferenceHolder()
 

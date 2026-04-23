@@ -1432,7 +1432,8 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
         updateConfiguration<CameraConfiguration.Photo> { cameraConfiguration ->
             val newAspectRatio = when (cameraConfiguration.photoAspectRatio) {
                 AspectRatio.RATIO_4_3 -> AspectRatio.RATIO_16_9
-                AspectRatio.RATIO_16_9 -> AspectRatio.RATIO_4_3
+                AspectRatio.RATIO_16_9 -> 2
+                2 -> AspectRatio.RATIO_4_3
                 else -> AspectRatio.RATIO_4_3
             }
 
