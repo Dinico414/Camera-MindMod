@@ -27,7 +27,7 @@
 
     <string name="aspect_ratio_4_3" translatable="false">4:3</string>
     <string name="aspect_ratio_16_9" translatable="false">16:9</string>
-    <string name="aspect_ratio_11_10" translatable="false">11:10</string>
+    <string name="aspect_ratio_full" translatable="false">Full</string>
 
     <string name="video_quality_sd" translatable="false">480p</string>
     <string name="video_quality_hd" translatable="false">720p</string>

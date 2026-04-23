@@ -1269,7 +1269,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                     when (photoAspectRatio) {
                         AspectRatio.RATIO_4_3 -> R.string.aspect_ratio_4_3
                         AspectRatio.RATIO_16_9 -> R.string.aspect_ratio_16_9
-                        2 -> R.string.aspect_ratio_11_10
+                        2 -> R.string.aspect_ratio_full
                         else -> throw Exception("Unknown aspect ratio $photoAspectRatio")
                     }
                 )
@@ -1606,7 +1606,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                     dimensionRatio = when (cameraConfiguration.photoAspectRatio) {
                         AspectRatio.RATIO_4_3 -> "3:4"
                         AspectRatio.RATIO_16_9 -> "9:16"
-                        2 -> "10:11"
+                        2 -> null
                         else -> null
                     }
                 }
