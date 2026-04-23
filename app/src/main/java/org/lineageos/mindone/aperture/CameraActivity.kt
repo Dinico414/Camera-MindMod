@@ -629,6 +629,28 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         super.onResume()
 
         hideSystemBars()
+        syncCameraState()
+    }
+
+    private fun syncCameraState() {
+        val hallValue = try {
+            android.provider.Settings.System.getString(contentResolver, "hall_camera")
+        } catch (_: Exception) { null }
+
+        val physicalFacing = if (hallValue == "front") {
+            CameraFacing.FRONT
+        } else {
+            CameraFacing.BACK
+        }
+
+        if (hallValue != null) {
+            viewModel.initialCameraFacing = physicalFacing
+            if (physicalFacing != viewModel.cameraFacing.value) {
+                runCatching {
+                    viewModel.setCameraFacing(physicalFacing)
+                }
+            }
+        }
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
