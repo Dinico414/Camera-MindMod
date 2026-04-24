@@ -832,7 +832,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 animateSecondaryBarBackground(false)
 
                 // Update secondary top bar buttons
-                aspectRatioButton.isVisible = cameraMode != CameraMode.VIDEO
+                aspectRatioButton.isVisible = cameraMode != CameraMode.VIDEO && cameraMode != CameraMode.QR
                 videoQualityButton.isVisible = cameraMode == CameraMode.VIDEO
                 videoFrameRateButton.isVisible = cameraMode == CameraMode.VIDEO
                 videoDynamicRangeButton.isVisible = cameraMode == CameraMode.VIDEO
@@ -1732,8 +1732,19 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
             is CameraConfiguration.Qr -> {
                 viewFinder.updateLayoutParams<ConstraintLayout.LayoutParams> {
-                    dimensionRatio = null
+                    dimensionRatio = "3:4"
                 }
+
+                val resolutionSelector = ResolutionSelector.Builder()
+                    .setAspectRatioStrategy(
+                        AspectRatioStrategy(
+                            AspectRatio.RATIO_4_3,
+                            AspectRatioStrategy.FALLBACK_RULE_AUTO,
+                        )
+                    )
+                    .build()
+                viewModel.cameraController.imageAnalysisResolutionSelector = resolutionSelector
+                viewModel.cameraController.previewResolutionSelector = resolutionSelector
 
                 viewModel.cameraController.setImageAnalysisAnalyzer(
                     viewModel.cameraExecutor, viewModel.qrImageAnalyzer
