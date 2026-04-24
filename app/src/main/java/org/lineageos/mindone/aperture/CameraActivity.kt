@@ -1215,9 +1215,9 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             viewModel.tapToFocusInfoState.collectLatest { tapToFocusInfoState ->
                 when (tapToFocusInfoState.focusState) {
                     CameraController.TAP_TO_FOCUS_STARTED -> {
-                        viewFinderFocus.x =
+                        viewFinderFocus.x = viewFinder.x +
                             tapToFocusInfoState.tapPoint!!.x - (viewFinderFocus.width / 2)
-                        viewFinderFocus.y =
+                        viewFinderFocus.y = viewFinder.y +
                             tapToFocusInfoState.tapPoint!!.y - (viewFinderFocus.height / 2)
                         viewFinderFocus.isVisible = true
                         handler.removeMessages(MSG_HIDE_FOCUS_RING)

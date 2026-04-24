@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:scaleType="fitCenter" />
+        app:scaleType="fillCenter" />
 
     <org.lineageos.mindone.aperture.ui.views.PreviewBlurView
         android:id="@+id/previewBlurView"
