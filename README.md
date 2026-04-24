@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="banner.png" width="1000" alt="Project Logo">
+</p>
+
 # LineageOS Camera: MindMod 📸
 
 **MindMod** is a specialized fork of the open-source LineageOS Camera application, coded in Kotlin and optimized specifically for the **iKKO MindOne**. This mod bridges the gap between specialized hardware and Android software, ensuring that the flip camera, physical shutter button, and touch-sensitive focus controls work as native features.
