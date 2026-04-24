@@ -458,8 +458,12 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             animateSecondaryBarBackground(willBeVisible)
         }
         googleLensButton.setOnClickListener {
-            dismissKeyguardAndRun {
-                GoogleLensUtils.launchGoogleLens(this)
+            if (GoogleLensUtils.isLensLauncherAvailable(this)) {
+                dismissKeyguardAndRun {
+                    GoogleLensUtils.launchGoogleLens(this)
+                }
+            } else {
+                GoogleLensUtils.installLensLauncher(this)
             }
         }
         flashButton.setOnClickListener { viewModel.cycleFlashMode(false) }
@@ -836,7 +840,18 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
                 // Update secondary bottom bar buttons
                 proButton.isVisible = cameraMode != CameraMode.QR
-                googleLensButton.isVisible = cameraMode == CameraMode.QR && isGoogleLensAvailable
+                googleLensButton.apply {
+                    isVisible = cameraMode == CameraMode.QR
+                    if (isVisible) {
+                        if (GoogleLensUtils.isLensLauncherAvailable(this@CameraActivity)) {
+                            setImageResource(R.drawable.ic_google_lens)
+                            contentDescription = getString(R.string.google_lens_button_description)
+                        } else {
+                            setImageResource(R.drawable.ic_install)
+                            contentDescription = getString(R.string.google_lens_download_button_description)
+                        }
+                    }
+                }
 
                 // Update primary bar buttons
                 shutterButton.isInvisible = cameraMode == CameraMode.QR

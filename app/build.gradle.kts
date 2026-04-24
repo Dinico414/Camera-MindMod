@@ -20,7 +20,7 @@ android {
     defaultConfig {
         applicationId = "org.lineageos.mindone.aperture"
         minSdk = 26
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
     }
@@ -32,6 +32,7 @@ android {
 
             // Enables resource shrinking.
             isShrinkResources = true
+            signingConfig = signingConfigs.getByName("debug")
 
             // Includes the default ProGuard rules files.
             setProguardFiles(
@@ -43,6 +44,7 @@ android {
         }
 
         debug {
+            signingConfig = signingConfigs.getByName("debug")
             // Append .dev to package name so we won't conflict with AOSP build.
             applicationIdSuffix = ".dev"
         }

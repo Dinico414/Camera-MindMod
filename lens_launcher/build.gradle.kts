@@ -17,7 +17,7 @@ android {
     defaultConfig {
         applicationId = "com.google.android.apps.googlecamera.fishfood"
         minSdk = 26
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
     }
@@ -29,6 +29,7 @@ android {
 
             // Enables resource shrinking.
             isShrinkResources = true
+            signingConfig = signingConfigs.getByName("debug")
 
             // Includes the default ProGuard rules files.
             setProguardFiles(
