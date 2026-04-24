@@ -48,6 +48,12 @@
     <string name="grid_off">GRID OFF</string>
     <string name="grid_on_3">GRID 3x3</string>
     <string name="grid_on_4">GRID 4x4</string>
+
+    <!-- Unsupported device dialog -->
+    <string name="unsupported_device_title">Unsupported device</string>
+    <string name="unsupported_device_message">This app is specifically designed for ikko Mind One and may not function correctly on this device.</string>
+    <string name="unsupported_device_button_ignore">Ignore</string>
+    <string name="unsupported_device_button_exit">Exit</string>
     <string name="grid_on_goldenratio">GRID φ</string>
 
     <string name="mic_off">MIC OFF</string>

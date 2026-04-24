@@ -42,6 +42,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.camera2.interop.CaptureRequestOptions
 import androidx.camera.camera2.interop.ExperimentalCamera2Interop
@@ -383,6 +384,19 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
     @Suppress("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (!Build.DEVICE.contains("mindone", ignoreCase = true) &&
+            !Build.PRODUCT.contains("mindone", ignoreCase = true)
+        ) {
+            AlertDialog.Builder(this)
+                .setTitle(R.string.unsupported_device_title)
+                .setMessage(R.string.unsupported_device_message)
+                .setPositiveButton(R.string.unsupported_device_button_ignore, null)
+                .setNegativeButton(R.string.unsupported_device_button_exit) { _, _ ->
+                    finish()
+                }
+                .show()
+        }
 
         // Enable edge-to-edge
         enableEdgeToEdge()
