@@ -271,102 +271,105 @@
     </LinearLayout>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/primaryBarLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingTop="16dp"
         android:background="#99000000"
-        app:layout_constraintBottom_toTopOf="@+id/cameraModeSelectorLayout"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <ImageButton
-            android:id="@+id/shutterButton"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:background="@null"
-            android:contentDescription="@string/shutter_button_description"
-            android:soundEffectsEnabled="false"
-            android:src="@drawable/avd_photo_capture"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/shutterLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/galleryButtonCardView"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="32dp"
-            android:backgroundTint="?colorSecondaryContainer"
-            android:scaleType="fitXY"
-            app:cardCornerRadius="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            <ImageButton
+                android:id="@+id/shutterButton"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:background="@null"
+                android:contentDescription="@string/shutter_button_description"
+                android:soundEffectsEnabled="false"
+                android:src="@drawable/avd_photo_capture"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/galleryButtonCardView"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="32dp"
+                android:backgroundTint="?colorSecondaryContainer"
+                android:scaleType="fitXY"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:id="@+id/galleryButtonIconImageView"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:contentDescription="@string/gallery_button_description"
-                    android:scaleX="0.50"
-                    android:scaleY="0.50"
-                    app:tint="?attr/colorOnSecondaryContainer" />
+                    android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/galleryButtonPreviewImageView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:contentDescription="@string/gallery_button_description"
-                    android:scaleType="centerCrop"
-                    android:visibility="gone" />
+                    <ImageView
+                        android:id="@+id/galleryButtonIconImageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/gallery_button_description"
+                        android:scaleX="0.50"
+                        android:scaleY="0.50"
+                        app:tint="?attr/colorOnSecondaryContainer" />
 
-            </FrameLayout>
+                    <ImageView
+                        android:id="@+id/galleryButtonPreviewImageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/gallery_button_description"
+                        android:scaleType="centerCrop"
+                        android:visibility="gone" />
 
-        </androidx.cardview.widget.CardView>
+                </FrameLayout>
 
-        <ImageButton
-            android:id="@+id/flipCameraButton"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginEnd="32dp"
-            android:background="@null"
-            android:contentDescription="@string/flip_camera_button_description"
-            android:scaleType="center"
-            android:src="@drawable/ic_flip_camera"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            </androidx.cardview.widget.CardView>
 
-        <ImageButton
-            android:id="@+id/videoRecordingStateButton"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:background="@null"
-            android:contentDescription="@string/video_recording_state_button_description"
-            android:src="@drawable/avd_video_recording_pause"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/flipCameraButton"
-            app:layout_constraintStart_toStartOf="@+id/flipCameraButton"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageButton
+                android:id="@+id/flipCameraButton"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="32dp"
+                android:background="@null"
+                android:contentDescription="@string/flip_camera_button_description"
+                android:scaleType="center"
+                android:src="@drawable/ic_flip_camera"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <org.lineageos.mindone.aperture.ui.views.CameraModeSelectorLayout
-        android:id="@+id/cameraModeSelectorLayout"
-        android:layout_width="0dp"
-        android:background="#99000000"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+            <ImageButton
+                android:id="@+id/videoRecordingStateButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@null"
+                android:contentDescription="@string/video_recording_state_button_description"
+                android:src="@drawable/avd_video_recording_pause"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/flipCameraButton"
+                app:layout_constraintStart_toStartOf="@+id/flipCameraButton"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <org.lineageos.mindone.aperture.ui.views.CameraModeSelectorLayout
+            android:id="@+id/cameraModeSelectorLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <androidx.camera.view.ScreenFlashView
         android:id="@+id/screenFlashView"

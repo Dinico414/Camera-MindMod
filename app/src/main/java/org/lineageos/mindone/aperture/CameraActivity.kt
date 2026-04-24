@@ -25,6 +25,7 @@ import android.os.Looper
 import android.os.Message
 import android.os.SystemClock
 import android.provider.MediaStore
+import android.transition.TransitionManager
 import android.util.Log
 import android.view.GestureDetector
 import android.view.InputDevice
@@ -175,12 +176,14 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
     private val mainLayout by lazy { findViewById<ConstraintLayout>(R.id.mainLayout) }
     private val micButton by lazy { findViewById<Button>(R.id.micButton) }
     private val previewBlurView by lazy { findViewById<PreviewBlurView>(R.id.previewBlurView) }
+    private val primaryBarLayout by lazy { findViewById<LinearLayout>(R.id.primaryBarLayout) }
     private val proButton by lazy { findViewById<ImageButton>(R.id.proButton) }
     private val screenFlashView by lazy { findViewById<ScreenFlashView>(R.id.screenFlashView) }
     private val secondaryBarLayout by lazy { findViewById<LinearLayout>(R.id.secondaryBarLayout) }
     private val secondaryTopBarLayout by lazy { findViewById<HorizontalScrollView>(R.id.secondaryTopBarLayout) }
     private val settingsButton by lazy { findViewById<Button>(R.id.settingsButton) }
     private val shutterButton by lazy { findViewById<ImageButton>(R.id.shutterButton) }
+    private val shutterLayout by lazy { findViewById<ConstraintLayout>(R.id.shutterLayout) }
     private val timerButton by lazy { findViewById<Button>(R.id.timerButton) }
     private val videoFrameRateButton by lazy { findViewById<Button>(R.id.videoFrameRateButton) }
     private val videoQualityButton by lazy { findViewById<Button>(R.id.videoQualityButton) }
@@ -827,6 +830,8 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
         launch {
             viewModel.cameraMode.collectLatest { cameraMode ->
+                TransitionManager.beginDelayedTransition(mainLayout)
+
                 // Hide secondary top bar
                 secondaryTopBarLayout.isVisible = false
                 animateSecondaryBarBackground(false)
@@ -854,7 +859,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 }
 
                 // Update primary bar buttons
-                shutterButton.isInvisible = cameraMode == CameraMode.QR
+                shutterLayout.isVisible = cameraMode != CameraMode.QR
 
                 // Update camera mode selector
                 cameraModeSelectorLayout.setCurrentCameraMode(cameraMode)
