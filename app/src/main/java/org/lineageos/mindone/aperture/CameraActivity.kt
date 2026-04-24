@@ -579,6 +579,15 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+        shutterButton.setOnLongClickListener {
+            if (viewModel.cameraMode.value == CameraMode.PHOTO) {
+                viewModel.onShutterLongPress()
+                true
+            } else {
+                false
+            }
+        }
+
         galleryButtonCardView.setOnClickListener { openGallery() }
 
         // Set lens switching callback

@@ -103,6 +103,7 @@ import kotlin.reflect.safeCast
  * [ViewModel] representing a camera session. This data is used to receive
  * live data regarding the setting currently enabled.
  */
+@ExperimentalZeroShutterLag
 class CameraViewModel(application: Application) : ApertureViewModel(application) {
     // System services
     private val locationManager = applicationContext.getSystemService(LocationManager::class.java)
@@ -1241,6 +1242,25 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
         }
     }
 
+    /**
+     * Handle shutter button long press.
+     * Switches to video mode and starts recording if not already in video mode.
+     */
+    fun onShutterLongPress() {
+        if (cameraMode.value == CameraMode.VIDEO) {
+            return
+        }
+
+        viewModelScope.launch {
+            setCameraMode(CameraMode.VIDEO)
+
+            // Wait for the camera to be IDLE (use cases bound and ready)
+            cameraState.filter { it == CameraState.IDLE }.first()
+
+            captureVideo()
+        }
+    }
+
     fun setCameraFacing(cameraFacing: CameraFacing) = updateConfiguration<CameraConfiguration> { cameraConfiguration ->
         if (cameraConfiguration.camera.cameraFacing == cameraFacing) {
             return@updateConfiguration cameraConfiguration
@@ -1576,12 +1596,22 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
 
         val zoomState = zoomState.value ?: return
 
-        ValueAnimator.ofFloat(
-            zoomState.zoomRatio,
-            zoomRatio.coerceIn(zoomState.minZoomRatio, zoomState.maxZoomRatio)
-        ).apply {
+        val startRatio = zoomState.zoomRatio
+        val endRatio = zoomRatio.coerceIn(zoomState.minZoomRatio, zoomState.maxZoomRatio)
+
+        if (startRatio == endRatio) {
+            zoomGestureMutex.unlock()
+            return
+        }
+
+        // Animate in log space for constant perceived speed (linear FOV change)
+        val startLog = kotlin.math.ln(startRatio)
+        val endLog = kotlin.math.ln(endRatio)
+
+        ValueAnimator.ofFloat(startLog, endLog).apply {
+            duration = 300
             addUpdateListener {
-                cameraController.setZoomRatio(it.animatedValue as Float)
+                cameraController.setZoomRatio(kotlin.math.exp(it.animatedValue as Float))
             }
             addListener(
                 onEnd = {
