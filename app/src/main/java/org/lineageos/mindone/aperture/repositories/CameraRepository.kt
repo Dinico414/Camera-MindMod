@@ -108,9 +108,13 @@ class CameraRepository(
     fun getExtensionEnabledCameraSelector(
         camera: Camera,
         mode: Int,
-    ): CameraSelector = extensionsManager.getExtensionEnabledCameraSelector(
-        camera.cameraSelector, mode
-    )
+    ): CameraSelector = try {
+        extensionsManager.getExtensionEnabledCameraSelector(
+            camera.cameraSelector, mode
+        )
+    } catch (e: IllegalArgumentException) {
+        camera.cameraSelector
+    }
 
     private fun CameraInfo.isInternalCameraAllowed(): Boolean {
         val camera2CameraInfo = Camera2CameraInfo.from(this)
