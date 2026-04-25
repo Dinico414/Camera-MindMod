@@ -53,7 +53,7 @@ enum class HardwareKey(
         KeyEvent.KEYCODE_VOLUME_UP,
         KeyEvent.KEYCODE_VOLUME_DOWN,
         true,
-        GestureAction.SHUTTER,
+        GestureAction.ZOOM,
         R.string.volume_buttons_action_title,
         R.string.volume_buttons_title,
         R.string.volume_buttons_invert_title,

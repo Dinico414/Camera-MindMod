@@ -463,7 +463,7 @@ class PreferencesRepository(
     val hardwareKeyInvertPreferences = HardwareKey.entries.associateWith {
         primitivePreference(
             key = "${it.sharedPreferencesKeyPrefix}_invert",
-            defaultValue = it.isTwoWayKey,
+            defaultValue = false,
         ).asPreferenceHolder()
     }
 
@@ -504,8 +504,8 @@ class PreferencesRepository(
             "shutter" -> GestureAction.SHUTTER
             "focus" -> GestureAction.FOCUS
             "mic_mute" -> GestureAction.MIC_MUTE
-            "zoom" -> GestureAction.ZOOM
-            "volume", "default" -> GestureAction.DEFAULT // volume for compat
+            "zoom", "default" -> GestureAction.ZOOM // volume for compat
+            "volume" -> GestureAction.DEFAULT
             "nothing" -> GestureAction.NOTHING
             else -> null
         }
