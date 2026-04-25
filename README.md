@@ -16,6 +16,11 @@ MindMod communicates directly with the iKKO MindOne’s unique hardware componen
 * **Camera Position Trigger:** Automatically adjusts UI and camera modes based on the physical position of the camera module.
 
 ## 🚀 Software Advancements
+
+<p align="center">
+  <img src="before-after.png" width="800" alt="Project Logo">
+</p>
+
 * **Maximized Viewfinder:** Dramatically increased preview area for an immersive shooting experience.
 * **Dynamic Flip Logic:** Physical camera movement instantly triggers the software camera switch.
 * **Precision Zoom:** Re-engineered zoom curves for more precise transitions.
