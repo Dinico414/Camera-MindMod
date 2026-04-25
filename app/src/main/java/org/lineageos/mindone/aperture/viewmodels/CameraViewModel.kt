@@ -93,6 +93,7 @@ import org.lineageos.mindone.aperture.repositories.CameraRepository
 import org.lineageos.mindone.aperture.utils.CameraSoundsUtils
 import org.lineageos.mindone.aperture.utils.StorageUtils
 import org.lineageos.mindone.aperture.ext.applicationContext
+import org.lineageos.mindone.aperture.ext.onTapToFocus
 import java.io.ByteArrayOutputStream
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -768,7 +769,7 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
             initialValue = preferencesRepository.videoDynamicRange.value,
         )
 
-    val isVideoDynamicRangeButtonEnabled = combine(
+    val isVideoDynamicRangeButtonEnabled = combine<CameraConfiguration?, CameraState, Boolean>(
         cameraConfiguration,
         cameraState,
     ) { cameraConfiguration, cameraState ->
@@ -783,7 +784,11 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
 
             else -> false
         }
-    }
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = false,
+    )
 
     /**
      * Video mic mode.
@@ -1251,11 +1256,26 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
             return
         }
 
+        val currentZoomRatio = zoomState.value?.zoomRatio
+        val currentTapToFocusInfo = tapToFocusInfoState.replayCache.firstOrNull()
+
         viewModelScope.launch {
             setCameraMode(CameraMode.VIDEO)
 
             // Wait for the camera to be IDLE (use cases bound and ready)
             cameraState.filter { it == CameraState.IDLE }.first()
+
+            // Restore zoom and focus if needed
+            currentZoomRatio?.let {
+                cameraController.setZoomRatio(it)
+            }
+            currentTapToFocusInfo?.let {
+                if (it.focusState == 1 /* CameraController.TAP_TO_FOCUS_STARTED */) {
+                    it.tapPoint?.let { tapPoint ->
+                        cameraController.onTapToFocus(tapPoint.x, tapPoint.y)
+                    }
+                }
+            }
 
             captureVideo()
         }

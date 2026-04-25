@@ -864,6 +864,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 videoQualityButton.isVisible = cameraMode == CameraMode.VIDEO
                 videoFrameRateButton.isVisible = cameraMode == CameraMode.VIDEO
                 videoDynamicRangeButton.isVisible = cameraMode == CameraMode.VIDEO
+                    && viewModel.isVideoDynamicRangeButtonEnabled.value
                 micButton.isVisible = cameraMode == CameraMode.VIDEO
 
                 // Update secondary bottom bar buttons
@@ -1436,6 +1437,8 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         launch {
             viewModel.isVideoDynamicRangeButtonEnabled.collectLatest { isVideoDynamicRangeButtonEnabled ->
                 videoDynamicRangeButton.isEnabled = isVideoDynamicRangeButtonEnabled
+                videoDynamicRangeButton.isVisible = viewModel.cameraMode.value == CameraMode.VIDEO
+                        && isVideoDynamicRangeButtonEnabled
             }
         }
 

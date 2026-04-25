@@ -23,6 +23,7 @@ import org.lineageos.mindone.aperture.utils.TimeUtils
 import kotlin.reflect.cast
 
 class CameraModeSelectorLayout @JvmOverloads constructor(
+
     context: Context, attrs: AttributeSet? = null
 ) : FrameLayout(context, attrs) {
     // Views

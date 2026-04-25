@@ -297,9 +297,7 @@ class Camera private constructor(
                 overlaysRepository.additionalVideoConfigurations[cameraId].orEmpty()
             val supportedExtensionModes = extensionsManager.getSupportedModes(
                 cameraXCameraInfo.cameraSelector
-            ).toMutableSet().apply {
-                add(androidx.camera.extensions.ExtensionMode.NIGHT)
-            }.toSet()
+            )
 
             return Camera(
                 cameraXCameraInfo,

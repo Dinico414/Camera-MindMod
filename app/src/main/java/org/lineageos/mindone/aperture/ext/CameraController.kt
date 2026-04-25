@@ -37,3 +37,15 @@ var CameraController.flashMode: FlashMode
 val CameraController.camera2CameraControl: Camera2CameraControl?
     @androidx.camera.camera2.interop.ExperimentalCamera2Interop
     get() = cameraControl?.let { Camera2CameraControl.from(it) }
+
+fun CameraController.onTapToFocus(x: Float, y: Float) {
+    // This is a hack to call the protected onTapToFocus method
+    this.javaClass.methods.find {
+        it.name == "onTapToFocus" && it.parameterCount == 2
+    }?.apply {
+        isAccessible = true
+    }?.invoke(this, x, y)
+}
+
+
+
