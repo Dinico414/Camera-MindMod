@@ -34,7 +34,7 @@ MindMod communicates directly with the iKKO MindOne’s unique hardware componen
   * **Press Down:** Configurable (Default: Zoom Out)
 * **Viewfinder Gestures:**
   * **Single Tap:** Trigger Auto-Focus (AF) on a specific point.
-  * **2-Finger Pinch:** Fluid Zoom In/Out.
+  * **2-Finger Pinch:** Zoom In/Out.
 * **Exposure Slider (Right Side):** Vertical slider for manual EV compensation.
 * **Zoom Slider (Bottom Center):** Horizontal slider for granular zoom control.
 
@@ -51,14 +51,14 @@ MindMod communicates directly with the iKKO MindOne’s unique hardware componen
 
 **Expanded Quick Action Row (Contextual):**
 * **In Photo Mode:**
-  * **Settings (Einstellungen):** Enter the configuration menu.
+  * **Settings:** Enter the configuration menu.
   * **Timer:** Toggle Off/3s/10s.
-  * **Grid (Raster):** Toggle composition overlays (Off, 3x3, Golden Ratio).
+  * **Grid:** Toggle composition overlays (Off, 3x3, Golden Ratio).
   * **Aspect Ratio:** Toggle between 4:3, 16:9, and 1.15:1.
 * **In Video Mode:**
   * **Microphone:** Toggle Audio On/Off.
   * **Timer:** Toggle recording delay.
-  * **Grid (Raster):** Toggle composition overlays.
+  * **Grid:** Toggle composition overlays.
   * **FPS:** Quick toggle for 24 FPS / 30 FPS
   * Resolution:** Quick toggle for 480p / 720p / 1080p settings.
 
@@ -66,18 +66,18 @@ MindMod communicates directly with the iKKO MindOne’s unique hardware componen
 
 ## ⚙️ Settings Menu Reference
 
-### Processing & Optics (Bearbeitung)
-* **Noise Reduction (Entrauschen):** Algorithm-based grain removal, specifically optimized for dark conditions.
-* **Sharpening (Schärfen):** Edge enhancement for increased detail definition.
+### Processing & Optics
+* **Noise Reduction:** Algorithm-based grain removal, specifically optimized for dark conditions.
+* **Sharpening:** Edge enhancement for increased detail definition.
 * **Vignette Correction:** Adjusts light fall-off (shading) towards the edges of the lens.
 * **Chromatic Aberration Correction:** Fixes color fringing caused by lens wavelength shifts.
-* **Distortion Correction (Verzerrung):** Compensates for optical lens warping.
+* **Distortion Correction:** Compensates for optical lens warping.
 * **Hotpixel Correction:** Interpolates and removes "stuck" or oversensitive sensor pixels.
 
-### General Settings (Allgemein)
+### General Settings
 * **Max Brightness:** Force screen to 100% when the app is active.
 * **Save Location:** Store GPS coordinates in Metadata.
 * **Shutter Sound:** Toggle the audible capture click.
-* **Level (Wasserwaage):** Visual indicator for horizontal device alignment.
+* **Level:** Visual indicator for horizontal device alignment.
 * **Mirror Front Camera:** Toggle whether front-facing shots are saved as seen in preview.
 * **Video Stabilization:** Enable software-based vibration reduction.
