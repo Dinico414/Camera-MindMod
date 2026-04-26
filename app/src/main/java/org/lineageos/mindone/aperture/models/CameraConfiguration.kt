@@ -105,6 +105,7 @@ sealed interface CameraConfiguration {
         val videoDynamicRange: VideoDynamicRange,
         val videoMirrorMode: VideoMirrorMode,
         val enableVideoStabilization: Boolean,
+        val videoAspectRatio: Int,
     ) : CameraConfiguration {
         override val cameraMode = CameraMode.VIDEO
         override val extensionMode = ExtensionMode.NONE

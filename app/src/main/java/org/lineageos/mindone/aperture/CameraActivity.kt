@@ -481,7 +481,13 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
 
         // Set secondary top bar button callbacks
-        aspectRatioButton.setOnClickListener { viewModel.cyclePhotoAspectRatio() }
+        aspectRatioButton.setOnClickListener {
+            when (viewModel.cameraMode.value) {
+                CameraMode.PHOTO -> viewModel.cyclePhotoAspectRatio()
+                CameraMode.VIDEO -> viewModel.cycleVideoAspectRatio()
+                else -> {}
+            }
+        }
         videoQualityButton.setOnClickListener { viewModel.cycleVideoQuality() }
         videoFrameRateButton.setOnClickListener { viewModel.cycleVideoFrameRate() }
         videoDynamicRangeButton.setOnClickListener { viewModel.cycleVideoDynamicRange() }
@@ -1318,14 +1324,20 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         }
 
         launch {
-            viewModel.photoAspectRatio.collectLatest { photoAspectRatio ->
+            combine(
+                viewModel.cameraMode,
+                viewModel.photoAspectRatio,
+                viewModel.videoAspectRatio
+            ) { mode, photoRatio, videoRatio ->
+                if (mode == CameraMode.VIDEO) videoRatio else photoRatio
+            }.collectLatest { aspectRatio ->
                 // Update secondary bar buttons
                 aspectRatioButton.setText(
-                    when (photoAspectRatio) {
+                    when (aspectRatio) {
                         AspectRatio.RATIO_4_3 -> R.string.aspect_ratio_4_3
                         AspectRatio.RATIO_16_9 -> R.string.aspect_ratio_16_9
                         2 -> R.string.aspect_ratio_full
-                        else -> throw Exception("Unknown aspect ratio $photoAspectRatio")
+                        else -> throw Exception("Unknown aspect ratio $aspectRatio")
                     }
                 )
             }
@@ -1727,8 +1739,30 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
             is CameraConfiguration.Video -> {
                 viewFinder.updateLayoutParams<ConstraintLayout.LayoutParams> {
-                    dimensionRatio = "V,9:16"
+                    dimensionRatio = when (cameraConfiguration.videoAspectRatio) {
+                        AspectRatio.RATIO_4_3 -> "v,3:4"
+                        AspectRatio.RATIO_16_9 -> "v,9:16"
+                        2 -> null
+                        else -> null
+                    }
                 }
+
+                val internalAspectRatio = if (cameraConfiguration.videoAspectRatio == 2) {
+                    AspectRatio.RATIO_16_9
+                } else {
+                    cameraConfiguration.videoAspectRatio
+                }
+
+                val resolutionSelector = ResolutionSelector.Builder()
+                    .setAspectRatioStrategy(
+                        AspectRatioStrategy(
+                            internalAspectRatio,
+                            AspectRatioStrategy.FALLBACK_RULE_AUTO,
+                        )
+                    )
+                    .build()
+
+                viewModel.cameraController.previewResolutionSelector = resolutionSelector
 
                 // Check whether or not the video quality is supported
                 val videoQualityInfo = cameraConfiguration.camera.supportedVideoQualities[
@@ -1957,7 +1991,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         animateSecondaryBarBackground(false)
 
         // Update visibility for secondary top bar buttons (for when it is eventually slid open)
-        aspectRatioButton.isVisible = cameraMode != CameraMode.VIDEO && cameraMode != CameraMode.QR
+        aspectRatioButton.isVisible = cameraMode != CameraMode.QR
         videoQualityButton.isVisible = cameraMode == CameraMode.VIDEO
         videoFrameRateButton.isVisible = cameraMode == CameraMode.VIDEO
         videoDynamicRangeButton.isVisible = cameraMode == CameraMode.VIDEO

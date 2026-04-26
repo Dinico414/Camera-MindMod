@@ -275,6 +275,19 @@ class PreferencesRepository(
     ).asPreferenceHolder()
 
     /**
+     * Desired [AspectRatio] for videos.
+     */
+    val videoAspectRatio = enumPreference<Int, String>(
+        key = "video_aspect_ratio",
+        defaultValue = AspectRatio.RATIO_16_9,
+        enumToPreferenceValue = mapOf(
+            AspectRatio.RATIO_4_3 to "4_3",
+            AspectRatio.RATIO_16_9 to "16_9",
+            2 to "full",
+        ),
+    ).asPreferenceHolder()
+
+    /**
      * Whether bright screen should be enabled.
      */
     val brightScreen = primitivePreference(

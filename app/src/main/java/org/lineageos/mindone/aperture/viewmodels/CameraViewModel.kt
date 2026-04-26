@@ -690,6 +690,25 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
     // Video
 
     /**
+     * Video aspect ratio.
+     * @see AspectRatio.Ratio
+     */
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val videoAspectRatio = cameraConfiguration
+        .mapLatest { cameraConfiguration ->
+            when (cameraConfiguration) {
+                is CameraConfiguration.Video -> cameraConfiguration.videoAspectRatio
+                else -> preferencesRepository.videoAspectRatio.value
+            }
+        }
+        .flowOn(Dispatchers.IO)
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(),
+            initialValue = preferencesRepository.videoAspectRatio.value,
+        )
+
+    /**
      * Video quality.
      */
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -1495,6 +1514,25 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
         }
 
     /**
+     * Cycle the video aspect ratio.
+     */
+    fun cycleVideoAspectRatio() =
+        updateConfiguration<CameraConfiguration.Video> { cameraConfiguration ->
+            val newAspectRatio = when (cameraConfiguration.videoAspectRatio) {
+                AspectRatio.RATIO_4_3 -> AspectRatio.RATIO_16_9
+                AspectRatio.RATIO_16_9 -> 2
+                2 -> AspectRatio.RATIO_4_3
+                else -> AspectRatio.RATIO_16_9
+            }
+
+            preferencesRepository.videoAspectRatio.value = newAspectRatio
+
+            cameraConfiguration.copy(
+                videoAspectRatio = newAspectRatio,
+            )
+        }
+
+    /**
      * Cycle the video quality.
      */
     fun cycleVideoQuality() =
@@ -1810,6 +1848,7 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
                 videoDynamicRange = videoDynamicRange,
                 videoMirrorMode = preferencesRepository.videoMirrorMode.value,
                 enableVideoStabilization = preferencesRepository.videoStabilization.value,
+                videoAspectRatio = preferencesRepository.videoAspectRatio.value,
             )
         }
 
