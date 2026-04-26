@@ -35,7 +35,6 @@ import android.view.InputDevice
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.ViewGroup
-import android.view.WindowInsets.Type.statusBars
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.HorizontalScrollView
@@ -153,6 +152,7 @@ import kotlin.reflect.safeCast
 import androidx.camera.core.CameraState as CameraXCameraState
 import androidx.core.graphics.drawable.toDrawable
 import androidx.core.graphics.toColorInt
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 
 @androidx.annotation.OptIn(ExperimentalCamera2Interop::class, ExperimentalZeroShutterLag::class)
@@ -452,20 +452,17 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
 
             cameraModeSelectorLayout.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                bottomMargin = insets.bottom
                 leftMargin = insets.left
                 rightMargin = insets.right
             }
 
             capturePreviewLayout.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                bottomMargin = insets.bottom
                 leftMargin = insets.left
                 rightMargin = insets.right
             }
 
             windowInsets
         }
-
         // Handle assistant intent
         assistantIntent?.useFrontCamera?.let {
             viewModel.initialCameraFacing = if (it) {
@@ -737,10 +734,12 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
     }
 
     private fun hideSystemBars() {
-        window.updateBarsVisibility(
-            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE,
-            systemBars = false,
-        )
+        // This tells the window to let the app draw behind the system bars
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
+        val controller = WindowInsetsControllerCompat(window, window.decorView)
+        controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        controller.hide(WindowInsetsCompat.Type.systemBars())
     }
 
     override fun onDestroy() {
