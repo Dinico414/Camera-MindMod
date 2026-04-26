@@ -29,6 +29,7 @@ import org.lineageos.mindone.aperture.models.FrameRate
 import org.lineageos.mindone.aperture.models.GestureAction
 import org.lineageos.mindone.aperture.models.GridMode
 import org.lineageos.mindone.aperture.models.HardwareKey
+import org.lineageos.mindone.aperture.utils.DeviceCapabilities
 import org.lineageos.mindone.aperture.models.HotPixelMode
 import org.lineageos.mindone.aperture.models.NoiseReductionMode
 import org.lineageos.mindone.aperture.models.Preference
@@ -162,6 +163,13 @@ class PreferencesRepository(
         key = "disable_jpeg_with_raw",
         defaultValue = false,
     ).asPreferenceHolder()
+
+    init {
+        if (!DeviceCapabilities.isRawCaptureSupported) {
+            enableRawImageCapture.value = false
+            disableJpegWithRaw.value = false
+        }
+    }
 
     /**
      * Toggle left-right mirroring of the front facing camera images.

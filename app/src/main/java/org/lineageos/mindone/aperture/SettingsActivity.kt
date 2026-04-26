@@ -40,6 +40,7 @@ import org.lineageos.mindone.aperture.repositories.PreferencesRepository.Compani
 import org.lineageos.mindone.aperture.repositories.PreferencesRepository.Companion.sharedPreferencesKeyPrefix
 import org.lineageos.mindone.aperture.repositories.PreferencesRepository.Companion.toPreferenceString
 import org.lineageos.mindone.aperture.utils.CameraSoundsUtils
+import org.lineageos.mindone.aperture.utils.DeviceCapabilities
 import org.lineageos.mindone.aperture.utils.PermissionsManager
 
 class SettingsActivity : AppCompatActivity(R.layout.activity_settings) {
@@ -159,6 +160,12 @@ class SettingsActivity : AppCompatActivity(R.layout.activity_settings) {
         }
         private val saveLocation by lazy { findPreference<SwitchPreference>("save_location") }
         private val shutterSound by lazy { findPreference<SwitchPreference>("shutter_sound") }
+        private val enableRawImageCapture by lazy {
+            findPreference<SwitchPreference>("enable_raw_image_capture")
+        }
+        private val disableJpegWithRaw by lazy {
+            findPreference<SwitchPreference>("disable_jpeg_with_raw")
+        }
 
         private val photoCaptureModePreferenceChangeListener =
             Preference.OnPreferenceChangeListener { preference, newValue ->
@@ -210,6 +217,11 @@ class SettingsActivity : AppCompatActivity(R.layout.activity_settings) {
             // Photo capture mode
             photoCaptureMode.onPreferenceChangeListener = photoCaptureModePreferenceChangeListener
             enableZsl.isEnabled = photoCaptureMode.value == "minimize_latency"
+
+            if (!DeviceCapabilities.isRawCaptureSupported) {
+                enableRawImageCapture?.isVisible = false
+                disableJpegWithRaw?.isVisible = false
+            }
         }
     }
 
