@@ -454,6 +454,16 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
         )
 
     /**
+     * Whether compact UI should be enabled.
+     */
+    val compactUiEnabled = preferencesRepository.compactUi
+        .stateIn(
+            viewModelScope,
+            started = SharingStarted.WhileSubscribed(),
+            initialValue = false
+        )
+
+    /**
      * Whether screen brightness should be forced to full.
      */
     val fullScreenBrightness = preferencesRepository.brightScreen

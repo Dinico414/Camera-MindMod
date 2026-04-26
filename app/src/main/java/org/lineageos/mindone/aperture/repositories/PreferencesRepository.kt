@@ -307,6 +307,14 @@ class PreferencesRepository(
     ).asPreferenceHolder()
 
     /**
+     * Whether compact UI should be enabled.
+     */
+    val compactUi = primitivePreference(
+        key = "compact_ui",
+        defaultValue = false,
+    ).asPreferenceHolder()
+
+    /**
      * Whether video stabilization should be enabled.
      */
     val videoStabilization = primitivePreference(

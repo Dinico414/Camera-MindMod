@@ -37,6 +37,13 @@
             app:summary="@string/leveler_summary"
             app:title="@string/leveler_title" />
 
+        <SwitchPreference
+            app:defaultValue="false"
+            app:iconSpaceReserved="false"
+            app:key="compact_ui"
+            app:summary="@string/compact_ui_summary"
+            app:title="@string/compact_ui_title" />
+
         <Preference
             app:fragment="org.lineageos.mindone.aperture.SettingsActivity$GesturesSettingsFragment"
             app:iconSpaceReserved="false"

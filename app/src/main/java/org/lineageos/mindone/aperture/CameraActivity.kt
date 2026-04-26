@@ -168,6 +168,10 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
     private val galleryButtonCardView by lazy { findViewById<CardView>(R.id.galleryButtonCardView) }
     private val galleryButtonIconImageView by lazy { findViewById<ImageView>(R.id.galleryButtonIconImageView) }
     private val galleryButtonPreviewImageView by lazy { findViewById<ImageView>(R.id.galleryButtonPreviewImageView) }
+    private val smallGalleryButtonCardView by lazy { findViewById<CardView>(R.id.smallGalleryButtonCardView) }
+    private val smallGalleryButtonIconImageView by lazy { findViewById<ImageView>(R.id.smallGalleryButtonIconImageView) }
+    private val smallGalleryButtonPreviewImageView by lazy { findViewById<ImageView>(R.id.smallGalleryButtonPreviewImageView) }
+    private val smallFlipCameraButton by lazy { findViewById<ImageButton>(R.id.smallFlipCameraButton) }
     private val googleLensButton by lazy { findViewById<ImageButton>(R.id.googleLensButton) }
     private val gridButton by lazy { findViewById<Button>(R.id.gridButton) }
     private val gridView by lazy { findViewById<GridView>(R.id.gridView) }
@@ -547,6 +551,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
         // Set primary bar button callbacks
         flipCameraButton.setOnClickListener { viewModel.flipCamera() }
+        smallFlipCameraButton.setOnClickListener { viewModel.flipCamera() }
 
         videoRecordingStateButton.setOnClickListener {
             viewModel.onVideoRecordingStateButtonPress()
@@ -589,6 +594,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         }
 
         galleryButtonCardView.setOnClickListener { openGallery() }
+        smallGalleryButtonCardView.setOnClickListener { openGallery() }
 
         // Set lens switching callback
         lensSelectorLayout.onCameraChangeCallback = {
@@ -807,8 +813,10 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                         forceTorchSnackbar.show()
                     }
 
-                    is Event.FlipCameraAnimation ->
+                    is Event.FlipCameraAnimation -> {
                         (flipCameraButton.drawable as AnimatedVectorDrawable).start()
+                        (smallFlipCameraButton.drawable as AnimatedVectorDrawable).start()
+                    }
 
                     is Event.PhotoCaptureStatus -> when (event) {
                         is Event.PhotoCaptureStatus.CaptureStarted -> {
@@ -853,40 +861,13 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
         launch {
             viewModel.cameraMode.collectLatest { cameraMode ->
-                TransitionManager.beginDelayedTransition(mainLayout)
+                updateCompactUi()
+            }
+        }
 
-                // Hide secondary top bar
-                secondaryTopBarLayout.isVisible = false
-                animateSecondaryBarBackground(false)
-
-                // Update secondary top bar buttons
-                aspectRatioButton.isVisible = cameraMode != CameraMode.VIDEO && cameraMode != CameraMode.QR
-                videoQualityButton.isVisible = cameraMode == CameraMode.VIDEO
-                videoFrameRateButton.isVisible = cameraMode == CameraMode.VIDEO
-                videoDynamicRangeButton.isVisible = cameraMode == CameraMode.VIDEO
-                    && viewModel.isVideoDynamicRangeButtonEnabled.value
-                micButton.isVisible = cameraMode == CameraMode.VIDEO
-
-                // Update secondary bottom bar buttons
-                proButton.isVisible = cameraMode != CameraMode.QR
-                googleLensButton.apply {
-                    isVisible = cameraMode == CameraMode.QR
-                    if (isVisible) {
-                        if (GoogleLensUtils.isLensLauncherAvailable(this@CameraActivity)) {
-                            setImageResource(R.drawable.ic_google_lens)
-                            contentDescription = getString(R.string.google_lens_button_description)
-                        } else {
-                            setImageResource(R.drawable.ic_install)
-                            contentDescription = getString(R.string.google_lens_download_button_description)
-                        }
-                    }
-                }
-
-                // Update primary bar buttons
-                shutterLayout.isVisible = cameraMode != CameraMode.QR
-
-                // Update camera mode selector
-                cameraModeSelectorLayout.setCurrentCameraMode(cameraMode)
+        launch {
+            viewModel.compactUiEnabled.collectLatest { compactUiEnabled ->
+                updateCompactUi()
             }
         }
 
@@ -1010,6 +991,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             viewModel.inSingleCaptureMode.collectLatest { inSingleCaptureMode ->
                 // Update primary bar buttons
                 galleryButtonCardView.isInvisible = inSingleCaptureMode
+                smallGalleryButtonCardView.isInvisible = inSingleCaptureMode
 
                 // Update camera mode selector
                 cameraModeSelectorLayout.setInSingleCaptureMode(inSingleCaptureMode)
@@ -1028,8 +1010,10 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
                 // Update primary bar buttons
                 galleryButtonCardView.isEnabled = cameraState == CameraState.IDLE
+                smallGalleryButtonCardView.isEnabled = cameraState == CameraState.IDLE
                 // Shutter button must stay enabled
                 flipCameraButton.isEnabled = cameraState == CameraState.IDLE
+                smallFlipCameraButton.isEnabled = cameraState == CameraState.IDLE
                 videoRecordingStateButton.isVisible = cameraState.isRecordingVideo
 
                 // Update camera mode selector
@@ -1084,6 +1068,8 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 galleryButtonCardView.smoothRotate(compensationValue)
                 shutterButton.smoothRotate(compensationValue)
                 flipCameraButton.smoothRotate(compensationValue)
+                smallGalleryButtonCardView.smoothRotate(compensationValue)
+                smallFlipCameraButton.smoothRotate(compensationValue)
 
                 // Rotate capture preview
                 capturePreviewLayout.setScreenRotation(screenRotation)
@@ -1527,6 +1513,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         launch {
             viewModel.canFlipCamera.collectLatest { canFlipCamera ->
                 flipCameraButton.isInvisible = !canFlipCamera
+                smallFlipCameraButton.isInvisible = !canFlipCamera
             }
         }
 
@@ -1856,12 +1843,12 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         runOnUiThread {
             val keyguardLocked = keyguardManager.isKeyguardLocked
 
-            galleryButtonIconImageView.setImageResource(
-                when (keyguardLocked) {
-                    true -> R.drawable.ic_lock
-                    false -> R.drawable.ic_image
-                }
-            )
+            val imageRes = when (keyguardLocked) {
+                true -> R.drawable.ic_lock
+                false -> R.drawable.ic_image
+            }
+            galleryButtonIconImageView.setImageResource(imageRes)
+            smallGalleryButtonIconImageView.setImageResource(imageRes)
 
             if (keyguardLocked != fromCapture) {
                 return@runOnUiThread
@@ -1894,11 +1881,79 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                         }
                     )
                 }
+                smallGalleryButtonPreviewImageView.load(uri) {
+                    decoderFactory(VideoFrameDecoder.Factory())
+                    crossfade(true)
+                    scale(Scale.FILL)
+                    size(48.px)
+                    error(R.drawable.ic_image)
+                    fallback(R.drawable.ic_image)
+                    listener(
+                        onCancel = {
+                            smallGalleryButtonPreviewImageView.isVisible = false
+                            smallGalleryButtonIconImageView.isVisible = true
+                        },
+                        onError = { _, _ ->
+                            smallGalleryButtonPreviewImageView.isVisible = false
+                            smallGalleryButtonIconImageView.isVisible = true
+                        },
+                        onSuccess = { _, _ ->
+                            smallGalleryButtonPreviewImageView.isVisible = true
+                            smallGalleryButtonIconImageView.isVisible = false
+                        }
+                    )
+                }
             } ?: run {
                 galleryButtonIconImageView.isVisible = true
                 galleryButtonPreviewImageView.isVisible = false
+                smallGalleryButtonIconImageView.isVisible = true
+                smallGalleryButtonPreviewImageView.isVisible = false
             }
         }
+    }
+
+    private fun updateCompactUi() {
+        val cameraMode = viewModel.cameraMode.value
+        val compactUiEnabled = viewModel.compactUiEnabled.value
+
+        TransitionManager.beginDelayedTransition(mainLayout)
+
+        // Hide secondary top bar
+        secondaryTopBarLayout.isVisible = false
+        animateSecondaryBarBackground(false)
+
+        // Update secondary top bar buttons
+        aspectRatioButton.isVisible = cameraMode != CameraMode.VIDEO && cameraMode != CameraMode.QR
+        videoQualityButton.isVisible = cameraMode == CameraMode.VIDEO
+        videoFrameRateButton.isVisible = cameraMode == CameraMode.VIDEO
+        videoDynamicRangeButton.isVisible = cameraMode == CameraMode.VIDEO
+                && viewModel.isVideoDynamicRangeButtonEnabled.value
+        micButton.isVisible = cameraMode == CameraMode.VIDEO
+
+        // Update secondary bottom bar buttons
+        proButton.isVisible = cameraMode != CameraMode.QR
+        googleLensButton.apply {
+            isVisible = cameraMode == CameraMode.QR
+            if (isVisible) {
+                if (GoogleLensUtils.isLensLauncherAvailable(this@CameraActivity)) {
+                    setImageResource(R.drawable.ic_google_lens)
+                    contentDescription = getString(R.string.google_lens_button_description)
+                } else {
+                    setImageResource(R.drawable.ic_install)
+                    contentDescription = getString(R.string.google_lens_download_button_description)
+                }
+            }
+        }
+
+        // Update primary bar buttons
+        val scannerMode = cameraMode == CameraMode.QR
+        val compactUi = compactUiEnabled && !scannerMode
+        shutterLayout.isVisible = !scannerMode && !compactUi
+        smallGalleryButtonCardView.isVisible = compactUi
+        smallFlipCameraButton.isVisible = compactUi
+
+        // Update camera mode selector
+        cameraModeSelectorLayout.setCurrentCameraMode(cameraMode)
     }
 
     private fun dismissKeyguardAndRun(runnable: () -> Unit) {
