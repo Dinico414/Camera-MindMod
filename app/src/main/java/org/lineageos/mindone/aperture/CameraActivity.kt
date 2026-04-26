@@ -337,6 +337,13 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             addTransition(ChangeBounds())
             addTransition(Fade(Fade.IN))
             duration = 250
+
+            excludeTarget(R.id.viewFinder, true)
+            excludeTarget(R.id.previewBlurView, true)
+            excludeTarget(R.id.gridView, true)
+            excludeTarget(R.id.levelerView, true)
+            excludeTarget(R.id.viewFinderFocus, true)
+            excludeTarget(R.id.countDownView, true)
         }
     }
 
@@ -1657,8 +1664,8 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             is CameraConfiguration.Photo -> {
                 viewFinder.updateLayoutParams<ConstraintLayout.LayoutParams> {
                     dimensionRatio = when (cameraConfiguration.photoAspectRatio) {
-                        AspectRatio.RATIO_4_3 -> "3:4"
-                        AspectRatio.RATIO_16_9 -> "9:16"
+                        AspectRatio.RATIO_4_3 -> "v,3:4"
+                        AspectRatio.RATIO_16_9 -> "v,9:16"
                         2 -> null
                         else -> null
                     }
@@ -1720,7 +1727,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
             is CameraConfiguration.Video -> {
                 viewFinder.updateLayoutParams<ConstraintLayout.LayoutParams> {
-                    dimensionRatio = "9:16"
+                    dimensionRatio = "V,9:16"
                 }
 
                 // Check whether or not the video quality is supported
@@ -1770,7 +1777,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
             is CameraConfiguration.Qr -> {
                 viewFinder.updateLayoutParams<ConstraintLayout.LayoutParams> {
-                    dimensionRatio = "3:4"
+                    dimensionRatio = "v,3:4"
                 }
 
                 val resolutionSelector = ResolutionSelector.Builder()
