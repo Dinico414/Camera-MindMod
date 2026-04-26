@@ -27,7 +27,7 @@
                     android:fillType="evenOdd"
                     android:pathData="M19 16C19 17.6569 17.6569 19 16 19C14.3431 19 13 17.6569 13 16C13 14.3431 14.3431 13 16 13C17.6569 13 19 14.3431 19 16Z"
                     android:strokeWidth="2"
-                    android:strokeColor="?attr/colorPrimary" />
+                    android:strokeColor="@android:color/white" />
             </group>
         </vector>
     </aapt:attr>

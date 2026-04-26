@@ -25,7 +25,10 @@ import android.os.Looper
 import android.os.Message
 import android.os.SystemClock
 import android.provider.MediaStore
+import android.transition.ChangeBounds
+import android.transition.Fade
 import android.transition.TransitionManager
+import android.transition.TransitionSet
 import android.util.Log
 import android.view.GestureDetector
 import android.view.InputDevice
@@ -83,6 +86,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -323,6 +327,17 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             .setAction(android.R.string.ok) {
                 viewModel.setForceModeHelpShown(true)
             }
+    }
+
+
+    private val compactUiTransition: TransitionSet by lazy {
+        TransitionSet().apply {
+            ordering = TransitionSet.ORDERING_TOGETHER
+            addTransition(Fade(Fade.OUT))
+            addTransition(ChangeBounds())
+            addTransition(Fade(Fade.IN))
+            duration = 250
+        }
     }
 
     enum class ShutterAnimation(val resourceId: Int) {
@@ -859,16 +874,19 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+        // Single combined collector that drives updateCompactUi(). Using combine() here is
+        // important: it guarantees that ANY of these inputs changing will recompute the small
+        // button visibility. Previously, each flow had its own collector and could clobber the
+        // visibility set by the others, which is why the small flip button never showed up
+        // (canFlipCamera flipped to true after compactUiEnabled, with no observer to react).
         launch {
-            viewModel.cameraMode.collectLatest { cameraMode ->
-                updateCompactUi()
-            }
-        }
-
-        launch {
-            viewModel.compactUiEnabled.collectLatest { compactUiEnabled ->
-                updateCompactUi()
-            }
+            combine(
+                viewModel.cameraMode,
+                viewModel.compactUiEnabled,
+                viewModel.inSingleCaptureMode,
+                viewModel.canFlipCamera,
+            ) { _, _, _, _ -> Unit }
+                .collectLatest { updateCompactUi() }
         }
 
         launch {
@@ -989,9 +1007,10 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
         launch {
             viewModel.inSingleCaptureMode.collectLatest { inSingleCaptureMode ->
-                // Update primary bar buttons
+                // Large primary-bar gallery button: keep INVISIBLE so the layout slot is preserved
+                // and the shutter remains centered. Small button visibility is owned by
+                // updateCompactUi() (driven by the combine() above).
                 galleryButtonCardView.isInvisible = inSingleCaptureMode
-                smallGalleryButtonCardView.isInvisible = inSingleCaptureMode
 
                 // Update camera mode selector
                 cameraModeSelectorLayout.setInSingleCaptureMode(inSingleCaptureMode)
@@ -1246,9 +1265,9 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 when (tapToFocusInfoState.focusState) {
                     CameraController.TAP_TO_FOCUS_STARTED -> {
                         viewFinderFocus.x = viewFinder.x +
-                            tapToFocusInfoState.tapPoint!!.x - (viewFinderFocus.width / 2)
+                                tapToFocusInfoState.tapPoint!!.x - (viewFinderFocus.width / 2)
                         viewFinderFocus.y = viewFinder.y +
-                            tapToFocusInfoState.tapPoint!!.y - (viewFinderFocus.height / 2)
+                                tapToFocusInfoState.tapPoint!!.y - (viewFinderFocus.height / 2)
                         viewFinderFocus.isVisible = true
                         handler.removeMessages(MSG_HIDE_FOCUS_RING)
                         ValueAnimator.ofInt(0.px, 8.px).apply {
@@ -1512,8 +1531,10 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
         launch {
             viewModel.canFlipCamera.collectLatest { canFlipCamera ->
+                // Large flip button: keep INVISIBLE so the shutter remains centered when the
+                // camera can't be flipped. Small button visibility is owned by updateCompactUi()
+                // (driven by the combine() above).
                 flipCameraButton.isInvisible = !canFlipCamera
-                smallFlipCameraButton.isInvisible = !canFlipCamera
             }
         }
 
@@ -1678,20 +1699,20 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 }
 
                 val resolutionSelector = ResolutionSelector.Builder()
-                        .setAspectRatioStrategy(
-                            AspectRatioStrategy(
-                                internalAspectRatio,
-                                AspectRatioStrategy.FALLBACK_RULE_AUTO,
-                            )
+                    .setAspectRatioStrategy(
+                        AspectRatioStrategy(
+                            internalAspectRatio,
+                            AspectRatioStrategy.FALLBACK_RULE_AUTO,
                         )
-                        .setAllowedResolutionMode(
-                            if (cameraConfiguration.enableHighResolution) {
-                                ResolutionSelector.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE
-                            } else {
-                                ResolutionSelector.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION
-                            }
-                        )
-                        .build()
+                    )
+                    .setAllowedResolutionMode(
+                        if (cameraConfiguration.enableHighResolution) {
+                            ResolutionSelector.PREFER_HIGHER_RESOLUTION_OVER_CAPTURE_RATE
+                        } else {
+                            ResolutionSelector.PREFER_CAPTURE_RATE_OVER_HIGHER_RESOLUTION
+                        }
+                    )
+                    .build()
                 viewModel.cameraController.imageCaptureResolutionSelector = resolutionSelector
                 viewModel.cameraController.previewResolutionSelector = resolutionSelector
 
@@ -1915,14 +1936,21 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
     private fun updateCompactUi() {
         val cameraMode = viewModel.cameraMode.value
         val compactUiEnabled = viewModel.compactUiEnabled.value
+        val inSingleCaptureMode = viewModel.inSingleCaptureMode.value
+        val canFlipCamera = viewModel.canFlipCamera.value
 
-        TransitionManager.beginDelayedTransition(mainLayout)
+        // Determine if we are in a "Minimal" state (either Scanner or Compact)
+        val isScannerMode = cameraMode == CameraMode.QR
+        val isMinimalUi = compactUiEnabled || isScannerMode
 
-        // Hide secondary top bar
+        // Use the parallel transition to avoid the "stuttering" look
+        TransitionManager.beginDelayedTransition(mainLayout, compactUiTransition)
+
+        // Hide secondary top bar (settings row)
         secondaryTopBarLayout.isVisible = false
         animateSecondaryBarBackground(false)
 
-        // Update secondary top bar buttons
+        // Update visibility for secondary top bar buttons (for when it is eventually slid open)
         aspectRatioButton.isVisible = cameraMode != CameraMode.VIDEO && cameraMode != CameraMode.QR
         videoQualityButton.isVisible = cameraMode == CameraMode.VIDEO
         videoFrameRateButton.isVisible = cameraMode == CameraMode.VIDEO
@@ -1931,9 +1959,9 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         micButton.isVisible = cameraMode == CameraMode.VIDEO
 
         // Update secondary bottom bar buttons
-        proButton.isVisible = cameraMode != CameraMode.QR
+        proButton.isVisible = !isScannerMode
         googleLensButton.apply {
-            isVisible = cameraMode == CameraMode.QR
+            isVisible = isScannerMode
             if (isVisible) {
                 if (GoogleLensUtils.isLensLauncherAvailable(this@CameraActivity)) {
                     setImageResource(R.drawable.ic_google_lens)
@@ -1945,14 +1973,16 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
-        // Update primary bar buttons
-        val scannerMode = cameraMode == CameraMode.QR
-        val compactUi = compactUiEnabled && !scannerMode
-        shutterLayout.isVisible = !scannerMode && !compactUi
-        smallGalleryButtonCardView.isVisible = compactUi
-        smallFlipCameraButton.isVisible = compactUi
+        // PRIMARY ROW EXIT LOGIC:
+        // If we are in Scanner Mode OR Compact Mode, the main shutter row exits.
+        shutterLayout.isVisible = !isMinimalUi
 
-        // Update camera mode selector
+        // SMALL BUTTONS ENTRY LOGIC:
+        // These only show up if we are specifically in Compact Mode (and not just QR/Scanner)
+        smallGalleryButtonCardView.isVisible = compactUiEnabled && !isScannerMode && !inSingleCaptureMode
+        smallFlipCameraButton.isVisible = compactUiEnabled && !isScannerMode && canFlipCamera
+
+        // Update camera mode selector (the bottom-most text/scroller)
         cameraModeSelectorLayout.setCurrentCameraMode(cameraMode)
     }
 
@@ -2053,11 +2083,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         }
     }
 
-    /**
-     * When the user took a photo or a video and confirmed it, its URI gets sent back to the
-     * app that sent the intent and closes the camera.
-     */
-    private fun sendIntentResultAndExit(input: Any) {
+     private fun sendIntentResultAndExit(input: Any) {
         // The user confirmed the choice
         var outputUri: Uri? = null
         if (intent.extras?.containsKey(MediaStore.EXTRA_OUTPUT) == true) {
@@ -2146,9 +2172,6 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         }
     }
 
-    /**
-     * Show a toast warning the user that no camera is available and close the activity.
-     */
     private fun noCamera() {
         Toast.makeText(
             this, R.string.error_no_cameras_available, Toast.LENGTH_LONG
@@ -2156,12 +2179,6 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         finish()
     }
 
-    /**
-     * Method called when a new media have been successfully captured and saved.
-     * Keep track of media items captured while in a secure lockscreen state so that they
-     * can be passed to the gallery for viewing without unlocking the device. However, if the
-     * keyguard is no longer locked, clear any existing URIs, and do not add this one.
-     */
     private fun onCapturedMedia(item: Uri?) {
         updateGalleryButton(item, true)
 
@@ -2174,11 +2191,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         }
     }
 
-    /**
-     * If keyguard is not locked, remove any URIs that were stored while in the secure camera state.
-     * Otherwise, remove any URIs that no longer exist.
-     */
-    private fun updateSecureMediaUris(keyguardLocked: Boolean) {
+   private fun updateSecureMediaUris(keyguardLocked: Boolean) {
         if (!keyguardLocked) {
             secureMediaUris.clear()
         } else {
@@ -2288,7 +2301,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
         viewFinder.dispatchTouchEvent(downEvent)
         viewFinder.dispatchTouchEvent(upEvent)
-        
+
         viewModel.setExposureCompensationLevel(0.5f)
         exposureLevel.isVisible = true
         handler.removeMessages(MSG_HIDE_EXPOSURE_SLIDER)
@@ -2367,13 +2380,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         private const val MSG_PERFORM_FOCUS = 3
         private const val MSG_ON_PINCH_TO_ZOOM = 4
 
-        // We need to return something small enough so as not to overwhelm Binder. 1MB is the
-        // per-process limit across all transactions. Camera2 sets a max pixel count of 51200.
-        // We set a max side length of 256, for a max pixel count of 65536. Even at 4 bytes per
-        // pixel, this is only 256K, well within the limits. (Note: It's not clear if any modern
-        // app expects a photo to be returned inline, rather than providing an output URI.)
-        // https://developer.android.com/guide/components/activities/parcelables-and-bundles#sdbp
-        private const val SINGLE_CAPTURE_INLINE_MAX_SIDE_LEN_PIXELS = 256
+      private const val SINGLE_CAPTURE_INLINE_MAX_SIDE_LEN_PIXELS = 256
 
         private val EXPOSURE_LEVEL_FORMATTER = DecimalFormat("+#;-#")
     }
