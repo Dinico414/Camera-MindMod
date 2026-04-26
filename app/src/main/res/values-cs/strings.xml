@@ -12,6 +12,13 @@
     <string name="flip_camera_button_description">Překlopení stran</string>
     <string name="gallery_button_description">Galerie</string>
     <string name="google_lens_button_description">Otevřit Google Lens</string>
+    <string name="google_lens_download_button_description">Nainstalovat spouštěč Google Lens</string>
+    <string name="unsupported_device_title">Nepodporované zařízení</string>
+    <string name="unsupported_device_message">Tato aplikace je speciálně navržena pro ikko Mind One a na tomto zařízení nemusí fungovat správně.</string>
+    <string name="unsupported_device_button_ignore">Ignorovat</string>
+    <string name="unsupported_device_button_exit">Ukončit</string>
+    <string name="compact_ui_title">Kompaktní uživatelské rozhraní</string>
+    <string name="compact_ui_summary">Použít kompaktnější rozvržení ovládacích prvků fotoaparátu</string>
     <string name="image_view_description">Náhled obrázku</string>
     <string name="pro_button_description">Profesionální možnosti</string>
     <string name="shutter_button_description">Závěrka</string>

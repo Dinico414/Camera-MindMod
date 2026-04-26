@@ -12,6 +12,13 @@
     <string name="flip_camera_button_description">Kameranı çevir</string>
     <string name="gallery_button_description">Qalereya</string>
     <string name="google_lens_button_description">Google Lens-i aç</string>
+    <string name="google_lens_download_button_description">Google Lens başladıcı quraşdırın</string>
+    <string name="unsupported_device_title">Dəstəklənməyən cihaz</string>
+    <string name="unsupported_device_message">Bu proqram xüsusi olaraq ikko Mind One üçün nəzərdə tutulub və bu cihazda düzgün işləməyə bilər.</string>
+    <string name="unsupported_device_button_ignore">İqnor et</string>
+    <string name="unsupported_device_button_exit">Çıxış</string>
+    <string name="compact_ui_title">Kompakt İS</string>
+    <string name="compact_ui_summary">Kamera idarəetmələri üçün daha kompakt tərtibatdan istifadə edin</string>
     <string name="image_view_description">Təsviri önizlə</string>
     <string name="pro_button_description">Pro ayarları</string>
     <string name="shutter_button_description">Sürgü</string>

@@ -37,4 +37,11 @@
     <string name="hot_pixel_mode_fast">Nopea</string>
     <string name="hot_pixel_mode_high_quality">Korkealaatuinen</string>
     <string name="video_mirror_mode_on_ffc_only">Vain etukamera</string>
+    <string name="google_lens_download_button_description">Asenna Google Lens</string>
+    <string name="unsupported_device_title">Ei-tuettu laite</string>
+    <string name="unsupported_device_message">Tämä sovellus on suunniteltu erityisesti ikko Mind One -laitteelle, eikä se välttämättä toimi oikein tässä laitteessa.</string>
+    <string name="unsupported_device_button_ignore">Ohita</string>
+    <string name="unsupported_device_button_exit">Poistu</string>
+    <string name="compact_ui_title">Kompakti käyttöliittymä</string>
+    <string name="compact_ui_summary">Käytä tiiviimpää asettelua kameran säätimille</string>
 </resources>

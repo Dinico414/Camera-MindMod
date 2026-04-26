@@ -5,6 +5,13 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="google_lens_button_description">Адкрыць Google Lens</string>
+    <string name="google_lens_download_button_description">Усталяваць запуск Google Lens</string>
+    <string name="unsupported_device_title">Непадтрымоўваная прылада</string>
+    <string name="unsupported_device_message">Гэта праграма распрацавана спецыяльна для ikko Mind One і можа працаваць некарэктна на гэтай прыладзе.</string>
+    <string name="unsupported_device_button_ignore">Ігнараваць</string>
+    <string name="unsupported_device_button_exit">Выхад</string>
+    <string name="compact_ui_title">Кампактны інтэрфейс</string>
+    <string name="compact_ui_summary">Выкарыстоўваць больш кампактную раскладку для кіравання камерай</string>
     <string name="qr_wifi_title">Падключыцца да гэтай сеткі Wi-Fi</string>
     <string name="location_permission_dialog_later">Пазней</string>
     <string name="location_permission_dialog_turn_on">Уключыць</string>

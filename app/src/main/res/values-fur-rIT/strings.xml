@@ -12,6 +12,7 @@
     <string name="flip_camera_button_description">Ribalte fotocjamare</string>
     <string name="gallery_button_description">Galarie</string>
     <string name="google_lens_button_description">Vierç Google Lens</string>
+    <string name="google_lens_download_button_description">Instale Google Lens</string>
     <string name="image_view_description">Anteprime de imagjin</string>
     <string name="pro_button_description">Impostazions Pro</string>
     <string name="shutter_button_description">Oturadôr</string>
@@ -25,6 +26,10 @@
     <string name="effect_night">GNOT</string>
     <string name="effect_face_retouch">RITOCJADE DE MUSE</string>
     <string name="effect_auto">AUTO</string>
+    <string name="unsupported_device_title">Dispositîf no supuartât</string>
+    <string name="unsupported_device_message">Cheste aplicazion e je stade pensade specifichement par ikko Mind One e e podarès no funzionâ polito su chest dispositîf.</string>
+    <string name="unsupported_device_button_ignore">Ignore</string>
+    <string name="unsupported_device_button_exit">Jes</string>
     <string name="grid_off">GRIDELE OFF</string>
     <string name="grid_on_3">GRIDELE 3x3</string>
     <string name="grid_on_4">GRIDELE 4x4</string>
@@ -79,6 +84,8 @@
     <string name="save_location_toast">L\'utent nol concêt l\'acès ae posizion.</string>
     <string name="shutter_sound_title">Sun oturadôr</string>
     <string name="shutter_sound_summary">Riprodûs un sun ae acuisizion</string>
+    <string name="compact_ui_title">Interface compatte</string>
+    <string name="compact_ui_summary">Dopre une disposizion plui compatte pai comants de fotocjamare</string>
     <string name="leveler_title">Nivel</string>
     <string name="leveler_summary">Indicadôr che al mostre l\'orientament dal dispositîf</string>
     <string name="gestures_title">Mots</string>

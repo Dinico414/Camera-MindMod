@@ -12,6 +12,13 @@
     <string name="flip_camera_button_description">Inverser la caméra</string>
     <string name="gallery_button_description">Galerie</string>
     <string name="google_lens_button_description">Ouvrir Google Lens</string>
+    <string name="google_lens_download_button_description">Installer le lanceur Google Lens</string>
+    <string name="unsupported_device_title">Appareil non pris en charge</string>
+    <string name="unsupported_device_message">Cette application est spécifiquement conçue pour ikko Mind One et peut ne pas fonctionner correctement sur cet appareil.</string>
+    <string name="unsupported_device_button_ignore">Ignorer</string>
+    <string name="unsupported_device_button_exit">Quitter</string>
+    <string name="compact_ui_title">Interface compacte</string>
+    <string name="compact_ui_summary">Utiliser une mise en page plus compacte pour les commandes de l\'appareil photo</string>
     <string name="image_view_description">Aperçu de l\'image</string>
     <string name="pro_button_description">Paramètres pro</string>
     <string name="shutter_button_description">Obturateur</string>

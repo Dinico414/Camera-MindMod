@@ -12,6 +12,13 @@
     <string name="flip_camera_button_description">Schakelen tussen camera\'s</string>
     <string name="gallery_button_description">Galerij</string>
     <string name="google_lens_button_description">Open Google Lens</string>
+    <string name="google_lens_download_button_description">Google Lens-launcher installeren</string>
+    <string name="unsupported_device_title">Niet-ondersteund apparaat</string>
+    <string name="unsupported_device_message">Deze app is specifiek ontworpen voor ikko Mind One en werkt mogelijk niet correct op dit apparaat.</string>
+    <string name="unsupported_device_button_ignore">Negeren</string>
+    <string name="unsupported_device_button_exit">Afsluiten</string>
+    <string name="compact_ui_title">Compacte UI</string>
+    <string name="compact_ui_summary">Gebruik een compactere lay-out voor de camerabediening</string>
     <string name="image_view_description">Voorbeeld afbeelding</string>
     <string name="pro_button_description">Pro-instellingen</string>
     <string name="shutter_button_description">Sluiter</string>

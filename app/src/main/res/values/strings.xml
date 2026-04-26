@@ -262,3 +262,12 @@
     <string name="video_mirror_mode_on">On</string>
     <string name="video_mirror_mode_on_ffc_only">Front facing camera only</string>
 </resources>
+
+<!--
+google_lens_download_button_description
+unsupported_device_title
+unsupported_device_message
+unsupported_device_button_ignore
+unsupported_device_button_exit
+compact_ui_title
+compact_ui_summary-->

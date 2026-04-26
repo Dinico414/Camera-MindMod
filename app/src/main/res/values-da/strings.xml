@@ -12,6 +12,13 @@
     <string name="flip_camera_button_description">Vend kamera</string>
     <string name="gallery_button_description">Galleri</string>
     <string name="google_lens_button_description">Åbn Google Lens</string>
+    <string name="google_lens_download_button_description">Installer Google Lens-genvej</string>
+    <string name="unsupported_device_title">Ikke-understøttet enhed</string>
+    <string name="unsupported_device_message">Denne app er specifikt designet til ikko Mind One og fungerer muligvis ikke korrekt på denne enhed.</string>
+    <string name="unsupported_device_button_ignore">Ignorer</string>
+    <string name="unsupported_device_button_exit">Afslut</string>
+    <string name="compact_ui_title">Kompakt brugerflade</string>
+    <string name="compact_ui_summary">Brug et mere kompakt layout til kamerakontrol</string>
     <string name="image_view_description">Billedeksempel</string>
     <string name="pro_button_description">Pro indstillinger</string>
     <string name="shutter_button_description">Udløser</string>

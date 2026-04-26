@@ -12,6 +12,13 @@
     <string name="flip_camera_button_description">翻转摄像头</string>
     <string name="gallery_button_description">相册</string>
     <string name="google_lens_button_description">打开 Google Lens</string>
+    <string name="google_lens_download_button_description">安装 Google Lens 启动器</string>
+    <string name="unsupported_device_title">不支持的设备</string>
+    <string name="unsupported_device_message">此应用专为 ikko Mind One 设计，在此设备上可能无法正常运行。</string>
+    <string name="unsupported_device_button_ignore">忽略</string>
+    <string name="unsupported_device_button_exit">退出</string>
+    <string name="compact_ui_title">紧凑型界面</string>
+    <string name="compact_ui_summary">为相机控件使用更紧凑的布局</string>
     <string name="image_view_description">图像预览</string>
     <string name="pro_button_description">专业设置</string>
     <string name="shutter_button_description">快门</string>

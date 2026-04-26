@@ -12,6 +12,13 @@
     <string name="flip_camera_button_description">Обърни камера</string>
     <string name="gallery_button_description">Галерия</string>
     <string name="google_lens_button_description">Отвори Google Lens</string>
+    <string name="google_lens_download_button_description">Инсталиране на стартер за Google Lens</string>
+    <string name="unsupported_device_title">Неподдържано устройство</string>
+    <string name="unsupported_device_message">Това приложение е създадено специално за ikko Mind One и може да не функционира правилно на това устройство.</string>
+    <string name="unsupported_device_button_ignore">Игнориране</string>
+    <string name="unsupported_device_button_exit">Изход</string>
+    <string name="compact_ui_title">Компактен интерфейс</string>
+    <string name="compact_ui_summary">Използване на по-компактно оформление за контролите на камерата</string>
     <string name="image_view_description">Преглед на изображението</string>
     <string name="pro_button_description">Професионални настройки</string>
     <string name="shutter_button_description">Затвор</string>

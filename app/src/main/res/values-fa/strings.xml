@@ -12,6 +12,7 @@
     <string name="flip_camera_button_description">چرخاندن دوربین</string>
     <string name="gallery_button_description">گالری</string>
     <string name="google_lens_button_description">بازکردن لنز گوگل</string>
+    <string name="google_lens_download_button_description">نصب گوگل لنز</string>
     <string name="image_view_description">پیش‌نمایش تصویر</string>
     <string name="pro_button_description">تنظیمات پیشرفته</string>
     <string name="shutter_button_description">شاتر</string>
@@ -25,6 +26,10 @@
     <string name="effect_night">شب</string>
     <string name="effect_face_retouch">روتوش صورت</string>
     <string name="effect_auto">خودکار</string>
+    <string name="unsupported_device_title">دستگاه پشتیبانی نشده</string>
+    <string name="unsupported_device_message">این برنامه به طور خاص برای ikko Mind One طراحی شده است و ممکن است در این دستگاه به درستی کار نکند.</string>
+    <string name="unsupported_device_button_ignore">نادیده گرفتن</string>
+    <string name="unsupported_device_button_exit">خروج</string>
     <string name="grid_off">خطوط جدولی خاموش</string>
     <string name="grid_on_3">خطوط جدولی ۳×۳</string>
     <string name="grid_on_4">خطوط جدولی ۴×۴</string>
@@ -79,6 +84,8 @@
     <string name="save_location_toast">مجوزهای دسترسی مکان توسط کاربر داده نشد.</string>
     <string name="shutter_sound_title">صدای شاتر</string>
     <string name="shutter_sound_summary">پخش صدای شاتر هنگام عکس گرفتن</string>
+    <string name="compact_ui_title">رابط کاربری فشرده</string>
+    <string name="compact_ui_summary">استفاده از طرح‌بندی فشرده‌تر برای کنترل‌های دوربین</string>
     <string name="leveler_title">تراز کننده</string>
     <string name="leveler_summary">نشانگری که جهت دستگاه را نشان می دهد</string>
     <string name="gestures_title">حرکات</string>

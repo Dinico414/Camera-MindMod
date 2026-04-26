@@ -12,6 +12,13 @@
     <string name="flip_camera_button_description">Camudar la cámara</string>
     <string name="gallery_button_description">Galería</string>
     <string name="google_lens_button_description">Abrir Google Lens</string>
+    <string name="google_lens_download_button_description">Instalar el llanzador de Google Lens</string>
+    <string name="unsupported_device_title">Dispositivu non compatible</string>
+    <string name="unsupported_device_message">Esti aplicativu ta diseñáu específicamente pa ikko Mind One y ye posible que nun funcione correutamente nesti dispositivu.</string>
+    <string name="unsupported_device_button_ignore">Innorar</string>
+    <string name="unsupported_device_button_exit">Salir</string>
+    <string name="compact_ui_title">IU compauta</string>
+    <string name="compact_ui_summary">Usar un diseñu más compautu pa los controles de la cámara</string>
     <string name="pro_button_description">Configuración Pro</string>
     <string name="shutter_button_description">Obturador</string>
     <string name="video_recording_state_button_description">Posar/siguir cola grabación de videu</string>

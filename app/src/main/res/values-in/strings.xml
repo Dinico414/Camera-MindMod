@@ -12,6 +12,13 @@
     <string name="flip_camera_button_description">Balikkan kamera</string>
     <string name="gallery_button_description">Galeri</string>
     <string name="google_lens_button_description">Buka Google Lens</string>
+    <string name="google_lens_download_button_description">Instal peluncur Google Lens</string>
+    <string name="unsupported_device_title">Perangkat tidak didukung</string>
+    <string name="unsupported_device_message">Aplikasi ini dirancang khusus untuk ikko Mind One dan mungkin tidak berfungsi dengan baik di perangkat ini.</string>
+    <string name="unsupported_device_button_ignore">Abaikan</string>
+    <string name="unsupported_device_button_exit">Keluar</string>
+    <string name="compact_ui_title">UI Ringkas</string>
+    <string name="compact_ui_summary">Gunakan tata letak yang lebih ringkas untuk kontrol kamera</string>
     <string name="image_view_description">Pratinjau gambar</string>
     <string name="video_recording_state_button_description">Jeda/lanjutkan perekaman video</string>
     <string name="video_framerate_auto">FPS OTOMATIS</string>

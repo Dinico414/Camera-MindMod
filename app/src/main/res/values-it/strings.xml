@@ -12,6 +12,13 @@
     <string name="flip_camera_button_description">Capovolgi fotocamera</string>
     <string name="gallery_button_description">Galleria</string>
     <string name="google_lens_button_description">Apri Google Lens</string>
+    <string name="google_lens_download_button_description">Installa il launcher di Google Lens</string>
+    <string name="unsupported_device_title">Dispositivo non supportato</string>
+    <string name="unsupported_device_message">Questa app è progettata specificamente per ikko Mind One e potrebbe non funzionare correttamente su questo dispositivo.</string>
+    <string name="unsupported_device_button_ignore">Ignora</string>
+    <string name="unsupported_device_button_exit">Esci</string>
+    <string name="compact_ui_title">UI compatta</string>
+    <string name="compact_ui_summary">Utilizza un layout più compatto per i controlli della fotocamera</string>
     <string name="image_view_description">Anteprima immagine</string>
     <string name="pro_button_description">Impostazioni Pro</string>
     <string name="shutter_button_description">Otturatore</string>

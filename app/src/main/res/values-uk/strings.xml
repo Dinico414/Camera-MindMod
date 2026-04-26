@@ -12,6 +12,7 @@
     <string name="flip_camera_button_description">Дзеркальний режим</string>
     <string name="gallery_button_description">Галерея</string>
     <string name="google_lens_button_description">Відкрити Google Об’єктив </string>
+    <string name="google_lens_download_button_description">Install Google Lens launcher</string>
     <string name="image_view_description">Попередній перегляд зображення</string>
     <string name="pro_button_description">Професійні налаштування</string>
     <string name="shutter_button_description">Затвор</string>
