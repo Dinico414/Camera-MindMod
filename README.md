@@ -64,8 +64,9 @@ MindMod communicates directly with the iKKO MindOne’s unique hardware componen
   * **Microphone:** Toggle Audio On/Off.
   * **Timer:** Toggle recording delay.
   * **Grid:** Toggle composition overlays.
-  * **FPS:** Quick toggle for 24 FPS / 30 FPS
-  * Resolution:** Quick toggle for 480p / 720p / 1080p settings.
+  * **Aspect Ratio:** Toggle between 4:3, 16:9, and 1.15:1.
+  * **FPS:** Quick toggle for 24 FPS / 30 FPS / 60 FPS
+  * **Resolution:** Quick toggle for 480p / 720p / 1080p settings.
 
 ---
 
