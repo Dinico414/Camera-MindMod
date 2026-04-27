@@ -897,7 +897,8 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 viewModel.compactUiEnabled,
                 viewModel.inSingleCaptureMode,
                 viewModel.canFlipCamera,
-            ) { _, _, _, _ -> Unit }
+                viewModel.isLensLauncherAvailable,
+            ) { _, _, _, _, _ -> Unit }
                 .collectLatest { updateCompactUi() }
         }
 

@@ -14,7 +14,7 @@ import java.io.FileOutputStream
 
 object GoogleLensUtils {
     private const val GSA_PACKAGE_NAME = "com.google.android.googlequicksearchbox"
-    private const val LAUNCHER_PACKAGE_NAME = "com.google.android.apps.googlecamera.fishfood"
+    const val LAUNCHER_PACKAGE_NAME = "com.google.android.apps.googlecamera.fishfood"
     private const val LAUNCHER_APK_ASSET_NAME = "ApertureLensLauncher.apk"
 
     private fun isGsaAvailable(context: Context) = runCatching {

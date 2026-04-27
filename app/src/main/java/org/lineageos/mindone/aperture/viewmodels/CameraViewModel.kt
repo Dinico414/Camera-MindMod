@@ -93,6 +93,7 @@ import org.lineageos.mindone.aperture.repositories.CameraRepository
 import org.lineageos.mindone.aperture.utils.CameraSoundsUtils
 import org.lineageos.mindone.aperture.utils.StorageUtils
 import org.lineageos.mindone.aperture.ext.applicationContext
+import org.lineageos.mindone.aperture.utils.GoogleLensUtils
 import org.lineageos.mindone.aperture.ext.onTapToFocus
 import java.io.ByteArrayOutputStream
 import java.util.concurrent.ExecutorService
@@ -595,6 +596,31 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
             viewModelScope,
             started = SharingStarted.WhileSubscribed(),
             replay = 1
+        )
+
+    /**
+     * Whether the lens launcher is available.
+     */
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val isLensLauncherAvailable = applicationContext.broadcastReceiverFlow(
+        IntentFilter().apply {
+            addAction(Intent.ACTION_PACKAGE_ADDED)
+            addAction(Intent.ACTION_PACKAGE_CHANGED)
+            addAction(Intent.ACTION_PACKAGE_REMOVED)
+            addAction(Intent.ACTION_PACKAGE_REPLACED)
+            addDataScheme("package")
+        }
+    )
+        .filter {
+            it?.data?.schemeSpecificPart == GoogleLensUtils.LAUNCHER_PACKAGE_NAME
+        }
+        .onStart { emit(null) }
+        .mapLatest { GoogleLensUtils.isLensLauncherAvailable(applicationContext) }
+        .flowOn(Dispatchers.IO)
+        .stateIn(
+            viewModelScope,
+            started = SharingStarted.WhileSubscribed(),
+            initialValue = GoogleLensUtils.isLensLauncherAvailable(applicationContext)
         )
 
     val isShutterButtonEnabled = combine(
