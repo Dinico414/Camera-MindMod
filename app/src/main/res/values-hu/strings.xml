@@ -32,7 +32,7 @@
 
     <!-- Unsupported device dialog -->
     <string name="unsupported_device_title">Nem támogatott eszköz</string>
-    <string name="unsupported_device_message">Ez az alkalmazás kifejezetten az ikko Mind One eszközhöz készült, és előfordulhat, hogy nem működik megfelelően ezen az eszközön.</string>
+    <string name="unsupported_device_message">Ez az alkalmazás kifejezetten az iKKO MindOne eszközhöz készült, és előfordulhat, hogy nem működik megfelelően ezen az eszközön.</string>
     <string name="unsupported_device_button_ignore">Mégse</string>
     <string name="unsupported_device_button_exit">Kilépés</string>
     <string name="grid_on_goldenratio">RÁCS φ</string>

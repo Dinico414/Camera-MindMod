@@ -32,7 +32,7 @@
 
     <!-- Unsupported device dialog -->
     <string name="unsupported_device_title">Enhet som inte stöds</string>
-    <string name="unsupported_device_message">Denna app är specifikt designad för ikko Mind One och kanske inte fungerar korrekt på denna enhet.</string>
+    <string name="unsupported_device_message">Denna app är specifikt designad för iKKO MindOne och kanske inte fungerar korrekt på denna enhet.</string>
     <string name="unsupported_device_button_ignore">Ignorera</string>
     <string name="unsupported_device_button_exit">Avsluta</string>
     <string name="grid_on_goldenratio">Gyllene snittet</string>

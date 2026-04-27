@@ -186,7 +186,7 @@
     <string name="video_mirror_mode_on_ffc_only">Berre frontkamera</string>
     <string name="google_lens_download_button_description">Last ned Google Lens</string>
     <string name="unsupported_device_title">Einininga er ikkje støtta</string>
-    <string name="unsupported_device_message">Aperture er ikkje støtta på ikko Mind One. Bruk av appen på denne eininga kan føra til uventa åtferd eller feil.</string>
+    <string name="unsupported_device_message">Aperture er ikkje støtta på iKKO MindOne. Bruk av appen på denne eininga kan føra til uventa åtferd eller feil.</string>
     <string name="unsupported_device_button_ignore">Ignorer</string>
     <string name="unsupported_device_button_exit">Avslutt</string>
     <string name="compact_ui_title">Kompakt grensesnitt</string>

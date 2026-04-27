@@ -14,7 +14,7 @@
     <string name="google_lens_button_description">Google Lens öffnen</string>
     <string name="google_lens_download_button_description">Google Lens Launcher installieren</string>
     <string name="unsupported_device_title">Nicht unterstütztes Gerät</string>
-    <string name="unsupported_device_message">Diese App ist speziell für das ikko Mind One konzipiert und funktioniert auf diesem Gerät möglicherweise nicht ordnungsgemäß.</string>
+    <string name="unsupported_device_message">Diese App ist speziell für das iKKO MindOne konzipiert und funktioniert auf diesem Gerät möglicherweise nicht ordnungsgemäß.</string>
     <string name="unsupported_device_button_ignore">Ignorieren</string>
     <string name="unsupported_device_button_exit">Beenden</string>
     <string name="compact_ui_title">Kompakte Benutzeroberfläche</string>

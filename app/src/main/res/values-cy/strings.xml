@@ -14,7 +14,7 @@
     <string name="google_lens_button_description">Agor Google Lens</string>
     <string name="google_lens_download_button_description">Gosod lansiwr Google Lens</string>
     <string name="unsupported_device_title">Dyfais heb ei chynnal</string>
-    <string name="unsupported_device_message">Mae\'r ap hwn wedi\'i gynllunio\'n arbennig ar gyfer ikko Mind One ac efallai na fydd yn gweithio\'n gywir ar y ddyfais hon.</string>
+    <string name="unsupported_device_message">Mae\'r ap hwn wedi\'i gynllunio\'n arbennig ar gyfer iKKO MindOne ac efallai na fydd yn gweithio\'n gywir ar y ddyfais hon.</string>
     <string name="unsupported_device_button_ignore">Anwybyddu</string>
     <string name="unsupported_device_button_exit">Gadael</string>
     <string name="compact_ui_title">Rhyngwyneb cryno</string>

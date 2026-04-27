@@ -32,7 +32,7 @@
 
     <!-- Unsupported device dialog -->
     <string name="unsupported_device_title">Thiết bị không được hỗ trợ</string>
-    <string name="unsupported_device_message">Ứng dụng này được thiết kế dành riêng cho ikko Mind One và có thể không hoạt động chính xác trên thiết bị này.</string>
+    <string name="unsupported_device_message">Ứng dụng này được thiết kế dành riêng cho iKKO MindOne và có thể không hoạt động chính xác trên thiết bị này.</string>
     <string name="unsupported_device_button_ignore">Bỏ qua</string>
     <string name="unsupported_device_button_exit">Thoát</string>
     <string name="grid_on_goldenratio">LƯỚI φ</string>

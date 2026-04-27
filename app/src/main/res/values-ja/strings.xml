@@ -14,7 +14,7 @@
     <string name="google_lens_button_description">Google レンズを開く</string>
     <string name="google_lens_download_button_description">Google レンズ ランチャーをインストールする</string>
     <string name="unsupported_device_title">サポートされていないデバイス</string>
-    <string name="unsupported_device_message">このアプリは ikko Mind One 専用に設計されており、このデバイスでは正しく動作しない可能性があります。</string>
+    <string name="unsupported_device_message">このアプリは iKKO MindOne 専用に設計されており、このデバイスでは正しく動作しない可能性があります。</string>
     <string name="unsupported_device_button_ignore">無視</string>
     <string name="unsupported_device_button_exit">終了</string>
     <string name="compact_ui_title">コンパクト UI</string>

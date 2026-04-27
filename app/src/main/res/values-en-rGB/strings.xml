@@ -27,7 +27,7 @@
     <string name="effect_face_retouch">FACE RETOUCH</string>
     <string name="effect_auto">AUTO</string>
     <string name="unsupported_device_title">Unsupported device</string>
-    <string name="unsupported_device_message">This app is specifically designed for ikko Mind One and may not function correctly on this device.</string>
+    <string name="unsupported_device_message">This app is specifically designed for iKKO MindOne and may not function correctly on this device.</string>
     <string name="unsupported_device_button_ignore">Ignore</string>
     <string name="unsupported_device_button_exit">Exit</string>
     <string name="grid_off">GRID OFF</string>

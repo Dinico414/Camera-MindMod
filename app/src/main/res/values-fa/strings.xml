@@ -27,7 +27,7 @@
     <string name="effect_face_retouch">روتوش صورت</string>
     <string name="effect_auto">خودکار</string>
     <string name="unsupported_device_title">دستگاه پشتیبانی نشده</string>
-    <string name="unsupported_device_message">این برنامه به طور خاص برای ikko Mind One طراحی شده است و ممکن است در این دستگاه به درستی کار نکند.</string>
+    <string name="unsupported_device_message">این برنامه به طور خاص برای iKKO MindOne طراحی شده است و ممکن است در این دستگاه به درستی کار نکند.</string>
     <string name="unsupported_device_button_ignore">نادیده گرفتن</string>
     <string name="unsupported_device_button_exit">خروج</string>
     <string name="grid_off">خطوط جدولی خاموش</string>

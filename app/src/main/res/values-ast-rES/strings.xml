@@ -14,7 +14,7 @@
     <string name="google_lens_button_description">Abrir Google Lens</string>
     <string name="google_lens_download_button_description">Instalar el llanzador de Google Lens</string>
     <string name="unsupported_device_title">Dispositivu non compatible</string>
-    <string name="unsupported_device_message">Esti aplicativu ta diseñáu específicamente pa ikko Mind One y ye posible que nun funcione correutamente nesti dispositivu.</string>
+    <string name="unsupported_device_message">Esti aplicativu ta diseñáu específicamente pa iKKO MindOne y ye posible que nun funcione correutamente nesti dispositivu.</string>
     <string name="unsupported_device_button_ignore">Innorar</string>
     <string name="unsupported_device_button_exit">Salir</string>
     <string name="compact_ui_title">IU compauta</string>

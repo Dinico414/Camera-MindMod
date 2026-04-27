@@ -186,7 +186,7 @@
     <string name="video_mirror_mode_on_ffc_only">முன்பக்கப் படமி மட்டும்</string>
     <string name="google_lens_download_button_description">கூகிள் லென்ஸைப் பதிவிறக்குக</string>
     <string name="unsupported_device_title">கருவி ஒத்துழைக்கப்படவில்லை</string>
-    <string name="unsupported_device_message">Aperture, ikko Mind One இல் ஒத்துழைக்கப்படவில்லை. இக்கருவியில் இச்செயலியைப் பயன்படுத்துவது எதிர்பாராத நடத்தை அல்லது பிழைகளை ஏற்படுத்தக்கூடும்.</string>
+    <string name="unsupported_device_message">Aperture, iKKO MindOne இல் ஒத்துழைக்கப்படவில்லை. இக்கருவியில் இச்செயலியைப் பயன்படுத்துவது எதிர்பாராத நடத்தை அல்லது பிழைகளை ஏற்படுத்தக்கூடும்.</string>
     <string name="unsupported_device_button_ignore">புறக்கணிக்கவும்</string>
     <string name="unsupported_device_button_exit">வெளியேறுக</string>
     <string name="compact_ui_title">சிறிய இடைமுகம்</string>

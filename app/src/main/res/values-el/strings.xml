@@ -27,7 +27,7 @@
     <string name="effect_face_retouch">ΡΕΤΟΥΣ ΠΡΟΣΩΠΟΥ</string>
     <string name="effect_auto">ΑΥΤΟΜΑΤΟ</string>
     <string name="unsupported_device_title">Μη υποστηριζόμενη συσκευή</string>
-    <string name="unsupported_device_message">Αυτή η εφαρμογή έχει σχεδιαστεί ειδικά για το ikko Mind One και ενδέχεται να μη λειτουργεί σωστά σε αυτήν τη συσκευή.</string>
+    <string name="unsupported_device_message">Αυτή η εφαρμογή έχει σχεδιαστεί ειδικά για το iKKO MindOne και ενδέχεται να μη λειτουργεί σωστά σε αυτήν τη συσκευή.</string>
     <string name="unsupported_device_button_ignore">Παράβλεψη</string>
     <string name="unsupported_device_button_exit">Έξοδος</string>
     <string name="grid_off">ΠΛΕΓΜΑ OFF</string>

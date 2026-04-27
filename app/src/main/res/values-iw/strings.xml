@@ -32,7 +32,7 @@
 
     <!-- Unsupported device dialog -->
     <string name="unsupported_device_title">מכשיר לא נתמך</string>
-    <string name="unsupported_device_message">אפליקציה זו תוכננה במיוחד עבור ikko Mind One וייתכן שלא תפעל כראוי במכשיר זה.</string>
+    <string name="unsupported_device_message">אפליקציה זו תוכננה במיוחד עבור iKKO MindOne וייתכן שלא תפעל כראוי במכשיר זה.</string>
     <string name="unsupported_device_button_ignore">התעלם</string>
     <string name="unsupported_device_button_exit">יציאה</string>
     <string name="grid_on_goldenratio">רשת φ</string>

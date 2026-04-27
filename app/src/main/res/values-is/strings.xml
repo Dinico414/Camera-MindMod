@@ -31,7 +31,7 @@
 
     <!-- Unsupported device dialog -->
     <string name="unsupported_device_title">Tæki er ekki stutt</string>
-    <string name="unsupported_device_message">Þetta forrit er sérstaklega hannað fyrir ikko Mind One og gæti ekki virkað rétt á þessu tæki.</string>
+    <string name="unsupported_device_message">Þetta forrit er sérstaklega hannað fyrir iKKO MindOne og gæti ekki virkað rétt á þessu tæki.</string>
     <string name="unsupported_device_button_ignore">Hunsa</string>
     <string name="unsupported_device_button_exit">Hætta</string>
     <string name="grid_on_goldenratio">REITIR φ</string>

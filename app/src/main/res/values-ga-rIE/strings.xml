@@ -32,7 +32,7 @@
 
     <!-- Unsupported device dialog -->
     <string name="unsupported_device_title">Gléas nach dtacaítear leis</string>
-    <string name="unsupported_device_message">Tá an aip seo deartha go sonrach do ikko Mind One agus seans nach n-oibreoidh sé i gceart ar an ngléas seo.</string>
+    <string name="unsupported_device_message">Tá an aip seo deartha go sonrach do iKKO MindOne agus seans nach n-oibreoidh sé i gceart ar an ngléas seo.</string>
     <string name="unsupported_device_button_ignore">Déan neamhaird de</string>
     <string name="unsupported_device_button_exit">Scoir</string>
     <string name="grid_on_goldenratio">GREILLE φ</string>

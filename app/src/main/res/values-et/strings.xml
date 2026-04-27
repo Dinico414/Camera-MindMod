@@ -13,7 +13,7 @@
     <string name="shortcut_video">Tee video</string>
     <string name="google_lens_download_button_description">Installi Google Lens</string>
     <string name="unsupported_device_title">Toetamata seade</string>
-    <string name="unsupported_device_message">See rakendus on loodud spetsiaalselt ikko Mind One jaoks ja ei pruugi selles seadmes õigesti töötada.</string>
+    <string name="unsupported_device_message">See rakendus on loodud spetsiaalselt iKKO MindOne jaoks ja ei pruugi selles seadmes õigesti töötada.</string>
     <string name="unsupported_device_button_ignore">Eira</string>
     <string name="unsupported_device_button_exit">Välju</string>
     <string name="compact_ui_title">Kompaktne kasutajaliides</string>

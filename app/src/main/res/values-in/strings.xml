@@ -14,7 +14,7 @@
     <string name="google_lens_button_description">Buka Google Lens</string>
     <string name="google_lens_download_button_description">Instal peluncur Google Lens</string>
     <string name="unsupported_device_title">Perangkat tidak didukung</string>
-    <string name="unsupported_device_message">Aplikasi ini dirancang khusus untuk ikko Mind One dan mungkin tidak berfungsi dengan baik di perangkat ini.</string>
+    <string name="unsupported_device_message">Aplikasi ini dirancang khusus untuk iKKO MindOne dan mungkin tidak berfungsi dengan baik di perangkat ini.</string>
     <string name="unsupported_device_button_ignore">Abaikan</string>
     <string name="unsupported_device_button_exit">Keluar</string>
     <string name="compact_ui_title">UI Ringkas</string>

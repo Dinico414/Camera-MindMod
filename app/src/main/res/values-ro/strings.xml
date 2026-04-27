@@ -32,7 +32,7 @@
 
     <!-- Unsupported device dialog -->
     <string name="unsupported_device_title">Dispozitiv neacceptat</string>
-    <string name="unsupported_device_message">Această aplicație este concepută special pentru ikko Mind One și este posibil să nu funcționeze corect pe acest dispozitiv.</string>
+    <string name="unsupported_device_message">Această aplicație este concepută special pentru iKKO MindOne și este posibil să nu funcționeze corect pe acest dispozitiv.</string>
     <string name="unsupported_device_button_ignore">Ignoră</string>
     <string name="unsupported_device_button_exit">Ieșire</string>
     <string name="grid_on_goldenratio">GRILĂ φ</string>

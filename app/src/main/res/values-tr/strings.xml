@@ -14,7 +14,7 @@
     <string name="google_lens_button_description">Google Lens\' i aç</string>
     <string name="google_lens_download_button_description">Google Lens başlatıcıyı yükle</string>
     <string name="unsupported_device_title">Desteklenmeyen cihaz</string>
-    <string name="unsupported_device_message">Bu uygulama özellikle ikko Mind One için tasarlanmıştır ve bu cihazda düzgün çalışmayabilir.</string>
+    <string name="unsupported_device_message">Bu uygulama özellikle iKKO MindOne için tasarlanmıştır ve bu cihazda düzgün çalışmayabilir.</string>
     <string name="unsupported_device_button_ignore">Yoksay</string>
     <string name="unsupported_device_button_exit">Çıkış</string>
     <string name="compact_ui_title">Kompakt arayüz</string>
