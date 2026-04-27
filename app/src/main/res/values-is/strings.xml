@@ -12,6 +12,7 @@
     <string name="flip_camera_button_description">Skipt milli myndavéla</string>
     <string name="gallery_button_description">Myndasafn</string>
     <string name="google_lens_button_description">Opna Google Lens</string>
+    <string name="google_lens_download_button_description">Setja upp Google Lens ræsi</string>
     <string name="image_view_description">Forskoðun myndar</string>
     <string name="pro_button_description">Atvinnustillingar</string>
     <string name="shutter_button_description">Lokari</string>
@@ -27,6 +28,12 @@
     <string name="grid_off">REITIR AF</string>
     <string name="grid_on_3">REITIR 3x3</string>
     <string name="grid_on_4">REITIR 4x4</string>
+
+    <!-- Unsupported device dialog -->
+    <string name="unsupported_device_title">Tæki er ekki stutt</string>
+    <string name="unsupported_device_message">Þetta forrit er sérstaklega hannað fyrir ikko Mind One og gæti ekki virkað rétt á þessu tæki.</string>
+    <string name="unsupported_device_button_ignore">Hunsa</string>
+    <string name="unsupported_device_button_exit">Hætta</string>
     <string name="grid_on_goldenratio">REITIR φ</string>
     <string name="mic_off">HLJÓÐN. AF</string>
     <string name="mic_on">HLJÓÐN. Á</string>
@@ -74,6 +81,8 @@
     <string name="save_location_toast">Staðsetningarheimildir ekki veittar af notandanum.</string>
     <string name="shutter_sound_title">Hljóð lokara</string>
     <string name="shutter_sound_summary">Spila hljóð við töku myndar</string>
+    <string name="compact_ui_title">Þjappað viðmót</string>
+    <string name="compact_ui_summary">Nota þjappaðra útlit fyrir myndavélarstýringar</string>
     <string name="leveler_title">Hallamál</string>
     <string name="leveler_summary">Vísir sem sýnir stefnu tækis</string>
     <string name="photo_capture_mode_title">Upptökuhamur</string>

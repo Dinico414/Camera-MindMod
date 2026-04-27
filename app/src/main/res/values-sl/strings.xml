@@ -184,4 +184,11 @@
     <string name="video_mirror_mode_off">Izklopljeno</string>
     <string name="video_mirror_mode_on">Vklopljeno</string>
     <string name="video_mirror_mode_on_ffc_only">Samo sprednji fotoaparat</string>
+    <string name="google_lens_download_button_description">Prenesi Google Lens</string>
+    <string name="unsupported_device_title">Naprava ni podprta</string>
+    <string name="unsupported_device_message">Aperture ni podprta na ikko Mind One. Uporaba aplikacije na tej napravi lahko povzroči nepričakovano obnašanje ali napake.</string>
+    <string name="unsupported_device_button_ignore">Prezri</string>
+    <string name="unsupported_device_button_exit">Izhod</string>
+    <string name="compact_ui_title">Kompakten uporabniški vmesnik</string>
+    <string name="compact_ui_summary">Zmanjšaj velikost elementov uporabniškega vmesnika</string>
 </resources>

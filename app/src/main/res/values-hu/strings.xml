@@ -12,6 +12,7 @@
     <string name="flip_camera_button_description">Kamerakép tükrözése</string>
     <string name="gallery_button_description">Galéria</string>
     <string name="google_lens_button_description">A Google Lens megnyitása</string>
+    <string name="google_lens_download_button_description">A Google Lens indító telepítése</string>
     <string name="image_view_description">Képelőnézet</string>
     <string name="pro_button_description">Pro-beállítások</string>
     <string name="shutter_button_description">Exponálógomb</string>
@@ -28,6 +29,12 @@
     <string name="grid_off">RÁCS KI</string>
     <string name="grid_on_3">RÁCS 3x3</string>
     <string name="grid_on_4">RÁCS 4x4</string>
+
+    <!-- Unsupported device dialog -->
+    <string name="unsupported_device_title">Nem támogatott eszköz</string>
+    <string name="unsupported_device_message">Ez az alkalmazás kifejezetten az ikko Mind One eszközhöz készült, és előfordulhat, hogy nem működik megfelelően ezen az eszközön.</string>
+    <string name="unsupported_device_button_ignore">Mégse</string>
+    <string name="unsupported_device_button_exit">Kilépés</string>
     <string name="grid_on_goldenratio">RÁCS φ</string>
     <string name="mic_off">MIKROFON KI</string>
     <string name="mic_on">MIKROFON BE</string>
@@ -79,6 +86,8 @@
     <string name="save_location_toast">Helyinformációs jogosultságokat a felhasználó nem adta meg.</string>
     <string name="shutter_sound_title">Zárhang</string>
     <string name="shutter_sound_summary">Hang lejátszása képkészítéskor</string>
+    <string name="compact_ui_title">Kompakt felület</string>
+    <string name="compact_ui_summary">Kompaktabb elrendezés használata a kameravezérlőkhöz</string>
     <string name="leveler_title">Szintező</string>
     <string name="leveler_summary">A készülék tájolását mutató jelző</string>
     <string name="gestures_title">Kézmozdulat-vezérlők</string>

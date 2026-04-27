@@ -12,6 +12,7 @@
     <string name="flip_camera_button_description">Comutați camera foto</string>
     <string name="gallery_button_description">Galerie</string>
     <string name="google_lens_button_description">Deschide Google Lens</string>
+    <string name="google_lens_download_button_description">Instalați lansatorul Google Lens</string>
     <string name="image_view_description">Previzualizare imagine</string>
     <string name="pro_button_description">Setări Pro</string>
     <string name="shutter_button_description">Obturator</string>
@@ -28,6 +29,12 @@
     <string name="grid_off">GRILĂ DEZACTIVATĂ</string>
     <string name="grid_on_3">GRILĂ 3x3</string>
     <string name="grid_on_4">GRILĂ 4x4</string>
+
+    <!-- Unsupported device dialog -->
+    <string name="unsupported_device_title">Dispozitiv neacceptat</string>
+    <string name="unsupported_device_message">Această aplicație este concepută special pentru ikko Mind One și este posibil să nu funcționeze corect pe acest dispozitiv.</string>
+    <string name="unsupported_device_button_ignore">Ignoră</string>
+    <string name="unsupported_device_button_exit">Ieșire</string>
     <string name="grid_on_goldenratio">GRILĂ φ</string>
     <string name="mic_off">MICROFON DEZACTIVAT</string>
     <string name="mic_on">MICROFON ACTIVAT</string>
@@ -79,6 +86,8 @@
     <string name="save_location_toast">Permisiuni de localizare neacordate de utilizator.</string>
     <string name="shutter_sound_title">Sunet obturator</string>
     <string name="shutter_sound_summary">Redă un sunet la captură</string>
+    <string name="compact_ui_title">Interfață compactă</string>
+    <string name="compact_ui_summary">Utilizați un aspect mai compact pentru comenzile camerei</string>
     <string name="leveler_title">Boloboc</string>
     <string name="leveler_summary">Indicator care arată orientarea dispozitivului</string>
     <string name="gestures_title">Gesturi</string>

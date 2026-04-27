@@ -12,6 +12,7 @@
     <string name="flip_camera_button_description">Smeach ceamara</string>
     <string name="gallery_button_description">Gailearaí</string>
     <string name="google_lens_button_description">Oscail Google Lens</string>
+    <string name="google_lens_download_button_description">Suiteáil seoladh Google Lens</string>
     <string name="image_view_description">Réamhamhairc íomhá</string>
     <string name="pro_button_description">Socruithe pro</string>
     <string name="shutter_button_description">Comhla</string>
@@ -28,6 +29,12 @@
     <string name="grid_off">GREILLE AS</string>
     <string name="grid_on_3">GREILLE 3x3</string>
     <string name="grid_on_4">GREILLE 4x4</string>
+
+    <!-- Unsupported device dialog -->
+    <string name="unsupported_device_title">Gléas nach dtacaítear leis</string>
+    <string name="unsupported_device_message">Tá an aip seo deartha go sonrach do ikko Mind One agus seans nach n-oibreoidh sé i gceart ar an ngléas seo.</string>
+    <string name="unsupported_device_button_ignore">Déan neamhaird de</string>
+    <string name="unsupported_device_button_exit">Scoir</string>
     <string name="grid_on_goldenratio">GREILLE φ</string>
     <string name="mic_off">MIC AS</string>
     <string name="mic_on">MIC AR </string>
@@ -79,6 +86,8 @@
     <string name="save_location_toast">Níl ceadanna suímh tugtha ag an úsáideoir.</string>
     <string name="shutter_sound_title">Fuaim cróluas</string>
     <string name="shutter_sound_summary">Seinn fuaim ar ghabháil</string>
+    <string name="compact_ui_title">UI dlúth</string>
+    <string name="compact_ui_summary">Úsáid leagan amach níos dlúithe do na rialtáin ceamara</string>
     <string name="leveler_title">Leibhéalóir</string>
     <string name="leveler_summary">Táscaire a thaispeánann treoshuíomh gléas</string>
     <string name="gestures_title">Gothaí</string>

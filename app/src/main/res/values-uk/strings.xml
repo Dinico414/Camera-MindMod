@@ -12,7 +12,7 @@
     <string name="flip_camera_button_description">Дзеркальний режим</string>
     <string name="gallery_button_description">Галерея</string>
     <string name="google_lens_button_description">Відкрити Google Об’єктив </string>
-    <string name="google_lens_download_button_description">Install Google Lens launcher</string>
+    <string name="google_lens_download_button_description">Встановити засіб запуску Google Об’єктива</string>
     <string name="image_view_description">Попередній перегляд зображення</string>
     <string name="pro_button_description">Професійні налаштування</string>
     <string name="shutter_button_description">Затвор</string>
@@ -29,6 +29,12 @@
     <string name="grid_off">СІТКА ВИМК.</string>
     <string name="grid_on_3">СІТКА 3х3</string>
     <string name="grid_on_4">СІТКА 4x4</string>
+
+    <!-- Unsupported device dialog -->
+    <string name="unsupported_device_title">Непідтримуваний пристрій</string>
+    <string name="unsupported_device_message">Ця програма розроблена спеціально для ikko Mind One і може не працювати належним чином на цьому пристрої.</string>
+    <string name="unsupported_device_button_ignore">Ігнорувати</string>
+    <string name="unsupported_device_button_exit">Вийти</string>
     <string name="grid_on_goldenratio">СІТКА φ</string>
     <string name="mic_off">ЗВУК ВИМК.</string>
     <string name="mic_on">ЗВУК УВІМК.</string>
@@ -79,6 +85,8 @@
     <string name="save_location_toast">Користувач не дозволив отримувати місцеперебування.</string>
     <string name="shutter_sound_title">Звук затвору</string>
     <string name="shutter_sound_summary">Відтворювати звук про захоплення</string>
+    <string name="compact_ui_title">Компактний інтерфейс</string>
+    <string name="compact_ui_summary">Використовувати більш компактний макет для елементів керування камерою</string>
     <string name="leveler_title">Вирівнювач</string>
     <string name="leveler_summary">Індикатор орієнтації пристрою</string>
     <string name="gestures_title">Жести</string>

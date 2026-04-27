@@ -184,4 +184,11 @@
     <string name="video_mirror_mode_off">Fikur</string>
     <string name="video_mirror_mode_on">Ndezur</string>
     <string name="video_mirror_mode_on_ffc_only">Vetëm kamera e përparme</string>
+    <string name="google_lens_download_button_description">Shkarko Google Lens</string>
+    <string name="unsupported_device_title">Pajisja nuk mbështetet</string>
+    <string name="unsupported_device_message">Aperture nuk mbështetet në ikko Mind One. Përdorimi i aplikacionit në këtë pajisje mund të shkaktojë sjellje të papritur ose gabime.</string>
+    <string name="unsupported_device_button_ignore">Injoro</string>
+    <string name="unsupported_device_button_exit">Dil</string>
+    <string name="compact_ui_title">Ndërfaqe kompakte</string>
+    <string name="compact_ui_summary">Zvogëloni madhësinë e elementeve të ndërfaqes</string>
 </resources>

@@ -12,6 +12,7 @@
     <string name="flip_camera_button_description">החלפת מצלמה</string>
     <string name="gallery_button_description">גלריה</string>
     <string name="google_lens_button_description">פתיחת עדשות גוגל</string>
+    <string name="google_lens_download_button_description">התקנת משגר Google Lens</string>
     <string name="image_view_description">תצוגה מקדימה של תמונה</string>
     <string name="pro_button_description">הגדרות למתקדמים</string>
     <string name="shutter_button_description">צמצם</string>
@@ -28,6 +29,12 @@
     <string name="grid_off">כיבוי רשת</string>
     <string name="grid_on_3">רשת 3x3</string>
     <string name="grid_on_4">רשת 4x4</string>
+
+    <!-- Unsupported device dialog -->
+    <string name="unsupported_device_title">מכשיר לא נתמך</string>
+    <string name="unsupported_device_message">אפליקציה זו תוכננה במיוחד עבור ikko Mind One וייתכן שלא תפעל כראוי במכשיר זה.</string>
+    <string name="unsupported_device_button_ignore">התעלם</string>
+    <string name="unsupported_device_button_exit">יציאה</string>
     <string name="grid_on_goldenratio">רשת φ</string>
     <string name="mic_off">מיקרופון כבוי</string>
     <string name="mic_on">מיקרופון פעיל</string>
@@ -79,6 +86,8 @@
     <string name="save_location_toast">הרשאות מיקום לא ניתנו על ידי המשתמש</string>
     <string name="shutter_sound_title">צליל צמצם</string>
     <string name="shutter_sound_summary">השמעת צליל בעת הלכידה</string>
+    <string name="compact_ui_title">ממשק דחוס</string>
+    <string name="compact_ui_summary">שימוש בפריסה דחוסה יותר עבור פקדי המצלמה</string>
     <string name="leveler_title">מיישר</string>
     <string name="leveler_summary">מחוון המציג את כיוון ההתקן</string>
     <string name="gestures_title">מחוות</string>

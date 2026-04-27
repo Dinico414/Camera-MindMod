@@ -12,6 +12,7 @@
     <string name="flip_camera_button_description">Xoay máy ảnh</string>
     <string name="gallery_button_description">Thư viện</string>
     <string name="google_lens_button_description">Mở Google Ống kính</string>
+    <string name="google_lens_download_button_description">Cài đặt trình khởi chạy Google Ống kính</string>
     <string name="image_view_description">Xem trước hình ảnh</string>
     <string name="pro_button_description">Cài đặt chuyên nghiệp</string>
     <string name="shutter_button_description">Màn trập</string>
@@ -28,6 +29,12 @@
     <string name="grid_off">TẮT LƯỚI</string>
     <string name="grid_on_3">LƯỚI 3x3</string>
     <string name="grid_on_4">LƯỚI 4x4</string>
+
+    <!-- Unsupported device dialog -->
+    <string name="unsupported_device_title">Thiết bị không được hỗ trợ</string>
+    <string name="unsupported_device_message">Ứng dụng này được thiết kế dành riêng cho ikko Mind One và có thể không hoạt động chính xác trên thiết bị này.</string>
+    <string name="unsupported_device_button_ignore">Bỏ qua</string>
+    <string name="unsupported_device_button_exit">Thoát</string>
     <string name="grid_on_goldenratio">LƯỚI φ</string>
     <string name="mic_off">TẮT MIC</string>
     <string name="mic_on">BẬT MIC</string>
@@ -79,6 +86,8 @@
     <string name="save_location_toast">Quyền vị trí không được cấp bởi người dùng.</string>
     <string name="shutter_sound_title">Âm thanh chụp ảnh</string>
     <string name="shutter_sound_summary">Phát âm thanh khi chụp</string>
+    <string name="compact_ui_title">Giao diện thu gọn</string>
+    <string name="compact_ui_summary">Sử dụng bố cục gọn gàng hơn cho các điều khiển máy ảnh</string>
     <string name="leveler_title">Mức độ</string>
     <string name="leveler_summary">Chỉ báo hiển thị hướng thiết bị</string>
     <string name="gestures_title">Cử chỉ</string>

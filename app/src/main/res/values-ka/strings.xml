@@ -184,4 +184,11 @@
     <string name="video_mirror_mode_off">გამორთ.</string>
     <string name="video_mirror_mode_on">ჩართ.</string>
     <string name="video_mirror_mode_on_ffc_only">მხოლოდ წინა კამერაზე</string>
+    <string name="google_lens_download_button_description">Google Lens-ის ჩამოტვირთვა</string>
+    <string name="unsupported_device_title">მოწყობილობა მხარდაუჭერელია</string>
+    <string name="unsupported_device_message">Aperture არ არის მხარდაჭერილი ikko Mind One-ზე. ამ მოწყობილობაზე აპლიკაციის გამოყენებამ შეიძლება გამოიწვიოს გაუთვალისწინებელი ქცევა ან შეცდომები.</string>
+    <string name="unsupported_device_button_ignore">იგნორირება</string>
+    <string name="unsupported_device_button_exit">გასვლა</string>
+    <string name="compact_ui_title">კომპაქტური ინტერფეისი</string>
+    <string name="compact_ui_summary">ინტერფეისის ელემენტების ზომის შემცირება</string>
 </resources>
