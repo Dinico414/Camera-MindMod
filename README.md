@@ -21,7 +21,12 @@ MindMod communicates directly with the iKKO MindOne’s unique hardware componen
   <img src="before-after.png" width="800" alt="Project Logo">
 </p>
 
+<p align="center">
+  <img src="UiComparison.png" width="800" alt="Project Logo">
+</p>
+
 * **Maximized Viewfinder:** Dramatically increased preview area for an immersive shooting experience.
+* **Compact Ui:** Giving the user an even more increased preview area for an even more immersive shooting experience, only allowed trough this unique Hardware
 * **Dynamic Flip Logic:** Physical camera movement instantly triggers the software camera switch.
 * **Precision Zoom:** Re-engineered zoom curves for more precise transitions.
 * **Live Aspect Ratio:** Viewfinder scaling now accurately reflects crop changes in real-time.
