@@ -4,6 +4,10 @@
 
 # LineageOS Camera: MindMod 📸
 
+<p align="center">
+  <img src="https://img.shields.io/github/v/release/Dinico414/Camera-MindMod?style=for-the-badge&color=orange&logo=github" alt="Latest Version">
+  <img src="https://img.shields.io/github/downloads/Dinico414/Camera-MindMod/total?style=for-the-badge&color=blue&logo=github" alt="Total Downloads">
+
 **MindMod** is a specialized fork of the open-source LineageOS Camera application, coded in Kotlin and optimized specifically for the **iKKO MindOne**. This mod bridges the gap between specialized hardware and Android software, ensuring that the flip camera, physical shutter button, and touch-sensitive focus controls work as native features.
 
 ---
@@ -18,15 +22,15 @@ MindMod communicates directly with the iKKO MindOne’s unique hardware componen
 ## 🚀 Software Advancements
 
 <p align="center">
-  <img src="before-after.png" width="800" alt="Project Logo">
+  <img src="before-after.png" width="800" alt="Comparison Before After">
 </p>
 
 <p align="center">
-  <img src="UiComparison.png" width="800" alt="Project Logo">
+  <img src="UiComparison.png" width="800" alt="UI Comparison">
 </p>
 
 * **Maximized Viewfinder:** Dramatically increased preview area for an immersive shooting experience.
-* **Compact Ui:** Giving the user an even more increased preview area for an even more immersive shooting experience, only allowed trough this unique Hardware
+* **Compact UI:** Giving the user an even more increased preview area for an even more immersive shooting experience, only allowed through this unique Hardware.
 * **Dynamic Flip Logic:** Physical camera movement instantly triggers the software camera switch.
 * **Precision Zoom:** Re-engineered zoom curves for more precise transitions.
 * **Live Aspect Ratio:** Viewfinder scaling now accurately reflects crop changes in real-time.
@@ -60,18 +64,8 @@ MindMod communicates directly with the iKKO MindOne’s unique hardware componen
 * **Rotation Button (Bottom Right):** Manually rotates/flips the camera preview.
 
 **Expanded Quick Action Row (Contextual):**
-* **In Photo Mode:**
-  * **Settings:** Enter the configuration menu.
-  * **Timer:** Toggle Off/3s/10s.
-  * **Grid:** Toggle composition overlays (Off, 3x3, Golden Ratio).
-  * **Aspect Ratio:** Toggle between 4:3, 16:9, and 1.15:1.
-* **In Video Mode:**
-  * **Microphone:** Toggle Audio On/Off.
-  * **Timer:** Toggle recording delay.
-  * **Grid:** Toggle composition overlays.
-  * **Aspect Ratio:** Toggle between 4:3, 16:9, and 1.15:1.
-  * **FPS:** Quick toggle for 24 FPS / 30 FPS / 60 FPS
-  * **Resolution:** Quick toggle for 480p / 720p / 1080p settings.
+* **In Photo Mode:** Settings, Timer (Off/3s/10s), Grid (3x3, Golden Ratio), Aspect Ratio (4:3, 16:9, 1.15:1).
+* **In Video Mode:** Microphone Toggle, Timer, Grid, Aspect Ratio, FPS (24/30/60), Resolution (480p/720p/1080p).
 
 ---
 
