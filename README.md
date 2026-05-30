@@ -15,7 +15,7 @@
 ## 🛠 Hardware Integration
 MindMod communicates directly with the iKKO MindOne’s unique hardware components:
 * **Shutter Button:** Full tactile support for photo and video capture.
-* **Shutter Touch Sensor:** Maps the capacitive touch state to trigger AF (Auto-Focus) pre-focusing.
+* **Focus Touch Sensor:** Maps the capacitive touch state to trigger AF (Auto-Focus) pre-focusing.
 * **Camera Hall-Effect Sensor:** Tracks the physical state of the flip camera for instant software orientation switching.
 * **Camera Position Trigger:** Automatically adjusts UI and camera modes based on the physical position of the camera module.
 
@@ -64,8 +64,8 @@ MindMod communicates directly with the iKKO MindOne’s unique hardware componen
 * **Rotation Button (Bottom Right):** Manually rotates/flips the camera preview.
 
 **Expanded Quick Action Row (Contextual):**
-* **In Photo Mode:** Settings, Timer (Off/3s/10s), Grid (3x3, Golden Ratio), Aspect Ratio (4:3, 16:9, 1.15:1).
-* **In Video Mode:** Microphone Toggle, Timer, Grid, Aspect Ratio, FPS (24/30/60), Resolution (480p/720p/1080p).
+* **In Photo Mode:** Settings, Timer (Off/3s/10s), Grid (Off/3x3/Golden Ratio), Aspect Ratio (4:3/16:9/1.15:1).
+* **In Video Mode:** Settings, Microphone Toggle, Timer (Off/3s/10s), Grid (Off/3x3/Golden Ratio), Aspect Ratio (4:3/16:9/1.15:1), FPS (24/30/60), Resolution (480p/720p/1080p).
 
 ---
 
@@ -84,5 +84,6 @@ MindMod communicates directly with the iKKO MindOne’s unique hardware componen
 * **Save Location:** Store GPS coordinates in Metadata.
 * **Shutter Sound:** Toggle the audible capture click.
 * **Level:** Visual indicator for horizontal device alignment.
+* **Compact Ui:** Removes Soft shutter and move Gallery thumbnail and Camera flip into the bottom row for more immersion.
 * **Mirror Front Camera:** Toggle whether front-facing shots are saved as seen in preview.
 * **Video Stabilization:** Enable software-based vibration reduction.
