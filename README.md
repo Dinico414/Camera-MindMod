@@ -64,8 +64,19 @@ MindMod communicates directly with the iKKO MindOne’s unique hardware componen
 * **Rotation Button (Bottom Right):** Manually rotates/flips the camera preview.
 
 **Expanded Quick Action Row (Contextual):**
-* **In Photo Mode:** Settings, Timer (Off/3s/10s), Grid (Off/3x3/Golden Ratio), Aspect Ratio (4:3/16:9/1.15:1).
-* **In Video Mode:** Settings, Microphone Toggle, Timer (Off/3s/10s), Grid (Off/3x3/Golden Ratio), Aspect Ratio (4:3/16:9/1.15:1), FPS (24/30/60), Resolution (480p/720p/1080p).
+* **In Photo Mode:** 
+  * Settings
+  * Timer (Off/3s/10s)
+  * Grid (Off/3x3/Golden Ratio)
+  * Aspect Ratio (4:3/16:9/1.15:1)
+* **In Video Mode:** 
+  * Settings
+  * Microphone Toggle
+  * Timer (Off/3s/10s)
+  * Grid (Off/3x3/Golden Ratio)
+  * Aspect Ratio (4:3/16:9/1.15:1)
+  * FPS (24/30/60)
+  * Resolution (480p/720p/1080p)
 
 ---
 
