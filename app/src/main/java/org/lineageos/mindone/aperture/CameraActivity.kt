@@ -412,10 +412,13 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         super.onCreate(savedInstanceState)
 
         val preferencesRepository = (application as ApertureApplication).preferencesRepository
-        if (!preferencesRepository.ignoreUnsupportedDeviceWarning.value &&
-            !Build.DEVICE.contains("mindone", ignoreCase = true) &&
-            !Build.PRODUCT.contains("mindone", ignoreCase = true)
-        ) {
+        val isSupportedDevice = Build.DEVICE.contains("mindone", ignoreCase = true) ||
+                Build.PRODUCT.contains("mindone", ignoreCase = true) ||
+                Build.MODEL.contains("mindone", ignoreCase = true) ||
+                Build.BOARD.contains("mindone", ignoreCase = true) ||
+                Build.MANUFACTURER.contains("ikko", ignoreCase = true)
+
+        if (!preferencesRepository.ignoreUnsupportedDeviceWarning.value && !isSupportedDevice) {
             val checkBox = android.widget.CheckBox(this).apply {
                 setText(R.string.unsupported_device_dont_show_again)
             }
