@@ -443,6 +443,14 @@ class PreferencesRepository(
     ).asPreferenceHolder()
 
     /**
+     * Whether the unsupported device warning should be ignored in future.
+     */
+    val ignoreUnsupportedDeviceWarning = primitivePreference(
+        key = "ignore_unsupported_device_warning",
+        defaultValue = false,
+    ).asPreferenceHolder()
+
+    /**
      * Desired [VideoDynamicRange] for videos.
      */
     val videoDynamicRange = enumPreference(

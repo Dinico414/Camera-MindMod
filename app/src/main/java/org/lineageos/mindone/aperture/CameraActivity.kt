@@ -411,13 +411,31 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (!Build.DEVICE.contains("mindone", ignoreCase = true) &&
+        val preferencesRepository = (application as ApertureApplication).preferencesRepository
+        if (!preferencesRepository.ignoreUnsupportedDeviceWarning.value &&
+            !Build.DEVICE.contains("mindone", ignoreCase = true) &&
             !Build.PRODUCT.contains("mindone", ignoreCase = true)
         ) {
+            val checkBox = android.widget.CheckBox(this).apply {
+                setText(R.string.unsupported_device_dont_show_again)
+            }
+            val container = LinearLayout(this).apply {
+                orientation = LinearLayout.VERTICAL
+                val marginHorizontal = (24 * resources.displayMetrics.density).toInt()
+                val marginVertical = (8 * resources.displayMetrics.density).toInt()
+                setPadding(marginHorizontal, marginVertical, marginHorizontal, marginVertical)
+                addView(checkBox)
+            }
+
             AlertDialog.Builder(this)
                 .setTitle(R.string.unsupported_device_title)
                 .setMessage(R.string.unsupported_device_message)
-                .setPositiveButton(R.string.unsupported_device_button_ignore, null)
+                .setView(container)
+                .setPositiveButton(R.string.unsupported_device_button_ignore) { _, _ ->
+                    if (checkBox.isChecked) {
+                        preferencesRepository.ignoreUnsupportedDeviceWarning.value = true
+                    }
+                }
                 .setNegativeButton(R.string.unsupported_device_button_exit) { _, _ ->
                     finish()
                 }

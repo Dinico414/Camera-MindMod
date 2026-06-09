@@ -54,6 +54,7 @@
     <string name="unsupported_device_message">This app is specifically designed for iKKO MindOne and may not function correctly on this device.</string>
     <string name="unsupported_device_button_ignore">Ignore</string>
     <string name="unsupported_device_button_exit">Exit</string>
+    <string name="unsupported_device_dont_show_again">Don\’t show this again</string>
     <string name="grid_on_goldenratio">GRID φ</string>
 
     <string name="mic_off">MIC OFF</string>
