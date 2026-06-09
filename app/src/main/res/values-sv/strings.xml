@@ -35,6 +35,7 @@
     <string name="unsupported_device_message">Denna app är specifikt designad för iKKO MindOne och kanske inte fungerar korrekt på denna enhet.</string>
     <string name="unsupported_device_button_ignore">Ignorera</string>
     <string name="unsupported_device_button_exit">Avsluta</string>
+    <string name="unsupported_device_dont_show_again">Visa inte igen</string>
     <string name="grid_on_goldenratio">Gyllene snittet</string>
     <string name="mic_off">MIC AV</string>
     <string name="mic_on">MIC PÅ</string>

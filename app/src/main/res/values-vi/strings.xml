@@ -35,6 +35,7 @@
     <string name="unsupported_device_message">Ứng dụng này được thiết kế dành riêng cho iKKO MindOne và có thể không hoạt động chính xác trên thiết bị này.</string>
     <string name="unsupported_device_button_ignore">Bỏ qua</string>
     <string name="unsupported_device_button_exit">Thoát</string>
+    <string name="unsupported_device_dont_show_again">Không hiển thị lại</string>
     <string name="grid_on_goldenratio">LƯỚI φ</string>
     <string name="mic_off">TẮT MIC</string>
     <string name="mic_on">BẬT MIC</string>

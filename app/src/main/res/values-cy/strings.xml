@@ -17,6 +17,7 @@
     <string name="unsupported_device_message">Mae\'r ap hwn wedi\'i gynllunio\'n arbennig ar gyfer iKKO MindOne ac efallai na fydd yn gweithio\'n gywir ar y ddyfais hon.</string>
     <string name="unsupported_device_button_ignore">Anwybyddu</string>
     <string name="unsupported_device_button_exit">Gadael</string>
+    <string name="unsupported_device_dont_show_again">Peidiwch â dangos hyn eto</string>
     <string name="compact_ui_title">Rhyngwyneb cryno</string>
     <string name="compact_ui_summary">Defnyddio cynllun mwy cryno ar gyfer rheolyddion y camera</string>
     <string name="image_view_description">Rhagolwg llun</string>

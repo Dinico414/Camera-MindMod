@@ -17,6 +17,7 @@
     <string name="unsupported_device_message">Esti aplicativu ta diseñáu específicamente pa iKKO MindOne y ye posible que nun funcione correutamente nesti dispositivu.</string>
     <string name="unsupported_device_button_ignore">Innorar</string>
     <string name="unsupported_device_button_exit">Salir</string>
+    <string name="unsupported_device_dont_show_again">Nun volver amosar</string>
     <string name="compact_ui_title">IU compauta</string>
     <string name="compact_ui_summary">Usar un diseñu más compautu pa los controles de la cámara</string>
     <string name="pro_button_description">Configuración Pro</string>

@@ -189,6 +189,7 @@
     <string name="unsupported_device_message">iKKO MindOne دا Aperture نى قوللىمايدۇ. بۇ ئۈسكۈنىدە ئەپنى ئىشلىتىش تاسادىپىي خاتالىقلارنى كەلتۈرۈپ چىقىرىشى مۇمكىن.</string>
     <string name="unsupported_device_button_ignore">پەرۋا قىلما</string>
     <string name="unsupported_device_button_exit">چېكىن</string>
+    <string name="unsupported_device_dont_show_again">قايتا كۆرسەتمە</string>
     <string name="compact_ui_title">ئىخچام كۆرۈنمە يۈزى</string>
     <string name="compact_ui_summary">كۆرۈنمە يۈزى ئېلېمېنتلىرىنىڭ چوڭ-كىچىكلىكىنى كىچىكلىتىدۇ</string>
 </resources>

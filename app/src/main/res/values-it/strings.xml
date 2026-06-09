@@ -17,6 +17,7 @@
     <string name="unsupported_device_message">Questa app è progettata specificamente per iKKO MindOne e potrebbe non funzionare correttamente su questo dispositivo.</string>
     <string name="unsupported_device_button_ignore">Ignora</string>
     <string name="unsupported_device_button_exit">Esci</string>
+    <string name="unsupported_device_dont_show_again">Non mostrare più</string>
     <string name="compact_ui_title">UI compatta</string>
     <string name="compact_ui_summary">Utilizza un layout più compatto per i controlli della fotocamera</string>
     <string name="image_view_description">Anteprima immagine</string>

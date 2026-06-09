@@ -17,6 +17,7 @@
     <string name="unsupported_device_message">此应用专为 iKKO MindOne 设计，在此设备上可能无法正常运行。</string>
     <string name="unsupported_device_button_ignore">忽略</string>
     <string name="unsupported_device_button_exit">退出</string>
+    <string name="unsupported_device_dont_show_again">不再显示</string>
     <string name="compact_ui_title">紧凑型界面</string>
     <string name="compact_ui_summary">为相机控件使用更紧凑的布局</string>
     <string name="image_view_description">图像预览</string>

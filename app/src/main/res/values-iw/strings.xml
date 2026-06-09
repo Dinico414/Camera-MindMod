@@ -35,6 +35,7 @@
     <string name="unsupported_device_message">אפליקציה זו תוכננה במיוחד עבור iKKO MindOne וייתכן שלא תפעל כראוי במכשיר זה.</string>
     <string name="unsupported_device_button_ignore">התעלם</string>
     <string name="unsupported_device_button_exit">יציאה</string>
+    <string name="unsupported_device_dont_show_again">אל תציג זאת שוב</string>
     <string name="grid_on_goldenratio">רשת φ</string>
     <string name="mic_off">מיקרופון כבוי</string>
     <string name="mic_on">מיקרופון פעיל</string>

@@ -189,6 +189,7 @@
     <string name="unsupported_device_message">Aperture არ არის მხარდაჭერილი iKKO MindOne-ზე. ამ მოწყობილობაზე აპლიკაციის გამოყენებამ შეიძლება გამოიწვიოს გაუთვალისწინებელი ქცევა ან შეცდომები.</string>
     <string name="unsupported_device_button_ignore">იგნორირება</string>
     <string name="unsupported_device_button_exit">გასვლა</string>
+    <string name="unsupported_device_dont_show_again">აღარ ჩვენება</string>
     <string name="compact_ui_title">კომპაქტური ინტერფეისი</string>
     <string name="compact_ui_summary">ინტერფეისის ელემენტების ზომის შემცირება</string>
 </resources>

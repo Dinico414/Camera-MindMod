@@ -30,6 +30,7 @@
     <string name="unsupported_device_message">این برنامه به طور خاص برای iKKO MindOne طراحی شده است و ممکن است در این دستگاه به درستی کار نکند.</string>
     <string name="unsupported_device_button_ignore">نادیده گرفتن</string>
     <string name="unsupported_device_button_exit">خروج</string>
+    <string name="unsupported_device_dont_show_again">دیگر نشان داده نشود</string>
     <string name="grid_off">خطوط جدولی خاموش</string>
     <string name="grid_on_3">خطوط جدولی ۳×۳</string>
     <string name="grid_on_4">خطوط جدولی ۴×۴</string>

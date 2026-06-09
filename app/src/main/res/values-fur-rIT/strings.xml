@@ -30,6 +30,7 @@
     <string name="unsupported_device_message">Cheste aplicazion e je stade pensade specifichement par iKKO MindOne e e podarès no funzionâ polito su chest dispositîf.</string>
     <string name="unsupported_device_button_ignore">Ignore</string>
     <string name="unsupported_device_button_exit">Jes</string>
+    <string name="unsupported_device_dont_show_again">No sta a fâ viodi di gnûf</string>
     <string name="grid_off">GRIDELE OFF</string>
     <string name="grid_on_3">GRIDELE 3x3</string>
     <string name="grid_on_4">GRIDELE 4x4</string>

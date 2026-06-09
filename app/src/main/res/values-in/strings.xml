@@ -17,6 +17,7 @@
     <string name="unsupported_device_message">Aplikasi ini dirancang khusus untuk iKKO MindOne dan mungkin tidak berfungsi dengan baik di perangkat ini.</string>
     <string name="unsupported_device_button_ignore">Abaikan</string>
     <string name="unsupported_device_button_exit">Keluar</string>
+    <string name="unsupported_device_dont_show_again">Jangan tunjukkan lagi</string>
     <string name="compact_ui_title">UI Ringkas</string>
     <string name="compact_ui_summary">Gunakan tata letak yang lebih ringkas untuk kontrol kamera</string>
     <string name="image_view_description">Pratinjau gambar</string>

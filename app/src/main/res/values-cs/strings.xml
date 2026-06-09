@@ -17,6 +17,7 @@
     <string name="unsupported_device_message">Tato aplikace je speciálně navržena pro iKKO MindOne a na tomto zařízení nemusí fungovat správně.</string>
     <string name="unsupported_device_button_ignore">Ignorovat</string>
     <string name="unsupported_device_button_exit">Ukončit</string>
+    <string name="unsupported_device_dont_show_again">Znovu nezobrazovat</string>
     <string name="compact_ui_title">Kompaktní uživatelské rozhraní</string>
     <string name="compact_ui_summary">Použít kompaktnější rozvržení ovládacích prvků fotoaparátu</string>
     <string name="image_view_description">Náhled obrázku</string>

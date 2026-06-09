@@ -34,6 +34,7 @@
     <string name="unsupported_device_message">Þetta forrit er sérstaklega hannað fyrir iKKO MindOne og gæti ekki virkað rétt á þessu tæki.</string>
     <string name="unsupported_device_button_ignore">Hunsa</string>
     <string name="unsupported_device_button_exit">Hætta</string>
+    <string name="unsupported_device_dont_show_again">Ekki sýna þetta aftur</string>
     <string name="grid_on_goldenratio">REITIR φ</string>
     <string name="mic_off">HLJÓÐN. AF</string>
     <string name="mic_on">HLJÓÐN. Á</string>

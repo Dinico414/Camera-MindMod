@@ -16,6 +16,7 @@
     <string name="unsupported_device_message">See rakendus on loodud spetsiaalselt iKKO MindOne jaoks ja ei pruugi selles seadmes õigesti töötada.</string>
     <string name="unsupported_device_button_ignore">Eira</string>
     <string name="unsupported_device_button_exit">Välju</string>
+    <string name="unsupported_device_dont_show_again">Ära seda enam kuva</string>
     <string name="compact_ui_title">Kompaktne kasutajaliides</string>
     <string name="compact_ui_summary">Kasutage kaamera juhtnuppude jaoks kompaktsemat paigutust</string>
 </resources>

@@ -30,6 +30,7 @@
     <string name="unsupported_device_message">Αυτή η εφαρμογή έχει σχεδιαστεί ειδικά για το iKKO MindOne και ενδέχεται να μη λειτουργεί σωστά σε αυτήν τη συσκευή.</string>
     <string name="unsupported_device_button_ignore">Παράβλεψη</string>
     <string name="unsupported_device_button_exit">Έξοδος</string>
+    <string name="unsupported_device_dont_show_again">Να μην εμφανιστεί ξανά</string>
     <string name="grid_off">ΠΛΕΓΜΑ OFF</string>
     <string name="grid_on_3">ΠΛΕΓΜΑ 3x3</string>
     <string name="grid_on_4">ΠΛΕΓΜΑ 4x4</string>

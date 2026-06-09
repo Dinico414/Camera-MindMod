@@ -189,6 +189,7 @@
     <string name="unsupported_device_message">Aperture, iKKO MindOne இல் ஒத்துழைக்கப்படவில்லை. இக்கருவியில் இச்செயலியைப் பயன்படுத்துவது எதிர்பாராத நடத்தை அல்லது பிழைகளை ஏற்படுத்தக்கூடும்.</string>
     <string name="unsupported_device_button_ignore">புறக்கணிக்கவும்</string>
     <string name="unsupported_device_button_exit">வெளியேறுக</string>
+    <string name="unsupported_device_dont_show_again">மீண்டும் காட்டாதே</string>
     <string name="compact_ui_title">சிறிய இடைமுகம்</string>
     <string name="compact_ui_summary">இடைமுக உறுப்புகளின் அளவைக் குறைக்க</string>
 </resources>

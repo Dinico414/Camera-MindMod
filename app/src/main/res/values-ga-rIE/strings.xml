@@ -35,6 +35,7 @@
     <string name="unsupported_device_message">Tá an aip seo deartha go sonrach do iKKO MindOne agus seans nach n-oibreoidh sé i gceart ar an ngléas seo.</string>
     <string name="unsupported_device_button_ignore">Déan neamhaird de</string>
     <string name="unsupported_device_button_exit">Scoir</string>
+    <string name="unsupported_device_dont_show_again">Ná taispeáin é seo arís</string>
     <string name="grid_on_goldenratio">GREILLE φ</string>
     <string name="mic_off">MIC AS</string>
     <string name="mic_on">MIC AR </string>

@@ -10,6 +10,7 @@
     <string name="unsupported_device_message">Гэта праграма распрацавана спецыяльна для iKKO MindOne і можа працаваць некарэктна на гэтай прыладзе.</string>
     <string name="unsupported_device_button_ignore">Ігнараваць</string>
     <string name="unsupported_device_button_exit">Выхад</string>
+    <string name="unsupported_device_dont_show_again">Больш не паказваць</string>
     <string name="compact_ui_title">Кампактны інтэрфейс</string>
     <string name="compact_ui_summary">Выкарыстоўваць больш кампактную раскладку для кіравання камерай</string>
     <string name="qr_wifi_title">Падключыцца да гэтай сеткі Wi-Fi</string>

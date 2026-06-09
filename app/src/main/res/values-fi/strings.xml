@@ -42,6 +42,7 @@
     <string name="unsupported_device_message">Tämä sovellus on suunniteltu erityisesti iKKO MindOne -laitteelle, eikä se välttämättä toimi oikein tässä laitteessa.</string>
     <string name="unsupported_device_button_ignore">Ohita</string>
     <string name="unsupported_device_button_exit">Poistu</string>
+    <string name="unsupported_device_dont_show_again">Älä näytä uudestaan</string>
     <string name="compact_ui_title">Kompakti käyttöliittymä</string>
     <string name="compact_ui_summary">Käytä tiiviimpää asettelua kameran säätimille</string>
 </resources>

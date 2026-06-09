@@ -35,6 +35,7 @@
     <string name="unsupported_device_message">Ця програма розроблена спеціально для iKKO MindOne і може не працювати належним чином на цьому пристрої.</string>
     <string name="unsupported_device_button_ignore">Ігнорувати</string>
     <string name="unsupported_device_button_exit">Вийти</string>
+    <string name="unsupported_device_dont_show_again">Більше не показувати</string>
     <string name="grid_on_goldenratio">СІТКА φ</string>
     <string name="mic_off">ЗВУК ВИМК.</string>
     <string name="mic_on">ЗВУК УВІМК.</string>
