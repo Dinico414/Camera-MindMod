@@ -68,18 +68,24 @@ MindMod communicates directly with the iKKO MindOne’s unique hardware componen
 
 **Expanded Quick Action Row (Contextual):**
 * **In Photo Mode:** 
-  * Settings
+  * Aspect Ratio (4:3/16:9/1.15:1)
+  * Auto Focus (On/Off)
+  * Auto Whitebalance (On/Off)
+  * Auto Exposure (On/Off)
   * Timer (Off/3s/10s)
   * Grid (Off/3x3/Golden Ratio)
-  * Aspect Ratio (4:3/16:9/1.15:1)
+  * Settings
 * **In Video Mode:** 
-  * Settings
+  * Aspect Ratio (4:3/16:9/1.15:1)
+  * Resolution (480p/720p/1080p)
+  * FPS (24/30/60)
   * Microphone Toggle
+  * Auto Focus (On/Off)
+  * Auto Whitebalance (On/Off)
+  * Auto Exposure (On/Off)
   * Timer (Off/3s/10s)
   * Grid (Off/3x3/Golden Ratio)
-  * Aspect Ratio (4:3/16:9/1.15:1)
-  * FPS (24/30/60)
-  * Resolution (480p/720p/1080p)
+  * Settings
 
 ---
 
