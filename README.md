@@ -34,6 +34,7 @@ MindMod communicates directly with the iKKO MindOne’s unique hardware componen
 * **Dynamic Flip Logic:** Physical camera movement instantly triggers the software camera switch.
 * **Precision Zoom:** Re-engineered zoom curves for more precise transitions.
 * **Live Aspect Ratio:** Viewfinder scaling now accurately reflects crop changes in real-time.
+* **Camera Safer:** 4 min camera safer to avoid heat and preserve battery life.
 
 ---
 
@@ -50,7 +51,9 @@ MindMod communicates directly with the iKKO MindOne’s unique hardware componen
   * **Single Tap:** Trigger Auto-Focus (AF) on a specific point.
   * **2-Finger Pinch:** Zoom In/Out.
 * **Exposure Slider (Right Side):** Vertical slider for manual EV compensation.
+* **Whitebalance Slider (Beside Exposure):** Slider for adjusting color temperature.
 * **Zoom Slider (Bottom Center):** Horizontal slider for granular zoom control.
+* **Focus Slider (Left Side):** Slider for manual focus adjustments.
 
 ### User Interface 
 **Mode Selector Row:**
