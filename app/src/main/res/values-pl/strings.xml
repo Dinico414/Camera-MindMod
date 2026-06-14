@@ -192,4 +192,8 @@
     <string name="video_mirror_mode_off">Wyłączono</string>
     <string name="video_mirror_mode_on">Włączono</string>
     <string name="video_mirror_mode_on_ffc_only">Tylko przedni aparat</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Aparat jest uśpiony</string>
+    <string name="inactivity_message">Aparat został wyłączony po 4 minutach braku aktywności, aby oszczędzać baterię i zmniejszyć nagrzewanie.</string>
+    <string name="inactivity_resume">DOTKNIJ, ABY WZNOWIĆ</string>
 </resources>

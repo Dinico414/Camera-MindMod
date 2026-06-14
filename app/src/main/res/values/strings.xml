@@ -49,6 +49,11 @@
     <string name="grid_on_3">GRID 3x3</string>
     <string name="grid_on_4">GRID 4x4</string>
 
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Camera is sleeping</string>
+    <string name="inactivity_message">The camera was disabled after 4 minutes of inactivity to save battery and reduce heat.</string>
+    <string name="inactivity_resume">TAP TO RESUME</string>
+
     <!-- Unsupported device dialog -->
     <string name="unsupported_device_title">Unsupported device</string>
     <string name="unsupported_device_message">This app is specifically designed for iKKO MindOne and may not function correctly on this device.</string>
@@ -61,6 +66,13 @@
     <string name="mic_on">MIC ON</string>
 
     <string name="settings">SETTINGS</string>
+
+    <string name="autofocus_on">AF ON</string>
+    <string name="autofocus_off">AF OFF</string>
+    <string name="awb_on">AWB ON</string>
+    <string name="awb_off">AWB OFF</string>
+    <string name="ae_on">AE ON</string>
+    <string name="ae_off">AE OFF</string>
 
     <!-- Toast messages -->
     <string name="app_permissions_toast">Permissions not granted by the user.</string>

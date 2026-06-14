@@ -45,4 +45,8 @@
     <string name="unsupported_device_dont_show_again">Älä näytä uudestaan</string>
     <string name="compact_ui_title">Kompakti käyttöliittymä</string>
     <string name="compact_ui_summary">Käytä tiiviimpää asettelua kameran säätimille</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Kamera on lepotilassa</string>
+    <string name="inactivity_message">Kamera poistettiin käytöstä 4 minuutin käyttämättömyyden jälkeen akun säästämiseksi ja lämmön vähentämiseksi.</string>
+    <string name="inactivity_resume">JATKA NAPAUTTAMALLA</string>
 </resources>

@@ -134,4 +134,8 @@
     <string name="video_mirror_mode_off">Non</string>
     <string name="video_mirror_mode_on">Sí</string>
     <string name="video_mirror_mode_on_ffc_only">Namás la cámara d\'alantre</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">La cámara ta dormiendo</string>
+    <string name="inactivity_message">La cámara desactivóse tres 4 minutos d\'inactividá p\'aforrar batería y amenorgar el calor.</string>
+    <string name="inactivity_resume">TOCA PA REANUDAR</string>
 </resources>

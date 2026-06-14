@@ -191,4 +191,8 @@
     <string name="video_mirror_mode_off">關閉</string>
     <string name="video_mirror_mode_on">開啟</string>
     <string name="video_mirror_mode_on_ffc_only">僅前鏡頭</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">相機正在休眠</string>
+    <string name="inactivity_message">為節省電量和減少發熱，相機在閒置4分鐘後已停用。</string>
+    <string name="inactivity_resume">輕觸以繼續</string>
 </resources>

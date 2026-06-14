@@ -192,4 +192,8 @@
     <string name="video_mirror_mode_off">خاموش</string>
     <string name="video_mirror_mode_on">روشن</string>
     <string name="video_mirror_mode_on_ffc_only">فقط دوربین جلو</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">دوربین در خواب است</string>
+    <string name="inactivity_message">دوربین پس از 4 دقیقه عدم فعالیت برای صرفه‌جویی در باتری و کاهش گرما غیرفعال شد.</string>
+    <string name="inactivity_resume">برای ادامه ضربه بزنید</string>
 </resources>

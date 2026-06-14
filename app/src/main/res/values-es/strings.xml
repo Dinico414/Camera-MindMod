@@ -37,6 +37,11 @@
     <string name="grid_on_3">CUADRÍCULA 3x3</string>
     <string name="grid_on_4">CUADRÍCULA 4x4</string>
     <string name="grid_on_goldenratio">CUADRÍCULA φ</string>
+
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">La cámara está en suspensión</string>
+    <string name="inactivity_message">La cámara se desactivó tras 4 minutos de inactividad para ahorrar batería y reducir el calor.</string>
+    <string name="inactivity_resume">TOCA PARA REANUDAR</string>
     <string name="mic_off">SIN MIC.</string>
     <string name="mic_on">CON MIC.</string>
     <string name="settings">AJUSTES</string>

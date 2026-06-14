@@ -192,4 +192,8 @@
     <string name="video_mirror_mode_off">Désactivé</string>
     <string name="video_mirror_mode_on">Activé</string>
     <string name="video_mirror_mode_on_ffc_only">Caméra frontale uniquement</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">L\'appareil photo est en veille</string>
+    <string name="inactivity_message">L\'appareil photo a été désactivé après 4 minutes d\'inactivité pour économiser la batterie et réduire la chaleur.</string>
+    <string name="inactivity_resume">TOUCHER POUR REPRENDRE</string>
 </resources>

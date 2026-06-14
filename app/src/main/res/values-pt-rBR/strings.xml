@@ -192,4 +192,8 @@
     <string name="video_mirror_mode_off">Desativado</string>
     <string name="video_mirror_mode_on">Ativado</string>
     <string name="video_mirror_mode_on_ffc_only">Somente câmera frontal</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">A câmera está suspensa</string>
+    <string name="inactivity_message">A câmera foi desativada após 4 minutos de inatividade para economizar bateria e reduzir o aquecimento.</string>
+    <string name="inactivity_resume">TOQUE PARA CONTINUAR</string>
 </resources>

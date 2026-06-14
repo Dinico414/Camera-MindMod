@@ -192,4 +192,8 @@
     <string name="unsupported_device_dont_show_again">قايتا كۆرسەتمە</string>
     <string name="compact_ui_title">ئىخچام كۆرۈنمە يۈزى</string>
     <string name="compact_ui_summary">كۆرۈنمە يۈزى ئېلېمېنتلىرىنىڭ چوڭ-كىچىكلىكىنى كىچىكلىتىدۇ</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">كامېرا ئۇخلاۋاتىدۇ</string>
+    <string name="inactivity_message">باتارېيەنى تېجەش ۋە ئىسسىقلىقنى ئازايتىش ئۈچۈن كامېرا 4 مىنۇت ھەرىكەتسىز تۇرغاندىن كېيىن چەكلەندى.</string>
+    <string name="inactivity_resume">داۋاملاشتۇرۇش ئۈچۈن چېكىڭ</string>
 </resources>

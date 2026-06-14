@@ -186,4 +186,8 @@
     <string name="video_mirror_mode_off">Kapalı</string>
     <string name="video_mirror_mode_on">Açık</string>
     <string name="video_mirror_mode_on_ffc_only">Yalnızca ön kamera</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Kamera uykuda</string>
+    <string name="inactivity_message">Pil tasarrufu yapmak ve ısınmayı azaltmak için 4 dakikalık hareketsizlikten sonra kamera devre dışı bırakıldı.</string>
+    <string name="inactivity_resume">DEVAM ETMEK İÇİN DOKUNUN</string>
 </resources>

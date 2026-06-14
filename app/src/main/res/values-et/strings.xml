@@ -19,4 +19,8 @@
     <string name="unsupported_device_dont_show_again">Ära seda enam kuva</string>
     <string name="compact_ui_title">Kompaktne kasutajaliides</string>
     <string name="compact_ui_summary">Kasutage kaamera juhtnuppude jaoks kompaktsemat paigutust</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Kaamera on puhkerežiimis</string>
+    <string name="inactivity_message">Kaamera keelati pärast 4-minutilist tegevusetust, et säästa akut ja vähendada kuumust.</string>
+    <string name="inactivity_resume">JÄTKAMISEKS PUUDUTA</string>
 </resources>

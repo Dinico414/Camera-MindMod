@@ -192,4 +192,8 @@
     <string name="unsupported_device_dont_show_again">აღარ ჩვენება</string>
     <string name="compact_ui_title">კომპაქტური ინტერფეისი</string>
     <string name="compact_ui_summary">ინტერფეისის ელემენტების ზომის შემცირება</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">კამერა ლოდინის რეჟიმშია</string>
+    <string name="inactivity_message">კამერა გაითიშა 4 წუთიანი უმოქმედობის შემდეგ, ბატარეის დაზოგვისა და გადახურების თავიდან ასაცილებლად.</string>
+    <string name="inactivity_resume">შეეხეთ გასაგრძელებლად</string>
 </resources>

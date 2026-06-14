@@ -102,6 +102,24 @@
         app:trackColor="#7FCCCCCC" />
 
     <org.lineageos.mindone.aperture.ui.views.VerticalSlider
+        android:id="@+id/focusLevel"
+        android:layout_width="32dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/secondaryBarLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/viewFinder"
+        app:thumbColor="@android:color/white"
+        app:thumbTextColor="@android:color/black"
+        app:thumbTextSize="10dp"
+        app:trackBorderColor="#a9a7aa"
+        app:trackColorGradient="true"
+        app:trackColorGradientCenter="#636363"
+        app:trackColorGradientEnd="#242424"
+        app:trackColorGradientStart="#8d9299" />
+
+    <org.lineageos.mindone.aperture.ui.views.VerticalSlider
         android:id="@+id/exposureLevel"
         android:layout_width="32dp"
         android:layout_height="250dp"
@@ -118,6 +136,24 @@
         app:trackColorGradientCenter="#636363"
         app:trackColorGradientEnd="#242424"
         app:trackColorGradientStart="#8d9299" />
+
+    <org.lineageos.mindone.aperture.ui.views.VerticalSlider
+        android:id="@+id/whiteBalanceLevel"
+        android:layout_width="32dp"
+        android:layout_height="250dp"
+        android:layout_marginEnd="48dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/secondaryBarLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/viewFinder"
+        app:thumbColor="@android:color/white"
+        app:thumbTextColor="@android:color/black"
+        app:thumbTextSize="10dp"
+        app:trackBorderColor="#a9a7aa"
+        app:trackColorGradient="true"
+        app:trackColorGradientCenter="#ffffff"
+        app:trackColorGradientEnd="#ffd400"
+        app:trackColorGradientStart="#007bff" />
 
     <LinearLayout
         android:id="@+id/secondaryBarLayout"
@@ -184,6 +220,24 @@
                     style="@style/Theme.Aperture.Camera.SecondaryTopBarButton"
                     android:drawableTop="@drawable/ic_mic_off"
                     android:text="@string/mic_off" />
+
+                <Button
+                    android:id="@+id/autoFocusButton"
+                    style="@style/Theme.Aperture.Camera.SecondaryTopBarButton"
+                    android:drawableTop="@drawable/ic_autofocus"
+                    android:text="@string/autofocus_on" />
+
+                <Button
+                    android:id="@+id/autoWhiteBalanceButton"
+                    style="@style/Theme.Aperture.Camera.SecondaryTopBarButton"
+                    android:drawableTop="@drawable/ic_awb"
+                    android:text="@string/awb_on" />
+
+                <Button
+                    android:id="@+id/autoExposureButton"
+                    style="@style/Theme.Aperture.Camera.SecondaryTopBarButton"
+                    android:drawableTop="@drawable/ic_ae"
+                    android:text="@string/ae_on" />
 
                 <!-- Common settings -->
                 <Button
@@ -443,4 +497,44 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/inactivityLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/black"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="32dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/inactivity_title"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="@string/inactivity_message"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/resumeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/inactivity_resume" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

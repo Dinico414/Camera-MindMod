@@ -186,4 +186,8 @@
     <string name="video_mirror_mode_off">Off</string>
     <string name="video_mirror_mode_on">On</string>
     <string name="video_mirror_mode_on_ffc_only">Dome fotocjamare frontâl</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">La fotocjamare e je in polse</string>
+    <string name="inactivity_message">La fotocjamare e je stade disativade daspò di 4 minûts di inativitât par sparagnâ batarie e ridusi il calôr.</string>
+    <string name="inactivity_resume">TOCA PAR LÂ INNANT</string>
 </resources>

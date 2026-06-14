@@ -192,4 +192,8 @@
     <string name="unsupported_device_dont_show_again">Mos e shfaq përsëri</string>
     <string name="compact_ui_title">Ndërfaqe kompakte</string>
     <string name="compact_ui_summary">Zvogëloni madhësinë e elementeve të ndërfaqes</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Kamera është në gjumë</string>
+    <string name="inactivity_message">Kamera u çaktivizua pas 4 minutash pasiviteti për të kursyer baterinë dhe për të reduktuar nxehtësinë.</string>
+    <string name="inactivity_resume">PREK PËR TË RINISUR</string>
 </resources>

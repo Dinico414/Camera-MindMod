@@ -173,4 +173,8 @@
     <string name="unsupported_device_dont_show_again">Non mustres prus</string>
     <string name="compact_ui_title">Interfache cumpata</string>
     <string name="compact_ui_summary">Redue sa mannària de is elementos de s\'interfache</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Sa fotocàmera est in pàusa</string>
+    <string name="inactivity_message">Sa fotocàmera est istada disativada a pustis de 4 minutos de inatividade pro sparagnare bateria e minimare su calore.</string>
+    <string name="inactivity_resume">TOCA PRO SIGHIRE</string>
 </resources>

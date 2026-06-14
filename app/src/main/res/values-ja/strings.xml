@@ -192,4 +192,8 @@
     <string name="video_mirror_mode_off">OFF</string>
     <string name="video_mirror_mode_on">ON</string>
     <string name="video_mirror_mode_on_ffc_only">フロントカメラのみ</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">カメラはスリープ状態です</string>
+    <string name="inactivity_message">バッテリーを節約し発熱を抑えるため、4分間操作がなかったためカメラを無効にしました。</string>
+    <string name="inactivity_resume">タップして再開</string>
 </resources>

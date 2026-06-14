@@ -187,4 +187,8 @@ Gedrag van volume omhoog en omlaag omkeren</string>
     <string name="video_mirror_mode_off">Uit</string>
     <string name="video_mirror_mode_on">Aan</string>
     <string name="video_mirror_mode_on_ffc_only">Alleen camera aan de voorkant</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Camera is in slaapstand</string>
+    <string name="inactivity_message">De camera is na 4 minuten inactiviteit uitgeschakeld om de batterij te sparen en hitte te verminderen.</string>
+    <string name="inactivity_resume">TIK OM TE HERVATTEN</string>
 </resources>

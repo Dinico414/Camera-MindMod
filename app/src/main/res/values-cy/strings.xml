@@ -149,4 +149,8 @@
     <string name="video_mirror_mode_off">I ffwrdd</string>
     <string name="video_mirror_mode_on">Ymlaen</string>
     <string name="video_mirror_mode_on_ffc_only">Camera blaen yn unig</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Mae\'r camera\'n cysgu</string>
+    <string name="inactivity_message">Analluogwyd y camera ar ôl 4 munud o anweithgarwch i arbed batri a lleihau gwres.</string>
+    <string name="inactivity_resume">TAPIWCH I AILDECHRAU</string>
 </resources>

@@ -7,6 +7,7 @@ package org.lineageos.mindone.aperture.ext
 
 import android.hardware.camera2.CameraMetadata
 import android.hardware.camera2.CaptureRequest
+import android.hardware.camera2.params.RggbChannelVector
 import android.os.Build
 import androidx.camera.camera2.interop.CaptureRequestOptions
 import androidx.core.util.toRange
@@ -18,6 +19,8 @@ import org.lineageos.mindone.aperture.models.HotPixelMode
 import org.lineageos.mindone.aperture.models.NoiseReductionMode
 import org.lineageos.mindone.aperture.models.ShadingMode
 import org.lineageos.mindone.aperture.models.VideoStabilizationMode
+import kotlin.math.ln
+import kotlin.math.pow
 
 @androidx.camera.camera2.interop.ExperimentalCamera2Interop
 fun <ValueT> CaptureRequestOptions.Builder.setOrClearCaptureRequestOption(
@@ -141,4 +144,82 @@ fun CaptureRequestOptions.Builder.setHotPixelMode(
         HotPixelMode.HIGH_QUALITY -> CameraMetadata.HOT_PIXEL_MODE_HIGH_QUALITY
         null -> null
     }
+)
+
+@androidx.camera.camera2.interop.ExperimentalCamera2Interop
+fun CaptureRequestOptions.Builder.setFocusMode(
+    autoFocus: Boolean
+) = setCaptureRequestOption(
+    CaptureRequest.CONTROL_AF_MODE,
+    if (autoFocus) {
+        CameraMetadata.CONTROL_AF_MODE_CONTINUOUS_PICTURE
+    } else {
+        CameraMetadata.CONTROL_AF_MODE_OFF
+    }
+)
+
+@androidx.camera.camera2.interop.ExperimentalCamera2Interop
+fun CaptureRequestOptions.Builder.setFocusDistance(
+    focusDistance: Float?
+) = setOrClearCaptureRequestOption(
+    CaptureRequest.LENS_FOCUS_DISTANCE,
+    focusDistance
+)
+
+@androidx.camera.camera2.interop.ExperimentalCamera2Interop
+fun CaptureRequestOptions.Builder.setWhiteBalanceMode(
+    autoWhiteBalance: Boolean
+) = setCaptureRequestOption(
+    CaptureRequest.CONTROL_AWB_MODE,
+    if (autoWhiteBalance) {
+        CameraMetadata.CONTROL_AWB_MODE_AUTO
+    } else {
+        CameraMetadata.CONTROL_AWB_MODE_OFF
+    }
+)
+
+@androidx.camera.camera2.interop.ExperimentalCamera2Interop
+fun CaptureRequestOptions.Builder.setWhiteBalanceTemperature(
+    temperature: Int?
+) = temperature?.let {
+    // This is a very rough approximation of Kelvin to ColorCorrectionGains
+    // For a real implementation, a more precise lookup table or formula should be used
+    val temp = it / 100.0
+    val red = if (temp <= 66) 255.0 else 329.698727446 * (temp - 60).pow(-0.1332047592)
+    val green = if (temp <= 66) {
+        99.4708025861 * ln(temp) - 161.1195681661
+    } else {
+        288.1221695283 * (temp - 60).pow(-0.0755148492)
+    }
+    val blue = if (temp >= 66) 255.0 else {
+        if (temp <= 19) 0.0 else 138.5177312231 * ln(temp - 10) - 305.0447927307
+    }
+
+    val gains = RggbChannelVector(
+        (red / 255.0 * 2.0).toFloat(),
+        (green / 255.0 * 1.0).toFloat(),
+        (green / 255.0 * 1.0).toFloat(),
+        (blue / 255.0 * 2.0).toFloat()
+    )
+    setCaptureRequestOption(CaptureRequest.COLOR_CORRECTION_MODE, CameraMetadata.COLOR_CORRECTION_MODE_TRANSFORM_MATRIX)
+    setCaptureRequestOption(CaptureRequest.COLOR_CORRECTION_GAINS, gains)
+} ?: run {
+    setCaptureRequestOption(CaptureRequest.COLOR_CORRECTION_MODE, CameraMetadata.COLOR_CORRECTION_MODE_FAST)
+    clearCaptureRequestOption(CaptureRequest.COLOR_CORRECTION_GAINS)
+}
+
+@androidx.camera.camera2.interop.ExperimentalCamera2Interop
+fun CaptureRequestOptions.Builder.setExposureMode(
+    autoExposure: Boolean
+) = this.apply {
+    setCaptureRequestOption(CaptureRequest.CONTROL_AE_MODE, CameraMetadata.CONTROL_AE_MODE_ON)
+    setCaptureRequestOption(CaptureRequest.CONTROL_AE_LOCK, !autoExposure)
+}
+
+@androidx.camera.camera2.interop.ExperimentalCamera2Interop
+fun CaptureRequestOptions.Builder.setExposureCompensation(
+    exposureCompensation: Int?
+) = setOrClearCaptureRequestOption(
+    CaptureRequest.CONTROL_AE_EXPOSURE_COMPENSATION,
+    exposureCompensation
 )

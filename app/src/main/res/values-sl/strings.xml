@@ -192,4 +192,8 @@
     <string name="unsupported_device_dont_show_again">Ne prikaži več</string>
     <string name="compact_ui_title">Kompakten uporabniški vmesnik</string>
     <string name="compact_ui_summary">Zmanjšaj velikost elementov uporabniškega vmesnika</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Kamera spi</string>
+    <string name="inactivity_message">Kamera je bila po 4 minutah neaktivnosti onemogočena za varčevanje z baterijo in zmanjšanje segrevanja.</string>
+    <string name="inactivity_resume">DOTAKNITE SE ZA NADALJEVANJE</string>
 </resources>

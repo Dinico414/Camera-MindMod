@@ -193,4 +193,8 @@
     <string name="video_mirror_mode_off">Вимкнено</string>
     <string name="video_mirror_mode_on">Увімкнено</string>
     <string name="video_mirror_mode_on_ffc_only">Лише фронтальна камера</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Камера в сплячому режимі</string>
+    <string name="inactivity_message">Камеру було вимкнено після 4 хвилин бездіяльності для економії заряду акумулятора та зменшення нагрівання.</string>
+    <string name="inactivity_resume">ТОРКНІТЬСЯ, ЩОБ ПРОДОВЖИТИ</string>
 </resources>

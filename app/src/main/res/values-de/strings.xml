@@ -37,6 +37,11 @@
     <string name="grid_on_3">RASTER 3 x 3</string>
     <string name="grid_on_4">RASTER 4 x 4</string>
     <string name="grid_on_goldenratio">RASTER GOLDENER SCHNITT</string>
+
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Kamera im Ruhezustand</string>
+    <string name="inactivity_message">Die Kamera wurde nach 4 Minuten Inaktivität deaktiviert, um den Akku zu schonen und die Wärmeentwicklung zu reduzieren.</string>
+    <string name="inactivity_resume">ZUM FORTSETZEN TIPPEN</string>
     <string name="mic_off">MIKROFON AUS</string>
     <string name="mic_on">MIKROFON EIN</string>
     <string name="settings">EINSTELLUNGEN</string>

@@ -112,4 +112,8 @@
     <string name="camera_mode_video">Video</string>
     <string name="camera_mode_qr">Skanna</string>
     <string name="video_mirror_mode_off">Av</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Kameran vilar</string>
+    <string name="inactivity_message">Kameran inaktiverades efter 4 minuters inaktivitet för att spara batteri och minska värmeutvecklingen.</string>
+    <string name="inactivity_resume">TRYCK FÖR ATT ÅTERUPPTA</string>
 </resources>

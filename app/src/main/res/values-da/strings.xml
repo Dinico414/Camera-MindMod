@@ -77,4 +77,8 @@
     <string name="location_permission_dialog_description">Kortlæg dine minder ved at inkludere placerings metadata med hver optagelse.</string>
     <string name="location_permission_dialog_later">Senere</string>
     <string name="location_permission_dialog_turn_on">Slå til</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Kameraet sover</string>
+    <string name="inactivity_message">Kameraet blev deaktiveret efter 4 minutters inaktivitet for at spare batteri og reducere varme.</string>
+    <string name="inactivity_resume">TRYK FOR AT GENOPTA</string>
 </resources>

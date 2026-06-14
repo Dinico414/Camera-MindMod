@@ -72,6 +72,10 @@ class Camera private constructor(
 
     val intrinsicZoomRatio = cameraInfo.intrinsicZoomRatio
 
+    val maxFocusDistance = camera2CameraInfo.getCameraCharacteristic(
+        CameraCharacteristics.LENS_INFO_MINIMUM_FOCUS_DISTANCE
+    ) ?: 0f
+
     private val imageCaptureCapabilities = ImageCapture.getImageCaptureCapabilities(cameraInfo)
 
     val supportedPhotoOutputFormats = imageCaptureCapabilities.supportedOutputFormats.map {

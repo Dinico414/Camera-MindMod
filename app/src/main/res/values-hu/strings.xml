@@ -194,4 +194,8 @@
     <string name="video_mirror_mode_off">Ki</string>
     <string name="video_mirror_mode_on">Be</string>
     <string name="video_mirror_mode_on_ffc_only">Csak a fő arckamerán</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">A kamera alszik</string>
+    <string name="inactivity_message">A kamera 4 perc inaktivitás után kikapcsolt az akkumulátor kímélése és a melegedés csökkentése érdekében.</string>
+    <string name="inactivity_resume">KOPPINTSON A FOLYTATÁSHOZ</string>
 </resources>

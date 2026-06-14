@@ -192,4 +192,8 @@
     <string name="unsupported_device_dont_show_again">மீண்டும் காட்டாதே</string>
     <string name="compact_ui_title">சிறிய இடைமுகம்</string>
     <string name="compact_ui_summary">இடைமுக உறுப்புகளின் அளவைக் குறைக்க</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">கேமரா உறங்குகிறது</string>
+    <string name="inactivity_message">பேட்டரியைச் சேமிக்க மற்றும் வெப்பத்தைக் குறைக்க 4 நிமிடச் செயலற்ற நிலைக்குப் பிறகு கேமரா முடக்கப்பட்டது.</string>
+    <string name="inactivity_resume">மீண்டும் தொடங்க தொடவும்</string>
 </resources>

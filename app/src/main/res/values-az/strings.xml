@@ -192,4 +192,8 @@
     <string name="video_mirror_mode_off">Bağlı</string>
     <string name="video_mirror_mode_on">Açıq</string>
     <string name="video_mirror_mode_on_ffc_only">Yalnız önə baxan kamera</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Kamera yatır</string>
+    <string name="inactivity_message">Kamera batareyaya qənaət etmək və istiliyi azaltmaq üçün 4 dəqiqəlik hərəkətsizlikdən sonra qeyri-aktiv edildi.</string>
+    <string name="inactivity_resume">DAVAM ETMƏK ÜÇÜN TOXUNUN</string>
 </resources>

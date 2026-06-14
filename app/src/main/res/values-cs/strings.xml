@@ -186,4 +186,8 @@
     <string name="video_mirror_mode_off">Vypnuto</string>
     <string name="video_mirror_mode_on">Zapnuto</string>
     <string name="video_mirror_mode_on_ffc_only">Pouze přední fotoaparát</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Fotoaparát spí</string>
+    <string name="inactivity_message">Fotoaparát byl po 4 minutách nečinnosti vypnut, aby se šetřila baterie a snížilo zahřívání.</string>
+    <string name="inactivity_resume">KLEPNUTÍM POKRAČUJTE</string>
 </resources>

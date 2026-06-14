@@ -192,4 +192,8 @@
     <string name="unsupported_device_dont_show_again">Ikkje vis igjen</string>
     <string name="compact_ui_title">Kompakt grensesnitt</string>
     <string name="compact_ui_summary">Gjer elementa i brukargrensesnittet mindre</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Kameraet søv</string>
+    <string name="inactivity_message">Kameraet vart deaktivert etter 4 minutt med inaktivitet for å spare batteri og redusere varme.</string>
+    <string name="inactivity_resume">TRYKK FOR Å HALDE FRAM</string>
 </resources>

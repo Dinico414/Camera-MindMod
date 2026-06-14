@@ -92,4 +92,8 @@
     <string name="camera_mode_qr">Pindai</string>
     <string name="video_mirror_mode_off">Nonaktif</string>
     <string name="video_mirror_mode_on">Aktif</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Kamera sedang tidur</string>
+    <string name="inactivity_message">Kamera dinonaktifkan setelah 4 menit tidak ada aktivitas untuk menghemat baterai dan mengurangi panas.</string>
+    <string name="inactivity_resume">KETUK UNTUK MELANJUTKAN</string>
 </resources>

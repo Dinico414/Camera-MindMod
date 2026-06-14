@@ -21,4 +21,8 @@
     <string name="video_mirror_mode_off">Выключана</string>
     <string name="video_mirror_mode_on">Уключана</string>
     <string name="video_mirror_mode_on_ffc_only">Толькі пярэдняя камера</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Камера ў спячым рэжыме</string>
+    <string name="inactivity_message">Камера была адключана пасля 4 хвілін бяздзейнасці для эканоміі зараду і зніжэння нагрэву.</string>
+    <string name="inactivity_resume">КРАНІЦЕ ДЛЯ ПРАЦЯГУ</string>
 </resources>

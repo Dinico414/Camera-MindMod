@@ -44,6 +44,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterNotNull
@@ -56,6 +57,7 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.runningFold
 import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import org.lineageos.mindone.aperture.ext.applicationContext
@@ -163,6 +165,31 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
     /**
      * Do not emit here directly, use [emitEvent].
      */
+    /**
+     * Focus mode.
+     */
+    val autoFocusMode = MutableStateFlow(true)
+
+    /**
+     * Manual focus distance.
+     */
+    val manualFocusDistance = MutableStateFlow(0f)
+
+    /**
+     * White balance mode.
+     */
+    val autoWhiteBalanceMode = MutableStateFlow(true)
+
+    /**
+     * Manual white balance temperature.
+     */
+    val whiteBalanceTemperature = MutableStateFlow(0.5f)
+
+    /**
+     * Exposure mode.
+     */
+    val autoExposureMode = MutableStateFlow(true)
+
     private val _event = MutableSharedFlow<Event>()
 
     /**
@@ -566,7 +593,6 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
     @OptIn(ExperimentalCoroutinesApi::class)
     private val exposureCompensationRange = cameraConfiguration
         .mapLatest { it.camera.exposureCompensationRange }
-        .flowOn(Dispatchers.IO)
         .shareIn(
             viewModelScope,
             started = SharingStarted.WhileSubscribed(),
@@ -579,7 +605,6 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
     ) { exposureCompensationLevel, exposureCompensationRange ->
         exposureCompensationRange to exposureCompensationLevel
     }
-        .flowOn(Dispatchers.IO)
         .shareIn(
             viewModelScope,
             started = SharingStarted.WhileSubscribed(),
@@ -587,11 +612,11 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
         )
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    private val exposureCompensationIndex = exposureCompensationRangeToLevel
-        .mapLatest { (exposureCompensationLevel, exposureCompensationRange) ->
-            Int.mapToRange(exposureCompensationLevel, exposureCompensationRange)
+    val exposureCompensationIndex = exposureCompensationRangeToLevel
+        .mapLatest { (exposureCompensationRange, exposureCompensationLevel) ->
+            Int.mapToRange(exposureCompensationRange, exposureCompensationLevel)
         }
-        .flowOn(Dispatchers.IO)
+        .distinctUntilChanged()
         .shareIn(
             viewModelScope,
             started = SharingStarted.WhileSubscribed(),
@@ -994,6 +1019,7 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
 
             launch {
                 exposureCompensationIndex.collectLatest { exposureCompensationIndex ->
+                    cameraController.initializationFuture.await()
                     cameraController.cameraControl?.setExposureCompensationIndex(
                         exposureCompensationIndex
                     )
@@ -1024,6 +1050,11 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
                         )
                     }
                 }
+            }
+        }
+        viewModelScope.launch {
+            autoFocusMode.collectLatest {
+                cameraController.isTapToFocusEnabled = it
             }
         }
     }
@@ -1662,6 +1693,26 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
         this.videoMicMode.value = videoMicrophoneEnabled
 
         preferencesRepository.videoMicMode.value = videoMicrophoneEnabled
+    }
+
+    fun toggleAutoFocusMode() {
+        autoFocusMode.value = !autoFocusMode.value
+    }
+
+    fun setManualFocusDistance(distance: Float) {
+        manualFocusDistance.value = distance
+    }
+
+    fun toggleAutoWhiteBalanceMode() {
+        autoWhiteBalanceMode.value = !autoWhiteBalanceMode.value
+    }
+
+    fun setManualWhiteBalanceTemperature(temperature: Float) {
+        whiteBalanceTemperature.value = temperature
+    }
+
+    fun toggleAutoExposureMode() {
+        autoExposureMode.value = !autoExposureMode.value
     }
 
     /**

@@ -97,12 +97,18 @@ import org.lineageos.mindone.aperture.ext.scale
 import org.lineageos.mindone.aperture.ext.setColorCorrectionAberrationMode
 import org.lineageos.mindone.aperture.ext.setDistortionCorrectionMode
 import org.lineageos.mindone.aperture.ext.setEdgeMode
+import org.lineageos.mindone.aperture.ext.setExposureCompensation
+import org.lineageos.mindone.aperture.ext.setExposureMode
+import org.lineageos.mindone.aperture.ext.setFocusDistance
+import org.lineageos.mindone.aperture.ext.setFocusMode
 import org.lineageos.mindone.aperture.ext.setFrameRate
 import org.lineageos.mindone.aperture.ext.setHotPixelMode
 import org.lineageos.mindone.aperture.ext.setNoiseReductionMode
 import org.lineageos.mindone.aperture.ext.setPadding
 import org.lineageos.mindone.aperture.ext.setShadingMode
 import org.lineageos.mindone.aperture.ext.setVideoStabilizationMode
+import org.lineageos.mindone.aperture.ext.setWhiteBalanceMode
+import org.lineageos.mindone.aperture.ext.setWhiteBalanceTemperature
 import org.lineageos.mindone.aperture.ext.slide
 import org.lineageos.mindone.aperture.ext.smoothRotate
 import org.lineageos.mindone.aperture.ext.transform
@@ -162,12 +168,16 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
     // Views
     private val aspectRatioButton by lazy { findViewById<Button>(R.id.aspectRatioButton) }
+    private val autoFocusButton by lazy { findViewById<Button>(R.id.autoFocusButton) }
+    private val autoWhiteBalanceButton by lazy { findViewById<Button>(R.id.autoWhiteBalanceButton) }
+    private val autoExposureButton by lazy { findViewById<Button>(R.id.autoExposureButton) }
     private val cameraModeSelectorLayout by lazy { findViewById<CameraModeSelectorLayout>(R.id.cameraModeSelectorLayout) }
     private val capturePreviewLayout by lazy { findViewById<CapturePreviewLayout>(R.id.capturePreviewLayout) }
     private val countDownView by lazy { findViewById<CountDownView>(R.id.countDownView) }
     private val effectButton by lazy { findViewById<Button>(R.id.effectButton) }
     private val exposureLevel by lazy { findViewById<VerticalSlider>(R.id.exposureLevel) }
     private val flashButton by lazy { findViewById<ImageButton>(R.id.flashButton) }
+    private val focusLevel by lazy { findViewById<VerticalSlider>(R.id.focusLevel) }
     private val flipCameraButton by lazy { findViewById<ImageButton>(R.id.flipCameraButton) }
     private val galleryButtonCardView by lazy { findViewById<CardView>(R.id.galleryButtonCardView) }
     private val galleryButtonIconImageView by lazy { findViewById<ImageView>(R.id.galleryButtonIconImageView) }
@@ -179,18 +189,19 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
     private val googleLensButton by lazy { findViewById<ImageButton>(R.id.googleLensButton) }
     private val gridButton by lazy { findViewById<Button>(R.id.gridButton) }
     private val gridView by lazy { findViewById<GridView>(R.id.gridView) }
+    private val inactivityLayout by lazy { findViewById<LinearLayout>(R.id.inactivityLayout) }
     private val islandView by lazy { findViewById<IslandView>(R.id.islandView) }
     private val lensSelectorLayout by lazy { findViewById<LensSelectorLayout>(R.id.lensSelectorLayout) }
     private val levelerView by lazy { findViewById<LevelerView>(R.id.levelerView) }
     private val mainLayout by lazy { findViewById<ConstraintLayout>(R.id.mainLayout) }
     private val micButton by lazy { findViewById<Button>(R.id.micButton) }
     private val previewBlurView by lazy { findViewById<PreviewBlurView>(R.id.previewBlurView) }
-    private val primaryBarLayout by lazy { findViewById<LinearLayout>(R.id.primaryBarLayout) }
     private val proButton by lazy { findViewById<ImageButton>(R.id.proButton) }
     private val screenFlashView by lazy { findViewById<ScreenFlashView>(R.id.screenFlashView) }
     private val secondaryBarLayout by lazy { findViewById<LinearLayout>(R.id.secondaryBarLayout) }
     private val secondaryTopBarLayout by lazy { findViewById<HorizontalScrollView>(R.id.secondaryTopBarLayout) }
     private val settingsButton by lazy { findViewById<Button>(R.id.settingsButton) }
+    private val resumeButton by lazy { findViewById<Button>(R.id.resumeButton) }
     private val shutterButton by lazy { findViewById<ImageButton>(R.id.shutterButton) }
     private val shutterLayout by lazy { findViewById<ConstraintLayout>(R.id.shutterLayout) }
     private val timerButton by lazy { findViewById<Button>(R.id.timerButton) }
@@ -200,6 +211,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
     private val videoDynamicRangeButton by lazy { findViewById<Button>(R.id.videoDynamicRangeButton) }
     private val viewFinder by lazy { findViewById<PreviewView>(R.id.viewFinder) }
     private val viewFinderFocus by lazy { findViewById<ImageView>(R.id.viewFinderFocus) }
+    private val whiteBalanceLevel by lazy { findViewById<VerticalSlider>(R.id.whiteBalanceLevel) }
     private val zoomLevel by lazy { findViewById<HorizontalSlider>(R.id.zoomLevel) }
 
     // System services
@@ -218,7 +230,6 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
     // QR
     private val qrBottomSheetDialog by lazy { QrBottomSheetDialog(this) }
-    private val isGoogleLensAvailable by lazy { GoogleLensUtils.isGoogleLensAvailable(this) }
 
     private var viewFinderTouchEvent: MotionEvent? = null
     private var isShutterKeyPressed = false
@@ -289,6 +300,15 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                     exposureLevel.isVisible = false
                 }
 
+                MSG_HIDE_FOCUS_SLIDER -> {
+                    focusLevel.isVisible = false
+                    whiteBalanceLevel.isVisible = false
+                }
+
+                MSG_INACTIVITY_TIMEOUT -> {
+                    enterInactivityMode()
+                }
+
                 MSG_PERFORM_FOCUS -> {
                     if (!isShutterKeyPressed) {
                         handleHardwareKeyDown(134, msg.obj as? KeyEvent)
@@ -343,6 +363,8 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             excludeTarget(R.id.gridView, true)
             excludeTarget(R.id.levelerView, true)
             excludeTarget(R.id.viewFinderFocus, true)
+            excludeTarget(R.id.focusLevel, true)
+            excludeTarget(R.id.whiteBalanceLevel, true)
             excludeTarget(R.id.countDownView, true)
         }
     }
@@ -500,6 +522,12 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+        whiteBalanceLevel.textFormatter = {
+            val temperature = (2000 + it * 8000).toInt()
+            "${temperature}K"
+        }
+
+
 
         // Set secondary top bar button callbacks
         aspectRatioButton.setOnClickListener {
@@ -509,14 +537,20 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 else -> {}
             }
         }
+
         videoQualityButton.setOnClickListener { viewModel.cycleVideoQuality() }
         videoFrameRateButton.setOnClickListener { viewModel.cycleVideoFrameRate() }
         videoDynamicRangeButton.setOnClickListener { viewModel.cycleVideoDynamicRange() }
         effectButton.setOnClickListener { viewModel.cycleExtensionMode() }
+        autoFocusButton.setOnClickListener { viewModel.toggleAutoFocusMode() }
+        autoWhiteBalanceButton.setOnClickListener { viewModel.toggleAutoWhiteBalanceMode() }
+        autoExposureButton.setOnClickListener { viewModel.toggleAutoExposureMode() }
         gridButton.setOnClickListener { viewModel.cycleGridMode() }
         timerButton.setOnClickListener { viewModel.toggleTimerMode() }
         micButton.setOnClickListener { viewModel.toggleVideoMicrophoneEnabled() }
         settingsButton.setOnClickListener { openSettings() }
+        resumeButton.setOnClickListener { exitInactivityMode() }
+        inactivityLayout.setOnClickListener { exitInactivityMode() }
 
         // Set secondary bottom bar button callbacks
         proButton.setOnClickListener {
@@ -533,6 +567,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 GoogleLensUtils.installLensLauncher(this)
             }
         }
+
         flashButton.setOnClickListener { viewModel.cycleFlashMode(false) }
         flashButton.setOnLongClickListener { viewModel.cycleFlashMode(true) }
 
@@ -551,11 +586,30 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             handler.removeMessages(MSG_HIDE_EXPOSURE_SLIDER)
             handler.sendMessageDelayed(handler.obtainMessage(MSG_HIDE_EXPOSURE_SLIDER), 2000)
 
+            if (!viewModel.autoFocusMode.value) {
+                focusLevel.isVisible = true
+                handler.removeMessages(MSG_HIDE_FOCUS_SLIDER)
+                handler.sendMessageDelayed(handler.obtainMessage(MSG_HIDE_FOCUS_SLIDER), 2000)
+            }
+
+            if (!viewModel.autoWhiteBalanceMode.value) {
+                whiteBalanceLevel.isVisible = true
+                handler.removeMessages(MSG_HIDE_FOCUS_SLIDER)
+                handler.sendMessageDelayed(handler.obtainMessage(MSG_HIDE_FOCUS_SLIDER), 2000)
+            }
+
+            if (!viewModel.autoExposureMode.value) {
+                exposureLevel.isVisible = true
+                handler.removeMessages(MSG_HIDE_EXPOSURE_SLIDER)
+                handler.sendMessageDelayed(handler.obtainMessage(MSG_HIDE_EXPOSURE_SLIDER), 2000)
+            }
+
             if (secondaryTopBarLayout.isVisible) {
                 secondaryTopBarLayout.slide()
                 animateSecondaryBarBackground(false)
             }
         }
+
 
         // Observe preview stream state
         viewFinder.previewStreamState.observe(this) {
@@ -580,6 +634,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
         zoomLevel.onProgressChangedByUser = {
             viewModel.cameraController.setLinearZoom(it)
         }
@@ -594,6 +649,40 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             handler.removeMessages(MSG_HIDE_EXPOSURE_SLIDER)
             handler.sendMessageDelayed(handler.obtainMessage(MSG_HIDE_EXPOSURE_SLIDER), 2000)
         }
+
+        focusLevel.onProgressChangedByUser = {
+            viewModel.setManualFocusDistance(it)
+
+            handler.removeMessages(MSG_HIDE_FOCUS_SLIDER)
+            handler.sendMessageDelayed(handler.obtainMessage(MSG_HIDE_FOCUS_SLIDER), 2000)
+        }
+
+        whiteBalanceLevel.onProgressChangedByUser = {
+            viewModel.setManualWhiteBalanceTemperature(it)
+
+            handler.removeMessages(MSG_HIDE_FOCUS_SLIDER)
+            handler.sendMessageDelayed(handler.obtainMessage(MSG_HIDE_FOCUS_SLIDER), 2000)
+        }
+
+        focusLevel.textFormatter = {
+            val camera = viewModel.camera.replayCache.firstOrNull()
+            if (camera != null && camera.maxFocusDistance > 0) {
+                val diopters = it * camera.maxFocusDistance
+                if (diopters == 0f) {
+                    "∞"
+                } else {
+                    val meters = 1f / diopters
+                    if (meters >= 1f) {
+                        "%.1fm".format(meters)
+                    } else {
+                        "%.0fcm".format(meters * 100)
+                    }
+                }
+            } else {
+                ""
+            }
+        }
+
 
         // Set primary bar button callbacks
         flipCameraButton.setOnClickListener { viewModel.flipCamera() }
@@ -630,6 +719,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
         shutterButton.setOnLongClickListener {
             if (viewModel.cameraMode.value == CameraMode.PHOTO) {
                 viewModel.onShutterLongPress()
@@ -638,6 +728,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 false
             }
         }
+
 
         galleryButtonCardView.setOnClickListener { openGallery() }
         smallGalleryButtonCardView.setOnClickListener { openGallery() }
@@ -668,6 +759,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
         // Set mode selector callback
         cameraModeSelectorLayout.onModeSelectedCallback = {
             viewModel.setCameraMode(it)
@@ -689,6 +781,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
         // Also collect location
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -697,6 +790,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 }
             }
         }
+
 
         // Check for permissions
         lifecycleScope.launch {
@@ -725,6 +819,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
         // Initialize stuff after camera permissions are granted
         lifecycleScope.launch {
             queueSetupWithCameraPermissions()
@@ -736,6 +831,52 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
         hideSystemBars()
         syncCameraState()
+        resetInactivityTimer()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        handler.removeMessages(MSG_INACTIVITY_TIMEOUT)
+    }
+
+    override fun onUserInteraction() {
+        super.onUserInteraction()
+        resetInactivityTimer()
+    }
+
+    private fun resetInactivityTimer() {
+        if (inactivityLayout.isVisible) {
+            return
+        }
+        handler.removeMessages(MSG_INACTIVITY_TIMEOUT)
+        handler.sendMessageDelayed(
+            handler.obtainMessage(MSG_INACTIVITY_TIMEOUT),
+            INACTIVITY_TIMEOUT_MS
+        )
+    }
+
+    private fun enterInactivityMode() {
+        if (viewModel.cameraState.value.isRecordingVideo) {
+            // Don't sleep while recording
+            resetInactivityTimer()
+            return
+        }
+
+        runOnUiThread {
+            inactivityLayout.isVisible = true
+            viewModel.cameraController.unbind()
+            previewBlurView.freeze()
+            previewBlurView.isVisible = true
+        }
+    }
+
+    private fun exitInactivityMode() {
+        inactivityLayout.isVisible = false
+        val cameraConfiguration = viewModel.cameraConfiguration.replayCache.firstOrNull()
+        if (cameraConfiguration != null) {
+            bindCameraUseCases(cameraConfiguration)
+        }
+        resetInactivityTimer()
     }
 
     private fun syncCameraState() {
@@ -757,6 +898,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 }
             }
         }
+
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -902,10 +1044,18 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         }
 
         launch {
+            viewModel.camera.collectLatest { camera ->
+                autoFocusButton.isEnabled = camera.maxFocusDistance > 0
+            }
+        }
+
+
+        launch {
             viewModel.cameraConfiguration.collectLatest { cameraConfiguration ->
                 bindCameraUseCases(cameraConfiguration)
             }
         }
+
 
         // Single combined collector that drives updateCompactUi(). Using combine() here is
         // important: it guarantees that ANY of these inputs changing will recompute the small
@@ -947,6 +1097,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
         launch {
             viewModel.lenses.collectLatest { (activeCamera, availableCameras) ->
                 // Update lens selector
@@ -958,6 +1109,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 }
             }
         }
+
 
         launch {
             viewModel.cameraXCameraState.collect { cameraXCameraState ->
@@ -1039,6 +1191,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
         launch {
             viewModel.inSingleCaptureMode.collectLatest { inSingleCaptureMode ->
                 // Large primary-bar gallery button: keep INVISIBLE so the layout slot is preserved
@@ -1050,6 +1203,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 cameraModeSelectorLayout.setInSingleCaptureMode(inSingleCaptureMode)
             }
         }
+
 
         launch {
             viewModel.cameraState.collectLatest { cameraState ->
@@ -1074,12 +1228,15 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
         launch {
             viewModel.screenRotation.collectLatest { screenRotation ->
                 val compensationValue = screenRotation.compensationValue.toFloat()
 
                 // Rotate sliders
                 exposureLevel.screenRotation = screenRotation
+                focusLevel.screenRotation = screenRotation
+                whiteBalanceLevel.screenRotation = screenRotation
                 zoomLevel.screenRotation = screenRotation
 
                 // Rotate info chip
@@ -1132,11 +1289,13 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
         launch {
             viewModel.capturedMedia.collectLatest { capturedMedia ->
                 updateGalleryButton(capturedMedia.firstOrNull(), false)
             }
         }
+
 
         launch {
             viewModel.supportedFlashModes.collectLatest { supportedFlashModes ->
@@ -1146,6 +1305,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                         || supportedFlashModes.first() != FlashMode.OFF
             }
         }
+
 
         launch {
             viewModel.flashMode.collectLatest { flashMode ->
@@ -1162,11 +1322,13 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
         launch {
             viewModel.isFlashButtonEnabled.collectLatest { isFlashButtonEnabled ->
                 flashButton.isEnabled = isFlashButtonEnabled
             }
         }
+
 
         launch {
             viewModel.gridMode.collectLatest { gridMode ->
@@ -1195,6 +1357,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
         launch {
             viewModel.timerMode.collectLatest { timerMode ->
                 // Update secondary bar buttons
@@ -1218,11 +1381,13 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
         launch {
             viewModel.levelerEnabled.collectLatest { levelerEnabled ->
                 levelerView.isVisible = levelerEnabled
             }
         }
+
 
         launch {
             viewModel.fullScreenBrightness.collectLatest { fullScreenBrightness ->
@@ -1234,6 +1399,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 }
             }
         }
+
 
         launch {
             viewModel.thermalStatus.collectLatest { thermalStatus ->
@@ -1280,6 +1446,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
         launch {
             viewModel.zoomState.collectLatest { zoomState ->
                 zoomState?.takeIf { it.minZoomRatio != it.maxZoomRatio }?.let {
@@ -1293,6 +1460,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 }
             }
         }
+
 
         launch {
             viewModel.tapToFocusInfoState.collectLatest { tapToFocusInfoState ->
@@ -1325,6 +1493,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
         launch {
             viewModel.exposureCompensationRangeToLevel.collectLatest { (range, level) ->
                 exposureLevel.steps = range.endInclusive - range.start
@@ -1339,11 +1508,13 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
         launch {
             viewModel.isShutterButtonEnabled.collectLatest { isShutterButtonEnabled ->
                 shutterButton.isEnabled = isShutterButtonEnabled
             }
         }
+
 
         launch {
             combine(
@@ -1364,6 +1535,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 )
             }
         }
+
 
         launch {
             viewModel.photoEffect.collectLatest { photoEffect ->
@@ -1396,11 +1568,13 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
         launch {
             viewModel.isPhotoEffectButtonVisible.collectLatest { isPhotoEffectButtonVisible ->
                 effectButton.isVisible = isPhotoEffectButtonVisible
             }
         }
+
 
         launch {
             viewModel.videoQuality.collectLatest { videoQuality ->
@@ -1429,11 +1603,13 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
         launch {
             viewModel.isVideoQualityButtonEnabled.collectLatest { isVideoQualityButtonEnabled ->
                 videoQualityButton.isEnabled = isVideoQualityButtonEnabled
             }
         }
+
 
         launch {
             viewModel.videoFrameRate.collectLatest { videoFrameRate ->
@@ -1444,11 +1620,13 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
         launch {
             viewModel.isVideoFrameRateButtonEnabled.collectLatest { isVideoFrameRateButtonEnabled ->
                 videoFrameRateButton.isEnabled = isVideoFrameRateButtonEnabled
             }
         }
+
 
         launch {
             viewModel.videoDynamicRange.collectLatest { videoDynamicRange ->
@@ -1479,6 +1657,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
         launch {
             viewModel.isVideoDynamicRangeButtonEnabled.collectLatest { isVideoDynamicRangeButtonEnabled ->
                 videoDynamicRangeButton.isEnabled = isVideoDynamicRangeButtonEnabled
@@ -1486,6 +1665,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                         && isVideoDynamicRangeButtonEnabled
             }
         }
+
 
         launch {
             viewModel.videoMicMode.collectLatest { videoMicMode ->
@@ -1507,17 +1687,20 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
         launch {
             viewModel.isVideoMicButtonEnabled.collectLatest { isVideoMicButtonEnabled ->
                 micButton.isEnabled = isVideoMicButtonEnabled
             }
         }
 
+
         launch {
             viewModel.videoRecordingDuration.collectLatest { videoRecordingDuration ->
                 cameraModeSelectorLayout.setVideoRecordingDuration(videoRecordingDuration)
             }
         }
+
 
         launch {
             viewModel.videoRecordEvent.collect { videoRecordEvent ->
@@ -1563,11 +1746,13 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
         launch {
             viewModel.qrResult.collectLatest { qrResult ->
                 qrBottomSheetDialog.setQrResult(qrResult)
             }
         }
+
 
         launch {
             viewModel.canFlipCamera.collectLatest { canFlipCamera ->
@@ -1578,11 +1763,105 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
+        launch {
+            viewModel.autoFocusMode.collectLatest { autoFocusMode ->
+                autoFocusButton.setCompoundDrawablesWithIntrinsicBounds(
+                    0,
+                    if (autoFocusMode) R.drawable.ic_autofocus else R.drawable.ic_autofocus_off,
+                    0,
+                    0
+                )
+                autoFocusButton.setText(
+                    if (autoFocusMode) R.string.autofocus_on else R.string.autofocus_off
+                )
+
+                if (!autoFocusMode) {
+                    focusLevel.isVisible = true
+                    handler.removeMessages(MSG_HIDE_FOCUS_SLIDER)
+                    handler.sendMessageDelayed(handler.obtainMessage(MSG_HIDE_FOCUS_SLIDER), 2000)
+                } else {
+                    focusLevel.isVisible = false
+                }
+
+                updateCamera2CaptureRequestOptions()
+            }
+        }
+
+
+        launch {
+            viewModel.manualFocusDistance.collectLatest {
+                updateCamera2CaptureRequestOptions()
+            }
+        }
+
+        launch {
+            viewModel.exposureCompensationIndex.collectLatest {
+                updateCamera2CaptureRequestOptions()
+            }
+        }
+
+
+        launch {
+            viewModel.autoWhiteBalanceMode.collectLatest { autoWhiteBalanceMode ->
+                autoWhiteBalanceButton.setCompoundDrawablesWithIntrinsicBounds(
+                    0,
+                    if (autoWhiteBalanceMode) R.drawable.ic_awb else R.drawable.ic_awb_off,
+                    0,
+                    0
+                )
+                autoWhiteBalanceButton.setText(
+                    if (autoWhiteBalanceMode) R.string.awb_on else R.string.awb_off
+                )
+
+                if (!autoWhiteBalanceMode) {
+                    whiteBalanceLevel.isVisible = true
+                    handler.removeMessages(MSG_HIDE_FOCUS_SLIDER)
+                    handler.sendMessageDelayed(handler.obtainMessage(MSG_HIDE_FOCUS_SLIDER), 2000)
+                } else {
+                    whiteBalanceLevel.isVisible = false
+                }
+
+                updateCamera2CaptureRequestOptions()
+            }
+        }
+
+        launch {
+            viewModel.whiteBalanceTemperature.collectLatest {
+                updateCamera2CaptureRequestOptions()
+            }
+        }
+
+        launch {
+            viewModel.autoExposureMode.collectLatest { autoExposureMode ->
+                autoExposureButton.setCompoundDrawablesWithIntrinsicBounds(
+                    0,
+                    if (autoExposureMode) R.drawable.ic_ae else R.drawable.ic_ae_off,
+                    0,
+                    0
+                )
+                autoExposureButton.setText(
+                    if (autoExposureMode) R.string.ae_on else R.string.ae_off
+                )
+
+                if (!autoExposureMode) {
+                    exposureLevel.isVisible = true
+                    handler.removeMessages(MSG_HIDE_EXPOSURE_SLIDER)
+                    handler.sendMessageDelayed(handler.obtainMessage(MSG_HIDE_EXPOSURE_SLIDER), 2000)
+                } else {
+                    exposureLevel.isVisible = false
+                }
+
+                updateCamera2CaptureRequestOptions()
+            }
+        }
+
         launch {
             viewModel.islandItems.collectLatest { islandItems ->
                 islandView.setItems(islandItems)
             }
         }
+
     }
 
     private suspend fun queueSetupWithCameraPermissions() {
@@ -1620,6 +1899,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 initialized = true
             }
         }
+
     }
 
     private fun startShutterAnimation(shutterAnimation: ShutterAnimation) {
@@ -1855,6 +2135,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             }
         }
 
+
         // Get the camera selector
         val cameraSelector = viewModel.getExtensionEnabledCameraSelector(
             cameraConfiguration.camera, cameraConfiguration.extensionMode
@@ -1887,32 +2168,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
             val camera2Options = cameraConfiguration.camera2Options
 
             // Set Camera2 CaptureRequest options
-            camera2CameraControl.captureRequestOptions = CaptureRequestOptions.Builder()
-                .setFrameRate(
-                    when (cameraConfiguration) {
-                        is CameraConfiguration.Video -> cameraConfiguration.videoFrameRate
-                        else -> null
-                    }
-                )
-                .setVideoStabilizationMode(
-                    when (cameraConfiguration) {
-                        is CameraConfiguration.Video -> when (
-                            cameraConfiguration.enableVideoStabilization
-                        ) {
-                            true -> VideoStabilizationMode.getMode(cameraConfiguration.camera)
-                            false -> null
-                        }
-
-                        else -> null
-                    } ?: VideoStabilizationMode.OFF
-                )
-                .setEdgeMode(camera2Options.edgeMode)
-                .setNoiseReductionMode(camera2Options.noiseReductionMode)
-                .setShadingMode(camera2Options.shadingMode)
-                .setColorCorrectionAberrationMode(camera2Options.colorCorrectionAberrationMode)
-                .setDistortionCorrectionMode(camera2Options.distortionCorrectionMode)
-                .setHotPixelMode(camera2Options.hotPixelMode)
-                .build()
+            updateCamera2CaptureRequestOptions()
         }
 
         // Restore settings that can be set on the fly
@@ -1920,6 +2176,63 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
         // Reset exposure level
         viewModel.setExposureCompensationLevel(0.5f)
+    }
+
+    private fun updateCamera2CaptureRequestOptions() {
+        val camera2CameraControl = viewModel.cameraController.camera2CameraControl ?: return
+        val cameraConfiguration = viewModel.cameraConfiguration.replayCache.firstOrNull() ?: return
+        val camera2Options = cameraConfiguration.camera2Options
+
+        camera2CameraControl.captureRequestOptions = CaptureRequestOptions.Builder()
+            .setFrameRate(
+                when (cameraConfiguration) {
+                    is CameraConfiguration.Video -> cameraConfiguration.videoFrameRate
+                    else -> null
+                }
+            )
+            .setVideoStabilizationMode(
+                when (cameraConfiguration) {
+                    is CameraConfiguration.Video -> when (
+                        cameraConfiguration.enableVideoStabilization
+                    ) {
+                        true -> VideoStabilizationMode.getMode(cameraConfiguration.camera)
+                        false -> null
+                    }
+
+                    else -> null
+                } ?: VideoStabilizationMode.OFF
+            )
+            .setEdgeMode(camera2Options.edgeMode)
+            .setNoiseReductionMode(camera2Options.noiseReductionMode)
+            .setShadingMode(camera2Options.shadingMode)
+            .setColorCorrectionAberrationMode(camera2Options.colorCorrectionAberrationMode)
+            .setDistortionCorrectionMode(camera2Options.distortionCorrectionMode)
+            .setHotPixelMode(camera2Options.hotPixelMode)
+            .setExposureMode(viewModel.autoExposureMode.value)
+            .setExposureCompensation(
+                if (!viewModel.autoExposureMode.value) {
+                    viewModel.exposureCompensationIndex.replayCache.firstOrNull()
+                } else {
+                    null
+                }
+            )
+            .setFocusMode(viewModel.autoFocusMode.value)
+            .setFocusDistance(
+                if (!viewModel.autoFocusMode.value) {
+                    viewModel.manualFocusDistance.value * cameraConfiguration.camera.maxFocusDistance
+                } else {
+                    null
+                }
+            )
+            .setWhiteBalanceMode(viewModel.autoWhiteBalanceMode.value)
+            .setWhiteBalanceTemperature(
+                if (!viewModel.autoWhiteBalanceMode.value) {
+                    (2000 + viewModel.whiteBalanceTemperature.value * 8000).toInt()
+                } else {
+                    null
+                }
+            )
+            .build()
     }
 
     private fun updateGalleryButton(uri: Uri?, fromCapture: Boolean) {
@@ -1993,6 +2306,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 smallGalleryButtonPreviewImageView.isVisible = false
             }
         }
+
     }
 
     private fun updateCompactUi() {
@@ -2014,6 +2328,9 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
 
         // Update visibility for secondary top bar buttons (for when it is eventually slid open)
         aspectRatioButton.isVisible = cameraMode != CameraMode.QR
+        autoFocusButton.isVisible = cameraMode != CameraMode.QR
+        autoWhiteBalanceButton.isVisible = cameraMode != CameraMode.QR
+        autoExposureButton.isVisible = cameraMode != CameraMode.QR
         videoQualityButton.isVisible = cameraMode == CameraMode.VIDEO
         videoFrameRateButton.isVisible = cameraMode == CameraMode.VIDEO
         videoDynamicRangeButton.isVisible = cameraMode == CameraMode.VIDEO
@@ -2034,6 +2351,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 }
             }
         }
+
 
         // PRIMARY ROW EXIT LOGIC:
         // If we are in Scanner Mode OR Compact Mode, the main shutter row exits.
@@ -2129,6 +2447,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 }
             }
         }
+
     }
 
     private fun openCapturePreview(uri: Uri, mediaType: MediaType) {
@@ -2156,6 +2475,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 intent.extras?.get(MediaStore.EXTRA_OUTPUT) as Uri
             }
         }
+
 
         outputUri?.let {
             try {
@@ -2251,6 +2571,7 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
                 secureMediaUris.addFirst(it)
             }
         }
+
     }
 
    private fun updateSecureMediaUris(keyguardLocked: Boolean) {
@@ -2439,10 +2760,14 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
         private const val MSG_HIDE_ZOOM_SLIDER = 0
         private const val MSG_HIDE_FOCUS_RING = 1
         private const val MSG_HIDE_EXPOSURE_SLIDER = 2
+        private const val MSG_HIDE_FOCUS_SLIDER = 5
         private const val MSG_PERFORM_FOCUS = 3
         private const val MSG_ON_PINCH_TO_ZOOM = 4
+        private const val MSG_INACTIVITY_TIMEOUT = 6
 
-      private const val SINGLE_CAPTURE_INLINE_MAX_SIDE_LEN_PIXELS = 256
+        private const val INACTIVITY_TIMEOUT_MS = 4 * 60 * 1000L
+
+        private const val SINGLE_CAPTURE_INLINE_MAX_SIDE_LEN_PIXELS = 256
 
         private val EXPOSURE_LEVEL_FORMATTER = DecimalFormat("+#;-#")
     }

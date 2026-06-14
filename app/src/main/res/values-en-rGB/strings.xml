@@ -192,4 +192,8 @@
     <string name="video_mirror_mode_off">Off</string>
     <string name="video_mirror_mode_on">On</string>
     <string name="video_mirror_mode_on_ffc_only">Front facing camera only</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Camera is sleeping</string>
+    <string name="inactivity_message">The camera was disabled after 4 minutes of inactivity to save battery and reduce heat.</string>
+    <string name="inactivity_resume">TAP TO RESUME</string>
 </resources>

@@ -192,4 +192,8 @@
     <string name="video_mirror_mode_off">Disattivata</string>
     <string name="video_mirror_mode_on">Attiva</string>
     <string name="video_mirror_mode_on_ffc_only">Solo fotocamera frontale</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">La fotocamera è in standby</string>
+    <string name="inactivity_message">La fotocamera è stata disattivata dopo 4 minuti di inattività per risparmiare batteria e ridurre il calore.</string>
+    <string name="inactivity_resume">TOCCA PER RIPRENDERE</string>
 </resources>

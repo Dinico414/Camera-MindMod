@@ -192,4 +192,8 @@
     <string name="video_mirror_mode_off">Ανενεργός</string>
     <string name="video_mirror_mode_on">Ενεργός</string>
     <string name="video_mirror_mode_on_ffc_only">Στην μπροστινή κάμερα μόνο</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Η κάμερα βρίσκεται σε αναστολή</string>
+    <string name="inactivity_message">Η κάμερα απενεργοποιήθηκε μετά από 4 λεπτά αδράνειας για εξοικονόμηση μπαταρίας και μείωση της θερμότητας.</string>
+    <string name="inactivity_resume">ΠΑΤΗΣΤΕ ΓΙΑ ΣΥΝΕΧΙΣΗ</string>
 </resources>

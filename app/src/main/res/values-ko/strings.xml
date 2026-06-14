@@ -192,4 +192,8 @@
     <string name="video_mirror_mode_off">꺼짐</string>
     <string name="video_mirror_mode_on">켜짐</string>
     <string name="video_mirror_mode_on_ffc_only">전면 카메라만 사용</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">카메라가 절전 모드입니다</string>
+    <string name="inactivity_message">배터리를 절약하고 발열을 줄이기 위해 4분 동안 사용하지 않아 카메라가 비활성화되었습니다.</string>
+    <string name="inactivity_resume">탭하여 다시 시작</string>
 </resources>

@@ -192,4 +192,8 @@
     <string name="video_mirror_mode_off">Изключено</string>
     <string name="video_mirror_mode_on">Включено</string>
     <string name="video_mirror_mode_on_ffc_only">Само предна камера</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Камерата спи</string>
+    <string name="inactivity_message">Камерата беше деактивирана след 4 минути неактивност за пестене на батерия и намаляване на топлината.</string>
+    <string name="inactivity_resume">ДОКОСНЕТЕ ЗА ПРОДЪЛЖАВАНЕ</string>
 </resources>

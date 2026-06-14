@@ -131,4 +131,8 @@
     <string name="video_mirror_mode_off">Slökkt</string>
     <string name="video_mirror_mode_on">Kveikt</string>
     <string name="video_mirror_mode_on_ffc_only">Einungis frammyndavél</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Myndavélin er í dvala</string>
+    <string name="inactivity_message">Slökkt var á myndavélinni eftir 4 mínútna óvirkni til að spara rafhlöðu og draga úr hita.</string>
+    <string name="inactivity_resume">ÝTTU TIL AÐ HALDA ÁFRAM</string>
 </resources>

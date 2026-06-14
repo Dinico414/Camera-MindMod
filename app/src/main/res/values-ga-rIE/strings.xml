@@ -194,4 +194,8 @@
     <string name="video_mirror_mode_off">As</string>
     <string name="video_mirror_mode_on">Ar</string>
     <string name="video_mirror_mode_on_ffc_only">Ceamara tosaigh amháin.</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Tá an ceamara ina chodladh</string>
+    <string name="inactivity_message">Díchumasaíodh an ceamara tar éis 4 nóiméad neamhghníomhaíochta chun cadhnra a shábháil agus teas a laghdú.</string>
+    <string name="inactivity_resume">TAPÁIL CHUN LEANÚINT</string>
 </resources>

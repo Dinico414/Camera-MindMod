@@ -194,4 +194,8 @@
     <string name="video_mirror_mode_off">כבוי</string>
     <string name="video_mirror_mode_on">מופעל</string>
     <string name="video_mirror_mode_on_ffc_only">מצלמה קדמית בלבד</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">המצלמה במצב שינה</string>
+    <string name="inactivity_message">המצלמה הושבתה לאחר 4 דקות של חוסר פעילות כדי לחסוך בסוללה ולהפחית התחממות.</string>
+    <string name="inactivity_resume">הקש כדי להמשיך</string>
 </resources>

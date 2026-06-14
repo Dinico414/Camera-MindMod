@@ -194,4 +194,8 @@
     <string name="video_mirror_mode_off">Oprit</string>
     <string name="video_mirror_mode_on">Pornit</string>
     <string name="video_mirror_mode_on_ffc_only">Doar camera frontală</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">Camera este în repaus</string>
+    <string name="inactivity_message">Camera a fost dezactivată după 4 minute de inactivitate pentru a economisi bateria și a reduce căldura.</string>
+    <string name="inactivity_resume">ATINGE PENTRU A RELUA</string>
 </resources>

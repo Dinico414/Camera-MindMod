@@ -192,4 +192,8 @@
     <string name="video_mirror_mode_off">Desactivat</string>
     <string name="video_mirror_mode_on">Activat</string>
     <string name="video_mirror_mode_on_ffc_only">Només la càmera frontal</string>
+    <!-- Inactivity timer -->
+    <string name="inactivity_title">La càmera està inactiva</string>
+    <string name="inactivity_message">La càmera s\'ha desactivat després de 4 minuts d\'inactivitat per estalviar bateria i reduir la calor.</string>
+    <string name="inactivity_resume">TOCA PER REPRENDRE</string>
 </resources>
